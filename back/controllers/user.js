@@ -16,8 +16,8 @@ exports.signup = (req, res) => {
 		});
 		//Send the user to the database
        dbConnection.query('INSERT INTO users SET ?', user, (err, result) => {
-		   if(err) throw err;
-		   res.status(201).json({ message: 'User created !'});
+		   if(err) res.status(400).json({message: 'Email already used !'});
+		   else res.status(201).json({ message: 'User created !'});
 	   });
     })
     	.catch(error => res.status(500).json({error}));
@@ -49,6 +49,20 @@ exports.login = (req, res) => {
 		}
 	}
 )};
+
+exports.getOneUser = (req, res) => {
+	dbConnection.query('SELECT * FROM users WHERE id = ?', req.params.id, (err, result) => {
+		if(err) res.status(404).json({err});
+		else res.status(200).json(result[0]);
+	});
+};
+
+exports.deleteUser = (req, res) => {
+	dbConnection.query('DELETE FROM users WHERE id = ?', req.params.id, (err, result) => {
+		if(err) res.status(400).json({err: 'Delete failed !'});
+		else res.status(200).json({message: 'User deleted !'});
+	});
+};
 
   
        

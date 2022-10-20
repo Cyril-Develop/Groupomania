@@ -17,8 +17,10 @@ app.use(helmet({
 
 //Routes
 const userRoutes = require('./routes/user');
+const profileRoutes = require('./routes/profile')
 
 app.use('/api/auth', userRoutes);
+app.use('/api/profile', profileRoutes);
 
 
 module.exports = app;

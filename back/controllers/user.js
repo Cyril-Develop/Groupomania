@@ -1,30 +1,35 @@
 const dbConnection = require('../db/mysql.js');
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
+const cryptojs = require('crypto-js');
 const User = require('../models/User.js');
 
 exports.signup = (req, res) => {
+    //encrypt the email
+    const emailCrypt = cryptojs.HmacSHA256(req.body.email, `${process.env.PASSWORD_CRYPTOJS}`).toString();
 	bcrypt.hash(req.body.password, 10)
 		.then(hash => {
 			const user = new User ({
-				email: req.body.email,
+				email: emailCrypt,
 				password: hash,
 				lastname: req.body.lastname,
 				name: req.body.name,
 				isAdmin: 0
 		});
 		//Send the user to the database
-       dbConnection.query('INSERT INTO users SET ?', user, (err, result) => {
-		   if(err) res.status(400).json({message: 'Email already used !'});
-		   else res.status(201).json({ message: 'User created !'});
-	   });
+        dbConnection.query('INSERT INTO users SET ?', user, (err, result) => {
+            if(err) res.status(400).json({error: 'Email already used !'});
+            else res.status(201).json({message: 'User created !'});
+        });
     })
     	.catch(error => res.status(500).json({error}));
 };
 
 exports.login = (req, res) => {
-	//Find the user in the database
-	dbConnection.query('SELECT * FROM users WHERE email = ?', req.body.email, (err, result) => {
+    //Decrypt the email
+    const emailCrypt = cryptojs.HmacSHA256(req.body.email, `${process.env.PASSWORD_CRYPTOJS}`).toString();
+    //Get user from the database
+	dbConnection.query('SELECT * FROM users WHERE email = ?', emailCrypt, (err, result) => {
 		if(err) throw err;
 		else {
 			if(result == 0){
@@ -37,9 +42,6 @@ exports.login = (req, res) => {
 						}
 						res.status(200).json({
 							userId : result[0].id,
-							email : result[0].email,
-							lastname : result[0].lastname,
-							name : result[0].name,
 							token : jwt.sign({userId: result[0].id}, `${process.env.PASSWORD_JWT}`, {expiresIn: "24h"})
 						});
 					})

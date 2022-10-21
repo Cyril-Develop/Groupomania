@@ -14,6 +14,8 @@
 ### Front : 
 - React
 
+![GitHub repo size](https://img.shields.io/github/repo-size/Cyril-Develop/Groupomania?style=for-the-badge)
+
 ## Tester le projet :
 
 ```terminal

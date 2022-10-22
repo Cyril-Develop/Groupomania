@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
+const path = require('path');
 
 const app = express();
 app.use(cors());
@@ -23,6 +24,7 @@ const adminRoutes = require('./routes/admin');
 app.use('/api/auth', userRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 
 

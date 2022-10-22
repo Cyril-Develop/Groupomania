@@ -1,4 +1,6 @@
 const dbConnection = require('../db/mysql.js');
+const cryptojs = require('crypto-js');
+const bcrypt = require('bcrypt');
 
 exports.getprofile = (req, res) => {
 	dbConnection.query('SELECT * FROM users WHERE id = ?', req.params.id, (err, result) => {
@@ -24,27 +26,23 @@ exports.deleteprofile = (req, res) => {
 
 //***************  Fonctionne pas *********************//
 exports.editProfile = (req, res) => {
-    dbConnection.query('SELECT * FROM users WHERE id = ?', req.params.id, (err, result) => {
-        if(result == 0) res.status(400).json({error: 'Invalid request !'});
-        else {
-            dbConnection.query('UPDATE users SET ? WHERE id = ?', req.body, (err, result) => {
-                if (err) throw err;
-                else res.status(200).json({message: 'User updated !'});
-            });
-        }
-    });	
+    if(req.auth.userId != req.params.id){
+        res.status(400).json({error: 'Invalid request !'});
+    } else {
+        //console.log(req.body)
+        bcrypt.hash(req.body.password, 10)
+            .then(hash => {
+                const editProfile = {
+                    name: req.body.name,
+                    lastname: req.body.lastname,
+                    email: cryptojs.HmacSHA256(req.body.email, `${process.env.PASSWORD_CRYPTOJS}`).toString(),
+                    password: hash
+            }
+        dbConnection.query('UPDATE users SET ? WHERE id = ?', [editProfile, req.params.id], (err, result) => {
+            if(err) throw err;
+            else res.status(200).json({message: 'User updated !'});
+        });
+    })
+        .catch(error => res.status(500).json({error}));
+    }
 };
-
-// app.post("/post", upload.single('image'), (req, res) => {
-//     if (!req.file) {
-//         console.log("No file upload");
-//     } else {
-//         console.log(req.file.filename)
-//         var imgsrc = 'http://127.0.0.1:3000/images/' + req.file.filename
-//         var insertData = "INSERT INTO users_file(file_src)VALUES(?)"
-//         db.query(insertData, [imgsrc], (err, result) => {
-//             if (err) throw err
-//             console.log("file uploaded")
-//         })
-//     }
-// });

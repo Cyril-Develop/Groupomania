@@ -1,4 +1,3 @@
-// const mysql = require("mysql");
 
 class User {
     constructor(user) {

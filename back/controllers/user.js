@@ -8,14 +8,16 @@ exports.signup = (req, res) => {
     //encrypt the email
     const emailCrypt = cryptojs.HmacSHA256(req.body.email, `${process.env.PASSWORD_CRYPTOJS}`).toString();
 	bcrypt.hash(req.body.password, 10)
-		.then(hash => {
-			const user = new User ({
-				email: emailCrypt,
-				password: hash,
-				lastname: req.body.lastname,
-				name: req.body.name,
-				isAdmin: 0
+	.then(hash => {
+		const user = new User ({
+			email: emailCrypt,
+			password: hash,
+			lastname: req.body.lastname,
+			firstname: req.body.firstname
 		});
+		if(user.email === '' || user.password === '' || user.lastname === '' || user.name === ''){
+			return res.status(400).json({error: 'Invalid request !'});
+		}
 		//Send the user to the database
         dbConnection.query('INSERT INTO users SET ?', user, (err, result) => {
             if(err) res.status(400).json({error: 'Email already used !'});

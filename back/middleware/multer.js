@@ -2,9 +2,10 @@ const multer = require('multer');
 
 //Mime type dictionnary
 const MIME_TYPE = {
-    "image/jpg" : "jpg",
-    "image/jpeg" : "jpg",
-    "image/png" : "png"
+    'image/jpg': 'jpg', 
+    'image/jpeg': 'jpg', 
+    'image/png': 'png', 
+    'image/gif': 'gif'
 };
 
 const storage = multer.diskStorage({

@@ -4,8 +4,9 @@ class User {
         this.email = user.email;
         this.password = user.password;
         this.lastname = user.lastname;
-        this.name = user.name;
-        this.isAdmin = user.isAdmin;
+        this.firstname = user.firstname;
+        this.role = "user";
+        this.imageUrl = "http://localhost:3000/images/defaultPicture.jpg";
     }
 };
 

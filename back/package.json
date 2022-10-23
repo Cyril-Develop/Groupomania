@@ -1,10 +1,10 @@
 {
   "name": "groupomania-back",
   "version": "1.0.0",
-  "description": "",
+  "description": "reseau social d'entreprise",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server"
   },
   "keywords": [],
   "author": "Cyril Bourdon",
@@ -15,6 +15,7 @@
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "express-rate-limit": "^6.6.0",
     "helmet": "^6.0.0",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",

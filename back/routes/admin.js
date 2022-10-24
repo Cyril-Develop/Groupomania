@@ -8,8 +8,8 @@ const admin = require('../middleware/admin');
 router.get('/profile', auth, admin, adminCtrl.getAllProfile);
 router.get('/profile/:id', auth, admin, adminCtrl.getProfile);
 router.delete('/profile/:id', auth, admin, adminCtrl.deleteProfile);
-//router.get('/message', adminCtrl.getMessages)');
-//router.get('/message/:id', adminCtrl.getMessage);
-//router.delete('/message/:id', adminCtrl.deleteMessage);
+router.get('/post', admin, adminCtrl.getAllPost);
+router.get('/post/:id', admin, adminCtrl.getPost);
+router.delete('/post/:id', admin, adminCtrl.deletePost);
 
 module.exports = router;

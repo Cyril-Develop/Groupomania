@@ -13,10 +13,11 @@ exports.signup = (req, res) => {
 			email: emailCrypt,
 			password: hash,
 			lastname: req.body.lastname,
-			firstname: req.body.firstname
+			firstname: req.body.firstname,
+			role: req.body.role ? req.body.role : "user"
 		});
 		if(user.email === '' || user.password === '' || user.lastname === '' || user.firstname === ''){
-			return res.status(400).json({error: 'Invalid request !'});
+			return res.status(400).json({error: 'Please complete all fields !'});
 		}
 		//Send the user to the database
         dbConnection.query('INSERT INTO users SET ?', user, (err, result) => {
@@ -32,7 +33,8 @@ exports.login = (req, res) => {
     const emailCrypt = cryptojs.HmacSHA256(req.body.email, `${process.env.PASSWORD_CRYPTOJS}`).toString();
     //Get user from the database
 	dbConnection.query('SELECT * FROM users WHERE email = ?', emailCrypt, (err, result) => {
-		if(err) throw err;
+		//if(err) throw err;
+		if (err) res.status(500).json(err);
 		else {
 			if(result == 0){
 				return res.status(404).json({error: 'User not found !'});

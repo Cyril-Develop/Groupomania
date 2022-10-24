@@ -3,7 +3,8 @@ const fs = require('fs');
 
 exports.getprofile = (req, res) => {
 	dbConnection.query('SELECT * FROM users WHERE id = ?', req.params.id, (err, result) => {
-        if (err) throw err;
+        //if (err) throw err;
+        if (err) res.status(500).json(err);
 		if(req.auth.userId != req.params.id || result == 0){
             res.status(400).json({error: 'Invalid request !'});
         }  

@@ -31,3 +31,9 @@ exports.deleteProfile = (req, res) => {
         }
     });	
 };
+
+exports.getAllPost = (req, res) => {};
+
+exports.getPost = (req, res) => {};
+
+exports.deletePost = (req, res) => {};

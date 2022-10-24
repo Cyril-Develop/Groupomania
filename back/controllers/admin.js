@@ -30,5 +30,4 @@ exports.deleteProfile = (req, res) => {
             }
         }
     });	
-
 };

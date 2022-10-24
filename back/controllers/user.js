@@ -15,7 +15,7 @@ exports.signup = (req, res) => {
 			lastname: req.body.lastname,
 			firstname: req.body.firstname
 		});
-		if(user.email === '' || user.password === '' || user.lastname === '' || user.name === ''){
+		if(user.email === '' || user.password === '' || user.lastname === '' || user.firstname === ''){
 			return res.status(400).json({error: 'Invalid request !'});
 		}
 		//Send the user to the database

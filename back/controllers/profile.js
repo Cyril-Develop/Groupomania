@@ -1,13 +1,8 @@
 const dbConnection = require('../db/mysql.js');
 const fs = require('fs');
 
-exports.getprofile = (req, res) => {
-	dbConnection.query('SELECT * FROM users WHERE id = ?', req.params.id, (err, result) => {
-        //if (err) throw err;
-        if (err) res.status(500).json(err);
-		if(req.auth.userId != req.params.id || result == 0){
-            res.status(400).json({error: 'Invalid request !'});
-        }  
+exports.getProfile = (req, res) => {
+	dbConnection.query('SELECT * FROM users WHERE id = ?', req.params.id, (err, result) => {  
         const dataUser = {
             lastname: result[0].lastname,
             firstname: result[0].firstname,
@@ -17,38 +12,41 @@ exports.getprofile = (req, res) => {
 	});
 };
 
-exports.deleteprofile = (req, res) => {
-    dbConnection.query('SELECT * FROM users WHERE id = ?', req.params.id, (err, result) => {
-        if(req.auth.userId != req.params.id || result == 0) res.status(400).json({error: 'Invalid request !'});
-        else {
-            const filename = result[0].imageUrl.split('/images/')[1];
-            if (filename !== "defaultPicture.jpg"){
-                fs.unlink(`images/${filename}`, () => {
+exports.deleteProfile = (req, res) => {
+     dbConnection.query('SELECT imageUrl FROM users WHERE id = ?', req.params.id, (err, result) => {
+           if (result[0].imageUrl === `http://localhost:3000/images/profilPictures/defaultPicture.jpg`) {
+                dbConnection.query('DELETE FROM users WHERE id = ?', req.params.id, (err, result) => {
+                    if (err) res.status(500).json(err);
+                    res.status(200).json({message: 'User deleted !'});
+                });
+           } else {
+                const profilPicture = result[0].imageUrl.split('/images/')[1];
+                fs.unlink(`images/${profilPicture}`, () => {
                     dbConnection.query('DELETE FROM users WHERE id = ?', req.params.id, (err, result) => {
-                        if(err) throw err;
+                        if (err) res.status(500).json(err);
                         res.status(200).json({message: 'User deleted !'});
-                    });
-                });   
-            }
-        }
-    });	
+                }); 
+            });
+     }}); 
 };
 
 exports.editProfile = (req, res) => {
-    dbConnection.query('SELECT * FROM users WHERE id = ?', req.params.id, (err, result) => {
-        if(req.auth.userId != req.params.id || result == 0){
-            res.status(400).json({error: 'Invalid request !'});
-        }  
-        else {
-            const imageUploaded = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-            if (imageUploaded !== "http://localhost:3000/images/defaultPicture.jpg"){
-                dbConnection.query('UPDATE users SET imageUrl = ? WHERE id = ?', [imageUploaded, req.params.id], (err, result) => {
-                    if(err) throw err;
-                    res.status(200).json({message: 'User updated !'});
-                });
-            }
+    dbConnection.query('SELECT imageUrl FROM users WHERE id = ?', req.params.id, (err, result) => {
+        if (result[0].imageUrl !== `http://localhost:3000/images/profilPictures/defaultPicture.jpg`) {
+            const filename = result[0].imageUrl.split('/images/')[1];
+             fs.unlink(`images/${filename}`, () => {
+                 dbConnection.query('UPDATE users SET imageUrl = ? WHERE id = ?', [`${req.protocol}://${req.get('host')}/images/profilPictures/${req.file.filename}`, req.params.id], (err, result) => {
+                    if (err) return res.status(500).json(err);
+                    return res.status(200).json({message: 'Updated profile picture !'});
+             }) 
+        })} else {
+            dbConnection.query('UPDATE users SET imageUrl = ? WHERE id = ?', [`${req.protocol}://${req.get('host')}/images/profilPictures/${req.file.filename}`, req.params.id], (err, result) => {
+                    if (err) return res.status(500).json(err);
+                    return res.status(200).json({message: 'Updated profile picture !'});
+             }) 
         }
-    })
+    }     
+ );
 };   
 
     
@@ -57,14 +55,6 @@ exports.editProfile = (req, res) => {
 
         
 
-            // dbConnection.query('SELECT * FROM users WHERE id = ?', req.params.id, (err, result) => {
-            //     if (err) throw err;
-            //     if(result == 0){
-            //         res.status(400).json({error: 'Invalid request !'});
-            //     }; 
-            //     res.status(200).json(result[0]);
-            // });
-        
     
             
        

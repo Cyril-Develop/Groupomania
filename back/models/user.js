@@ -6,7 +6,7 @@ class User {
         this.lastname = user.lastname;
         this.firstname = user.firstname;
         this.role = user.role;
-        this.imageUrl = "http://localhost:3000/images/defaultPicture.jpg";
+        this.imageUrl = "http://localhost:3000/images/profilPictures/defaultPicture.jpg";
     }
 };
 

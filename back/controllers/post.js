@@ -3,8 +3,9 @@ const dbConnection = require('../db/mysql');
 const fs = require('fs');
 
 exports.createPost = (req, res) => {
-    //Rendre l'envoie impossible côté front si il n'y a pas de titre et de contenu si égal à ''
-    //parcontre l'image est facultative
+    //Rendre l'envoie impossible côté front si il n'y a pas de titre et de contenu si égal à '' ?
+    //ou permettre d'envoyer des posts avec uniquement une image ?
+    //l'image est facultative
     const post = new Post({
         title: req.body.title ? req.body.title : '',
         content: req.body.content ? req.body.content : '',

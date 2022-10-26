@@ -11,5 +11,6 @@ router.delete('/profile/:id', auth, admin, adminCtrl.deleteProfile);
 router.get('/post', auth, admin, adminCtrl.getAllPost);
 router.get('/post/:id', auth, admin, adminCtrl.getPost);
 router.delete('/post/:id', auth, admin, adminCtrl.deletePost);
+router.put('/post/:id', auth, admin, adminCtrl.editPost);
 
 module.exports = router;

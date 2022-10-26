@@ -1,7 +1,9 @@
 
 module.exports = (req, res, next) => {
+    console.log(req.originalUrl.split('/')[3]);
+    console.log(req.auth.userId);
     try{
-        if(result != 0 || req.auth.userId == req.originalUrl.split('/')[3]){
+        if(req.auth.userId == req.originalUrl.split('/')[3]){
             next();
         }  
     } catch(error){

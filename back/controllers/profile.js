@@ -43,10 +43,8 @@ exports.editProfile = (req, res) => {
             dbConnection.query('UPDATE users SET imageUrl = ? WHERE id = ?', [`${req.protocol}://${req.get('host')}/images/profilPictures/${req.file.filename}`, req.params.id], (err, result) => {
                     if (err) return res.status(500).json(err);
                     return res.status(200).json({message: 'Updated profile picture !'});
-             }) 
-        }
-    }     
- );
+            }) 
+    }});      
 };   
 
     

@@ -68,3 +68,22 @@ exports.deletePost = (req, res) => {
         }
     }); 
 };
+
+exports.likePost = (req, res) => {
+    dbConnection.query('SELECT userId FROM likes WHERE postId = ?', req.params.id, (err, result) => {
+        if (err) return res.status(500).json(err);
+        const userLiked = result.find(user => user.userId === req.auth.userId);
+        if (userLiked) {
+            dbConnection.query('DELETE FROM likes WHERE userId = ?', req.auth.userId, (err, result) => {
+                if (err) return res.status(500).json(err);
+                res.status(200).json({message: 'Like removed !'});
+            });
+        } else {
+            dbConnection.query('INSERT INTO likes SET postId = ?, userId = ?', [req.params.id, req.auth.userId], (err, result) => {
+                if (err) return res.status(500).json(err);
+                res.status(200).json({message: 'Post liked !'});
+            });
+        }
+    })
+};
+    

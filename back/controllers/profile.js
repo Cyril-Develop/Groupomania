@@ -15,14 +15,12 @@ exports.getProfile = (req, res) => {
 exports.deleteProfile = (req, res) => {
     //Delete all posts images from directory
     dbConnection.query('SELECT imageUrl FROM post WHERE userId = ?', req.params.id, (err, result) => {
-        if(result == 0) return res.status(400).json({message: 'No post image to delete !'});
         result.forEach(image => {
             const filename = image.imageUrl.split('/images/')[1];
             fs.unlink(`images/${filename}`, () => {
                 if (err) return res.status(500).json(err);
-            }
-        )})
-    });
+            })
+        })
     //Delete user and all his posts from database
     dbConnection.query('SELECT imageUrl FROM users WHERE id = ?', req.params.id, (err, result) => {
            if (result[0].imageUrl === `http://localhost:3000/images/profilPictures/defaultPicture.jpg`) {
@@ -39,7 +37,9 @@ exports.deleteProfile = (req, res) => {
                 }); 
             });
      }}); 
+    })
 };
+
 
 exports.editProfile = (req, res) => {
     dbConnection.query('SELECT imageUrl FROM users WHERE id = ?', req.params.id, (err, result) => {

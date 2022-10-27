@@ -9,7 +9,7 @@ exports.createPost = (req, res) => {
     const post = new Post({
         title: req.body.title ? req.body.title : '',
         content: req.body.content ? req.body.content : '',
-        userId: req.params.id,
+        userId: req.auth.userId,
         imageUrl: req.file ? `${req.protocol}://${req.get('host')}/images/articleImages/${req.file.filename}` : ''
     });
     dbConnection.query('INSERT INTO post SET ? ', post, (err, result) => {
@@ -19,7 +19,7 @@ exports.createPost = (req, res) => {
 };
     
 exports.getAllPost = (req, res) => {
-    dbConnection.query('SELECT * FROM post WHERE userId = ?', req.params.id, (err, result) => {
+    dbConnection.query('SELECT * FROM post ', (err, result) => {
         if (err) return res.status(500).json(err);
         res.status(200).json(result);
     });

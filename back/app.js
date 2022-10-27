@@ -26,13 +26,9 @@ app.use(helmet({
 
 //Routes
 const userRoutes = require('./routes/user');
-const profileRoutes = require('./routes/profile');
 const postRoutes = require('./routes/post');
-const adminRoutes = require('./routes/admin');
 
-app.use('/api/auth', userRoutes);
-app.use('/api/profile', profileRoutes);
-app.use('/api/admin', adminRoutes);
+app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));
 

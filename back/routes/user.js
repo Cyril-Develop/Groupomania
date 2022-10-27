@@ -6,7 +6,7 @@ const password = require('../middleware/password-control');
 const email = require('../middleware/email-control');
 const auth = require('../middleware/auth');
 const permission = require('../middleware/permission');
-const multer = require('../middleware/multer');
+const multer = require('../middleware/multer-profile');
 
 router.post('/signup', password, email, userCtrl.signup);
 router.post('/login', userCtrl.login);

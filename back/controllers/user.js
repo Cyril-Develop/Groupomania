@@ -74,7 +74,7 @@ exports.deleteAccount = (req, res) => {
         })
     //Delete user and all his posts from database
     dbConnection.query('SELECT imageUrl FROM users WHERE id = ?', req.params.id, (err, result) => {
-           if (result[0].imageUrl === `http://localhost:3000/images/profilPictures/defaultPicture.jpg`) {
+           if (result[0].imageUrl === `http://localhost:3000/images/profilePictures/defaultPicture.jpg`) {
                 dbConnection.query('DELETE FROM users WHERE id = ?', req.params.id, (err, result) => {
                     if (err) res.status(500).json(err);
                     res.status(200).json({message: 'User deleted !'});
@@ -93,15 +93,15 @@ exports.deleteAccount = (req, res) => {
 
 exports.editPicture = (req, res) => {
 	dbConnection.query('SELECT imageUrl FROM users WHERE id = ?', req.params.id, (err, result) => {
-        if (result[0].imageUrl !== `http://localhost:3000/images/profilPictures/defaultPicture.jpg`) {
+        if (result[0].imageUrl !== `http://localhost:3000/images/profilePictures/defaultPicture.jpg`) {
             const filename = result[0].imageUrl.split('/images/')[1];
              fs.unlink(`images/${filename}`, () => {
-                 dbConnection.query('UPDATE users SET imageUrl = ? WHERE id = ?', [`${req.protocol}://${req.get('host')}/images/profilPictures/${req.file.filename}`, req.params.id], (err, result) => {
+                 dbConnection.query('UPDATE users SET imageUrl = ? WHERE id = ?', [`${req.protocol}://${req.get('host')}/images/profilePictures/${req.file.filename}`, req.params.id], (err, result) => {
                     if (err) return res.status(500).json(err);
                     return res.status(200).json({message: 'Updated profile picture !'});
              }) 
         })} else {
-            dbConnection.query('UPDATE users SET imageUrl = ? WHERE id = ?', [`${req.protocol}://${req.get('host')}/images/profilPictures/${req.file.filename}`, req.params.id], (err, result) => {
+            dbConnection.query('UPDATE users SET imageUrl = ? WHERE id = ?', [`${req.protocol}://${req.get('host')}/images/profilePictures/${req.file.filename}`, req.params.id], (err, result) => {
                     if (err) return res.status(500).json(err);
                     return res.status(200).json({message: 'Updated profile picture !'});
             }) 

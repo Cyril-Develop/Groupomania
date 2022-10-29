@@ -10,7 +10,7 @@ const multer = require('../middleware/multer-profile');
 
 router.post('/signup', password, email, userCtrl.signup);
 router.post('/login', userCtrl.login);
-//router.get('/logout', userCtrl.logout);
+router.get('/logout', auth, userCtrl.logout);
 
 //Récupérer toutes les infos d'un user pour les affichers dans le profil
 router.get('/:id', auth, userCtrl.userInfos);

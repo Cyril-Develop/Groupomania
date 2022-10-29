@@ -21,6 +21,7 @@ exports.createPost = (req, res) => {
 exports.getAllPost = (req, res) => {
     dbConnection.query('SELECT * FROM post ', (err, result) => {
         if (err) return res.status(500).json(err);
+        if(result == 0) return res.status(404).json({error: 'No posts to display !'});
         res.status(200).json(result);
     });
 };
@@ -28,6 +29,7 @@ exports.getAllPost = (req, res) => {
 exports.getPost = (req, res) => {
     dbConnection.query('SELECT * FROM post WHERE id = ?', req.params.id, (err, result) => {
         if (err) return res.status(500).json(err);
+        if(result == 0) return res.status(404).json({error: 'Post not found !'});
         res.status(200).json(result[0]); 
     });    
 }

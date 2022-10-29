@@ -50,9 +50,16 @@ exports.login = (req, res) => {
 	}
 )};
 
+exports.logout = (req, res) => {
+    req.auth = null;
+    res.redirect("/");
+};
+
 //Récupérer toutes les infos d'un user
 exports.userInfos = (req, res) => {
 	dbConnection.query('SELECT * FROM users WHERE id = ?', req.params.id, (err, result) => {  
+        if (err) return res.status(500).json(err);
+        if(result == 0) return res.status(404).json({error: 'User not found !'});
         const dataUser = {
             lastname: result[0].lastname,
             firstname: result[0].firstname,
@@ -93,6 +100,7 @@ exports.deleteAccount = (req, res) => {
 
 exports.editPicture = (req, res) => {
 	dbConnection.query('SELECT imageUrl FROM users WHERE id = ?', req.params.id, (err, result) => {
+        if (err) return res.status(500).json(err);
         if (result[0].imageUrl !== `http://localhost:3000/images/profilePictures/defaultPicture.jpg`) {
             const filename = result[0].imageUrl.split('/images/')[1];
              fs.unlink(`images/${filename}`, () => {

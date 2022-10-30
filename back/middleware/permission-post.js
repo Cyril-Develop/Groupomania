@@ -1,7 +1,6 @@
 const dbConnection = require('../db/mysql.js');
 
 module.exports = (req, res, next) => {
-    //récupére le créateur du post 
     dbConnection.query('SELECT userId FROM post WHERE id = ?', req.params.id, (err, result) => {
         if (err) return res.status(500).json(err);
         if(result == 0 ) return res.status(404).json({error: 'Post not found !'});

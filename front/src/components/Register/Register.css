@@ -1,4 +1,4 @@
-.container-card{
+.container-register{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,7 +6,7 @@
     background: linear-gradient(315deg, #668b8f 50%, var(--secondary) 80%)
 }
 
-.card{
+.register-card{
     display: flex;
     justify-content: center;
     max-width: 800px;
@@ -15,11 +15,11 @@
     background-color:white;
 }
 
-.card-left, .card-right{
+.register-card-left, .register-card-right{
     width: 50%;
 }
 
-.card-left{
+.register-card-left{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,28 +29,27 @@
     background-position: center;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    padding: 40px 20px;
+    padding: 20px;
+    letter-spacing: 1px;
     color: white;
 }
 
-.card-left img{
+.register-card-left img{
     width: 100%;
     object-fit: contain;
     object-position:50% 40%;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
 }
 
-.card-left p{
+.register-card-left p{
     font-size: 1.2rem;
 }
 
-.card-left a {
+.register-card-left a {
     position: relative;
     color: royalblue;
 }
 
-.card-left a::after{
+.register-card-left a::after{
     content: '';
     position: absolute;
     width: 0%;
@@ -61,15 +60,18 @@
     transition: all 0.2s ease-in-out;
 }
 
-.card-left a:hover::after{
+.register-card-left a:hover::after{
     width: 100%;
 }
 
-.card-right{
+.register-card-right{
     padding: 20px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #ecf0f3;
 }
 
-.card-right h2{
+.register-card-right h2{
     text-align: center;
     margin-bottom: 15px;
 }
@@ -85,15 +87,18 @@
     font-size: 1.2rem;
     position: absolute;
     top: 15px;
-    left: 0;
+    left: 15px;
 }
 
 .form-control input{
     outline: none;
     border: none;
-    padding: 15px 0;
     font-size: 1.2rem;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid transparent;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: inset 8px 8px 8px #cbced1,
+                inset -8px -8px 8px #fff;
 }
 
 .form-control input:focus + label, 
@@ -117,13 +122,13 @@
     border-radius: 10px;
     font-size: 1.1rem;
     border: none;
-    box-shadow: -3px -3px 7px #ffffff73,
+    box-shadow: -3px -3px 7px #ffffff,
                 3px 3px 5px rgba(94, 104, 121, .288);
     transition: all 0.2s ease-in-out;
 }
 
 .btn-form:hover{
-    box-shadow: inset -3px -3px 7px #ffffff73,
+    box-shadow: inset -3px -3px 7px #ffffff,
                 inset 3px 5px 5px rgba(94, 104, 121, .288);
 }
 
@@ -134,7 +139,7 @@
     font-family: 'Font Awesome 5 Free';
     position: absolute;
     top: 15px;
-    right: 0;
+    right: 15px;
     font-size: 1.2rem;
     cursor: pointer;
 } 

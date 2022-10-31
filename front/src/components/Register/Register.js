@@ -15,13 +15,13 @@ export default function Connection() {
 	}
 
 	return (
-		<div className="container-card">
-			<div className='card'>
-				<div className="card-left">
+		<div className="container-register">
+			<div className='register-card'>
+				<div className="register-card-left">
 					<img src={Logo} alt="logo groupomania" />
 					<p>Déjà inscrit ? <a onClick={() => navigate('/login')} href="../login">se connecter</a></p>
 				</div>
-				<div className="card-right">
+				<div className="register-card-right">
 					<h2><span></span> Inscription <span></span></h2>
 					<form>
 						<div className='form-control'>

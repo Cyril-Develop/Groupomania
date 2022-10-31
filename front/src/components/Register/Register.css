@@ -1,0 +1,158 @@
+.container-card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(315deg, #668b8f 50%, var(--secondary) 80%)
+}
+
+.card{
+    display: flex;
+    justify-content: center;
+    max-width: 800px;
+    width: 90%;
+    border-radius: 10px;
+    background-color:white;
+}
+
+.card-left, .card-right{
+    width: 50%;
+}
+
+.card-left{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-image: url('../../assets/bg-register-card.jpg');
+    background-size: cover;
+    background-position: center;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 40px 20px;
+    color: white;
+}
+
+.card-left img{
+    width: 100%;
+    object-fit: contain;
+    object-position:50% 40%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.card-left p{
+    font-size: 1.2rem;
+}
+
+.card-left a {
+    position: relative;
+    color: royalblue;
+}
+
+.card-left a::after{
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background-color: royalblue;
+    left: 0;
+    bottom: -5px;
+    transition: all 0.2s ease-in-out;
+}
+
+.card-left a:hover::after{
+    width: 100%;
+}
+
+.card-right{
+    padding: 20px;
+}
+
+.card-right h2{
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.form-control {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.form-control label{
+    font-size: 1.2rem;
+    position: absolute;
+    top: 15px;
+    left: 0;
+}
+
+.form-control input{
+    outline: none;
+    border: none;
+    padding: 15px 0;
+    font-size: 1.2rem;
+    border-bottom: 2px solid black;
+}
+
+.form-control input:focus + label, 
+.form-control input:valid + label{
+    color: royalblue;
+    transform: translateY(-25px);
+    font-size: 1.1rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-control input:focus, 
+.form-control input:valid{
+    border-bottom: 2px solid royalblue;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-form{
+    display: block;
+    margin: 0 auto;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    border: none;
+    box-shadow: -3px -3px 7px #ffffff73,
+                3px 3px 5px rgba(94, 104, 121, .288);
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-form:hover{
+    box-shadow: inset -3px -3px 7px #ffffff73,
+                inset 3px 5px 5px rgba(94, 104, 121, .288);
+}
+
+/* Eyes password */
+
+.open-eye::before,
+.close-eye::after{
+    font-family: 'Font Awesome 5 Free';
+    position: absolute;
+    top: 15px;
+    right: 0;
+    font-size: 1.2rem;
+    cursor: pointer;
+} 
+
+.open-eye::before:hover,
+.close-eye::after:hover{
+    font-family: 'Font Awesome 5 Free';
+    position: absolute;
+    top: 15px;
+    right: 0;
+    font-size: 1.2rem;
+    cursor: pointer;
+} 
+
+.open-eye::before{
+    content: '\f06e';
+}
+
+.close-eye::after{
+    content: '\f070';
+}

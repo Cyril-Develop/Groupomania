@@ -17,3 +17,15 @@ html{
   --secondary: #FFD7D7;
   --tertiary: #4E5166;
 }
+
+a{
+  text-decoration: none;
+}
+
+li{
+  list-style: none;
+}
+
+button{
+  cursor: pointer;
+}

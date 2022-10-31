@@ -26,7 +26,7 @@
     justify-content: space-between;
     background-image: url('../../assets/bg-register-card.jpg');
     background-size: cover;
-    background-position: center;
+    background-position: 20% 90%;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     padding: 20px;
@@ -88,6 +88,8 @@
     position: absolute;
     top: 15px;
     left: 15px;
+    pointer-events: none;
+    transition: all 0.2s ease-in-out;
 }
 
 .form-control input{
@@ -98,7 +100,7 @@
     padding: 15px;
     border-radius: 10px;
     box-shadow: inset 8px 8px 8px #cbced1,
-                inset -8px -8px 8px #fff;
+                inset -8px -8px 8px #fff;   
 }
 
 .form-control input:focus + label, 

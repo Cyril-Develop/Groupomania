@@ -18,7 +18,7 @@ export default function Connection() {
 		<div className="container-login">
 			<div className='login-card'>
 				<div className="login-card-left">
-					<h2><span></span> Connexion <span></span></h2>
+					<h2>Connexion</h2>
 					<form>
 						<div className='form-control'>
 							<input type="email" name="email" id="email" required/>
@@ -35,7 +35,7 @@ export default function Connection() {
 				</div>
 				<div className="login-card-right">
 					<img src={Logo} alt="logo groupomania" />
-					<p>Pas encore inscrit ? <a onClick={() => navigate('/login')} href="../register">s'inscrire</a></p>
+					<p>Pas de compte ? <a onClick={() => navigate('/login')} href="../register">s'inscrire</a></p>
 				</div>
 			</div>
 		</div>

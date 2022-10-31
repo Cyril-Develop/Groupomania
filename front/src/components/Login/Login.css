@@ -26,7 +26,7 @@
     justify-content: space-between;
     background-image: url('../../assets/bg-login-card.jpg');
     background-size: cover;
-    background-position: 100% 25%;
+    background-position: 100% 15%;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     padding: 20px;
@@ -76,7 +76,7 @@
     margin-bottom: 15px;
 }
 
-.form-control {
+/* .form-control {
     display: flex;
     flex-direction: column;
     position: relative;
@@ -130,11 +130,11 @@
 .btn-form:hover{
     box-shadow: inset -3px -3px 7px #ffffff,
                 inset 3px 5px 5px rgba(94, 104, 121, .288);
-}
+} */
 
 /* Eyes password */
 
-.open-eye::before,
+/* .open-eye::before,
 .close-eye::after{
     font-family: 'Font Awesome 5 Free';
     position: absolute;
@@ -160,4 +160,4 @@
 
 .close-eye::after{
     content: '\f070';
-}
+} */

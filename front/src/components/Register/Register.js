@@ -6,13 +6,13 @@ import {useState} from 'react'
 
 export default function Connection() {
 
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 
-	const [showPassword, setShowPassword] = useState(false)
+	const [showPassword, setShowPassword] = useState(false);
 
 	const togglePassword = () => {
 		setShowPassword(!showPassword)
-	}
+	};
 
 	return (
 		<div className="container-register">
@@ -22,7 +22,7 @@ export default function Connection() {
 					<p>Déjà inscrit ? <a onClick={() => navigate('/login')} href="../login">se connecter</a></p>
 				</div>
 				<div className="register-card-right">
-					<h2><span></span> Inscription <span></span></h2>
+					<h2>Inscription</h2>
 					<form>
 						<div className='form-control'>
 							<input type="text" name="Nom" id="Nom" required/>
@@ -37,8 +37,7 @@ export default function Connection() {
 							<label htmlFor="email">Email</label>
 						</div>
 						<div className='form-control'>
-							<div onClick={() => togglePassword()} className={showPassword ? "close-eye" : "open-eye"}>
-							</div>
+							<div onClick={() => togglePassword()} className={showPassword ? "close-eye" : "open-eye"}></div>
 							<input type={showPassword ? "text" : "password"} name="mdp" id="mdp" required/>
 							<label htmlFor="mdp">Mot de passe</label>
 						</div>

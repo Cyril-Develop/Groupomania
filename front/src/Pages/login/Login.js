@@ -15,18 +15,18 @@ export default function Login() {
 	return (
 		<div className="login">
 			<div className='card'>
-				<div className="right">
+				<div className="card_right">
 					<img src={Logo} alt="logo groupomania" />
-					<p>Pas de compte ? <Link to='/register'><a>inscription</a></Link></p>
+					<p>Pas de compte ? <Link to='/register'><a href='/register'>inscription</a></Link></p>
 				</div>
-				<div className="left">
+				<div className="card_left">
 					<h2>Connexion</h2>
-					<form>
-						<div className='form-control'>
+					<form className='form'>
+						<div className='form_control'>
 							<input type="email" name="email" id="email" required/>
 							<label htmlFor="email">Email</label>
 						</div>
-						<div className='form-control'>
+						<div className='form_control'>
 							<div onClick={() => togglePassword()} className={showPassword ? "close-eye" : "open-eye"}>
 							</div>
 							<input type={showPassword ? "text" : "password"} name="mdp" id="mdp" required/>

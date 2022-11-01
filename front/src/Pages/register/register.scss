@@ -4,7 +4,6 @@
     align-items: center;
     height: 100vh;
     background-image: radial-gradient(circle at 82% 60%, rgba(59, 59, 59,0.06) 0%, rgba(59, 59, 59,0.06) 69%,transparent 69%, transparent 100%),radial-gradient(circle at 36% 0%, rgba(185, 185, 185,0.06) 0%, rgba(185, 185, 185,0.06) 59%,transparent 59%, transparent 100%),radial-gradient(circle at 58% 82%, rgba(183, 183, 183,0.06) 0%, rgba(183, 183, 183,0.06) 17%,transparent 17%, transparent 100%),radial-gradient(circle at 71% 32%, rgba(19, 19, 19,0.06) 0%, rgba(19, 19, 19,0.06) 40%,transparent 40%, transparent 100%),radial-gradient(circle at 77% 5%, rgba(31, 31, 31,0.06) 0%, rgba(31, 31, 31,0.06) 52%,transparent 52%, transparent 100%),radial-gradient(circle at 96% 80%, rgba(11, 11, 11,0.06) 0%, rgba(11, 11, 11,0.06) 73%,transparent 73%, transparent 100%),radial-gradient(circle at 91% 59%, rgba(252, 252, 252,0.06) 0%, rgba(252, 252, 252,0.06) 44%,transparent 44%, transparent 100%),radial-gradient(circle at 52% 82%, rgba(223, 223, 223,0.06) 0%, rgba(223, 223, 223,0.06) 87%,transparent 87%, transparent 100%),radial-gradient(circle at 84% 89%, rgba(160, 160, 160,0.06) 0%, rgba(160, 160, 160,0.06) 57%,transparent 57%, transparent 100%),linear-gradient(145deg, rgb(255,215,215),rgb(78,81,102));
-
     .card{
         display: flex;
         flex-direction: row-reverse;
@@ -14,7 +13,7 @@
         border-radius: 10px;
         background-color:white;
         overflow: hidden;
-            .right{
+            &_right{
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -25,100 +24,106 @@
                 background-position: center;
                 padding: 20px;
                 letter-spacing: 1px;
-                img{
-                    width: 100%;
-                    object-fit: contain;
-                    object-position:50% 40%;
-                }
-                p{
-                    font-size: 1rem;
-
-                    a{
-                        position: relative;
-                        color: royalblue;
-                    }
-                    a::after {
-                        content: '';
-                        position: absolute;
-                        width: 0%;
-                        height: 2px;
-                        background-color: royalblue;
-                        left: 0;
-                        bottom: -5px;
-                        transition: all 0.2s ease-in-out;
-                    }
-                    a:hover::after{
+                    img{
                         width: 100%;
+                        object-fit: contain;
+                        object-position:50% 40%;
                     }
-                }
+                    p{
+                        font-size: 1rem;
+                        a{
+                            position: relative;
+                            color: royalblue;
+                            &::after{
+                                content: '';
+                                position: absolute;
+                                width: 0%;
+                                height: 2px;
+                                background-color: royalblue;
+                                left: 0;
+                                bottom: -5px;
+                                transition: all 0.2s ease-in-out;
+                            }
+                            &:hover::after{
+                                width: 100%;
+                            }
+                        }
+                        
+                    }
             }
-            .left{
+            &_left{
                 flex: 1;
                 padding: 20px;
                 background-color: #ecf0f3;
-
-                h2{
-                    text-align: center;
-                    margin-bottom: 30px;
-                }
-                form{
-                    .form-control{
-                        display: flex;
-                        flex-direction: column;
-                        position: relative;
-                        margin-bottom: 50px;
-
-                        input{
-                            outline: none;
-                            border: none;
-                            font-size: 1.2rem;
-                            border-bottom: 2px solid transparent;
-                            padding: 15px;
-                            border-radius: 10px;
-                            box-shadow: inset 8px 8px 8px #cbced1,
-                                        inset -8px -8px 8px #fff;
-                        }
-                        label{
-                            font-size: 1.2rem;
-                            position: absolute;
-                            top: 15px;
-                            left: 15px;
-                        }
+                    h2{
+                        text-align: center;
+                        margin-bottom: 30px;
                     }
-                    button{
-                        display: block;
-                        margin: 0 auto;
-                        padding: 5px 10px;
-                        border-radius: 10px;
-                        font-size: 1.1rem;
-                        border: none;
-                        box-shadow: -3px -3px 7px #ffffff,
-                                    3px 3px 5px rgba(94, 104, 121, .288);
-                        transition: all 0.2s ease-in-out;
-                    }
-                    
-                    button:hover{
-                        box-shadow: inset -3px -3px 7px #ffffff,
-                                    inset 3px 5px 5px rgba(94, 104, 121, .288);
-                    } 
-                }
-            }
+                
     }
-}
+};
 
-.form-control input:focus + label, 
-.form-control input:valid + label{
-    color: royalblue;
-    transform: translateY(-25px);
-    font-size: 1.1rem;
-    transition: all 0.2s ease-in-out;
-}
+.form{
+    &_control{
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin-bottom: 50px;
 
-.form-control input:focus, 
-.form-control input:valid{
-    border-bottom: 2px solid royalblue;
-    transition: all 0.2s ease-in-out;
-}
+        input{
+            outline: none;
+            border: none;
+            font-size: 1.2rem;
+            border-bottom: 2px solid transparent;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: inset 8px 8px 8px #cbced1,
+                        inset -8px -8px 8px #fff;
+            &:focus,
+            &:valid{
+                border-bottom: 2px solid royalblue;
+                transition: all 0.2s ease-in-out;
+            }
+            &:focus + label,
+            &:valid + label{
+                color: royalblue;
+                transform: translateY(-25px);
+                font-size: 1.1rem;
+                transition: all 0.2s ease-in-out;
+            }
+        }
+        label{
+            font-size: 1.2rem;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            transition: all 0.2s ease-in-out;
+        }
+    }
+    button{
+        display: block;
+        margin: 0 auto;
+        padding: 5px 10px;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        border: none;
+        box-shadow: -3px -3px 7px #ffffff,
+                    3px 3px 5px rgba(94, 104, 121, .288);
+        transition: all 0.2s ease-in-out;
+        &:hover{
+            box-shadow: inset -3px -3px 7px #ffffff,
+                    inset 3px 5px 5px rgba(94, 104, 121, .288);
+        }
+    }}  
+};
+
+.open-eye::before{
+    content: '\f06e';
+};
+
+.close-eye::after{
+    content: '\f070';
+}; 
 
 .open-eye::before,
 .close-eye::after{
@@ -128,22 +133,13 @@
     right: 15px;
     font-size: 1.2rem;
     cursor: pointer;
-} 
+    &:hover{
+        font-family: 'Font Awesome 5 Free';
+        position: absolute;
+        top: 15px;
+        right: 0;
+        font-size: 1.2rem;
+        cursor: pointer;
+    }
+};
 
-.open-eye::before:hover,
-.close-eye::after:hover{
-    font-family: 'Font Awesome 5 Free';
-    position: absolute;
-    top: 15px;
-    right: 0;
-    font-size: 1.2rem;
-    cursor: pointer;
-} 
-
-.open-eye::before{
-    content: '\f06e';
-}
-
-.close-eye::after{
-    content: '\f070';
-} 

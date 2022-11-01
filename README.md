@@ -13,6 +13,7 @@
 
 ### Front : 
 - React
+- Sass
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/Cyril-Develop/Groupomania?style=for-the-badge)
 

@@ -1,30 +1,28 @@
 import React from 'react'
-import './Register.css'
-import Logo from '../../assets/logo-groupo-black.svg'
-import {useNavigate} from 'react-router-dom'
+import './register.scss'
+import Logo from '../../assets/logo-groupo.svg'
 import {useState} from 'react'
+import { Link } from 'react-router-dom';
 
-export default function Connection() {
+export default function Login() {
 
-	const navigate = useNavigate();
-
-	const [showPassword, setShowPassword] = useState(false);
+	const [showPassword, setShowPassword] = useState(false)
 
 	const togglePassword = () => {
 		setShowPassword(!showPassword)
-	};
+	}
 
 	return (
-		<div className="container-register">
-			<div className='register-card'>
-				<div className="register-card-left">
+		<div className="register">
+			<div className='card'>
+				<div className="right">
 					<img src={Logo} alt="logo groupomania" />
-					<p>Déjà inscrit ? <a onClick={() => navigate('/login')} href="../login">se connecter</a></p>
+					<p>Déjà inscrit ? <Link to='/login'><a>se connecter</a></Link></p>
 				</div>
-				<div className="register-card-right">
+				<div className="left">
 					<h2>Inscription</h2>
 					<form>
-						<div className='form-control'>
+                    <div className='form-control'>
 							<input type="text" name="Nom" id="Nom" required/>
 							<label htmlFor="Nom">Nom</label>
 						</div>
@@ -41,7 +39,7 @@ export default function Connection() {
 							<input type={showPassword ? "text" : "password"} name="mdp" id="mdp" required/>
 							<label htmlFor="mdp">Mot de passe</label>
 						</div>
-						<button className='btn-form' type='submit'>Inscription</button>
+						<button type='submit'>Inscription</button>
 					</form>
 				</div>
 			</div>

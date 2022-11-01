@@ -1,20 +1,22 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-import Register from './components/Register/Register';
-import Login from './components/Login/Login';
-import NotFound from './components/NotFound/NotFound';
+import { createBrowserRouter, RouterProvider, Navigate} from 'react-router-dom';
+import Login from './Pages/login/Login';
+import Register from './Pages/register/Register';
+import NotFound from './Pages/notFound/NotFound';
 
 
 function App() {
 
-
+	const router = createBrowserRouter([
+		{ path: '/login', element: <Login /> },
+    	{ path: '/register', element: <Register /> },
+		{ path: '/', element: <Navigate replace to="/register" /> },
+		{ path: '*', element: <NotFound /> }
+	]);
 
 	return (
-		<Routes>
-			<Route path="/login" element={<Login />} />
-			<Route path="/register" element={<Register />} />
-			<Route path="/" element={<Navigate replace to="/register" />} />
-			<Route path='*' element={<NotFound />}/>
-		</Routes>
+		<div>
+			<RouterProvider router={router} />
+		</div>
 	);
 }
 

@@ -1,12 +1,10 @@
 import React from 'react'
-import './Login.css'
-import Logo from '../../assets/logo-groupo-black.svg'
-import {useNavigate} from 'react-router-dom'
+import './login.scss'
+import Logo from '../../assets/logo-groupo.svg'
 import {useState} from 'react'
+import { Link } from 'react-router-dom';
 
-export default function Connection() {
-
-	const navigate = useNavigate()
+export default function Login() {
 
 	const [showPassword, setShowPassword] = useState(false)
 
@@ -15,9 +13,13 @@ export default function Connection() {
 	}
 
 	return (
-		<div className="container-login">
-			<div className='login-card'>
-				<div className="login-card-left">
+		<div className="login">
+			<div className='card'>
+				<div className="right">
+					<img src={Logo} alt="logo groupomania" />
+					<p>Pas de compte ? <Link to='/register'><a>inscription</a></Link></p>
+				</div>
+				<div className="left">
 					<h2>Connexion</h2>
 					<form>
 						<div className='form-control'>
@@ -30,12 +32,8 @@ export default function Connection() {
 							<input type={showPassword ? "text" : "password"} name="mdp" id="mdp" required/>
 							<label htmlFor="mdp">Mot de passe</label>
 						</div>
-						<button className='btn-form' type='submit'>Connexion</button>
+						<button type='submit'>Connexion</button>
 					</form>
-				</div>
-				<div className="login-card-right">
-					<img src={Logo} alt="logo groupomania" />
-					<p>Pas de compte ? <a onClick={() => navigate('/login')} href="../register">s'inscrire</a></p>
 				</div>
 			</div>
 		</div>

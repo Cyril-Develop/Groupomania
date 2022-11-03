@@ -19,8 +19,8 @@ exports.signup = (req, res) => {
 		});
         dbConnection.query('INSERT INTO users SET ?', user, (err, result) => {
             if(err) res.status(400).json({error: 'Email already used !'});
-            //else res.status(201).json({message: 'User created !'});
-			else res.status(201).json({userId :result.insertId});
+            else res.status(201).json({message: 'User created !'});
+			//else res.status(201).json({userId :result.insertId});
         });
     })
     	.catch(error => res.status(500).json({error}));

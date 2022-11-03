@@ -6,11 +6,41 @@ import { Link } from 'react-router-dom';
 
 export default function Login() {
 
+    /////////////////////////////////////////////////////////
 	const [showPassword, setShowPassword] = useState(false)
 
 	const togglePassword = () => {
 		setShowPassword(!showPassword)
 	}
+
+    ////////////////////////////////////////////////////////
+
+    const [inputs, setInputs] = useState({
+        lastname : '',   
+        firstname : '',
+        email : '',
+        password : '',
+    })
+
+    //Récupére les données du formulaire
+    const handleChange = e => {
+        setInputs((previous) => ({...previous, [e.target.name]: e.target.value}))
+    }
+
+    const handleClick = e => {
+        e.preventDefault();
+          
+          fetch('http://localhost:8080/api/user/signup', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(inputs)
+          })
+          .then(response => response.json())
+          .then(data => console.log(data))
+
+    }
 
 	return (
 		<div className="register">
@@ -23,23 +53,23 @@ export default function Login() {
 					<h2>Inscription</h2>
 					<form className='form'>
                     <div className='form_control'>
-							<input type="text" name="nom" id="Nom" required/>
-							<label htmlFor="nom">Nom</label>
+							<input type="text" name="lastname" id="lastname" onChange={handleChange} required/>
+							<label htmlFor="lastname">Nom</label>
 						</div>
 						<div className='form_control'>
-							<input type="text" name="prenom" id="Prénom" required/>
-							<label htmlFor="prenom">Prénom</label>
+							<input type="text" name="firstname" id="firstname" onChange={handleChange} required/>
+							<label htmlFor="firstname">Prénom</label>
 						</div>
 						<div className='form_control'>
-							<input type="email" name="email" id="email" required/>
+							<input type="email" name="email" id="email" onChange={handleChange} required/>
 							<label htmlFor="email">Email</label>
 						</div>
 						<div className='form_control'>
 							<div onClick={() => togglePassword()} className={showPassword ? "close-eye" : "open-eye"}></div>
-							<input type={showPassword ? "text" : "password"} name="mdp" id="mdp" required/>
-							<label htmlFor="mdp">Mot de passe</label>
+							<input type={showPassword ? "text" : "password"} name="password" id="password" onChange={handleChange} required/>
+							<label htmlFor="password">Mot de passe</label>
 						</div>
-						<button type='submit'>Inscription</button>
+						<button onClick={handleClick} type='submit'>Valider</button>
 					</form>
 				</div>
 			</div>

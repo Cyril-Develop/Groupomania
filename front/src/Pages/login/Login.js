@@ -29,10 +29,10 @@ export default function Login() {
 						<div className='form_control'>
 							<div onClick={() => togglePassword()} className={showPassword ? "close-eye" : "open-eye"}>
 							</div>
-							<input type={showPassword ? "text" : "password"} name="mdp" id="mdp" required/>
-							<label htmlFor="mdp">Mot de passe</label>
+							<input type={showPassword ? "text" : "password"} name="password" id="password" required/>
+							<label htmlFor="password">Mot de passe</label>
 						</div>
-						<button type='submit'>Connexion</button>
+						<button type='submit'>Valider</button>
 					</form>
 				</div>
 			</div>

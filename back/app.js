@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const path = require('path');
-const rateLimit = require('express-rate-limit');
+//const rateLimit = require('express-rate-limit');
 
 const app = express();
 app.use(cors());
@@ -11,11 +11,11 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 //Connection attempt
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 20 // limit each IP to 20 requests per windowMs
-});
-app.use(limiter);
+//const limiter = rateLimit({
+    //windowMs: 15 * 60 * 1000, // 15 minutes
+    //max: 20 // limit each IP to 20 requests per windowMs
+//});
+//app.use(limiter);
 
 //Connection to the database
 require('./db/mysql');

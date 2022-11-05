@@ -19,6 +19,7 @@ export default function Register() {
         email: "",
         password: ""
     };
+
     const [formValues, setFormValues] = useState(initialValues);
     const [formError, setFormError] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
@@ -40,9 +41,15 @@ export default function Register() {
             },
             body: JSON.stringify(formValues),
         })
-            .then((response) => response.json())
-            .then((data) => console.log(data))
-            .catch((error) => console.log(error));
+        .then(res => {
+            if (res.ok) {
+                res.json().then(data => {
+                    console.log(data);
+                    setFormValues(initialValues);
+                })
+            } 
+        })
+        .catch((error) => console.log(error));
     };
 
     useEffect(() => {
@@ -86,12 +93,7 @@ export default function Register() {
             <div className="card">
                 <div className="card_right">
                     <img src={Logo} alt="logo groupomania" />
-                    <p>
-                        Déjà inscrit ?{" "}
-                        <Link to="/login">
-                            <a href="/login">se connecter</a>
-                        </Link>
-                    </p>
+                    <p>Déjà inscrit ? <Link to="/login">se connecter</Link></p>
                 </div>
                 <div className="card_left">
                     <h2>Inscription</h2>

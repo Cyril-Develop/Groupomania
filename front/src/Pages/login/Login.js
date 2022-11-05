@@ -1,8 +1,9 @@
 import React from 'react'
 import './login.scss'
 import Logo from '../../assets/logo-groupo.svg'
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/authContext';
 
 export default function Login() {
 
@@ -13,7 +14,21 @@ export default function Login() {
 	}
 
 	///////////////////////////////////////////////////////////////
+	const navigate = useNavigate()
 
+	const {login} = useContext(AuthContext);
+
+	const handleLogin = async (e) => {
+		e.preventDefault()
+		try{
+			await login()
+			navigate('/')
+		} catch (err) {
+			console.log(err)
+		}
+	}
+		
+	///////////////////////////////////////////////////////////////
 	const initialValues = {
 		email: "",
 		password: ""
@@ -32,22 +47,11 @@ export default function Login() {
         e.preventDefault();
         setFormError(validate(formValues));
         setIsSubmit(true);
-
-        fetch("http://localhost:8080/api/user/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-            },
-            body: JSON.stringify(formValues),
-        })
-            .then((response) => response.json())
-            .then((data) => console.log(data))
-            .catch((error) => console.log(error));
-    };
+   };
 
     useEffect(() => {
         if (Object.keys(formError).length === 0 && isSubmit) {
-            console.log("User registered");
+            console.log("User connected");
         }
     });
 
@@ -74,7 +78,7 @@ export default function Login() {
 			<div className='card'>
 				<div className="card_right">
 					<img src={Logo} alt="logo groupomania" />
-					<p>Pas de compte ? <Link to='/register'><a href='/register'>inscription</a></Link></p>
+					<p>Pas de compte ? <Link to='/register'>inscription</Link></p>
 				</div>
 				<div className="card_left">
 					<h2>Connexion</h2>
@@ -103,7 +107,7 @@ export default function Login() {
 							<label htmlFor="password" className={formValues.password && 'animLabel'}>Mot de passe</label>
 							{formError.password && <p>{formError.password}</p>}
 						</div>
-						<button type='submit'>Valider</button>
+						<button onClick={handleLogin} type='submit'>Valider</button>
 					</form>
 				</div>
 			</div>

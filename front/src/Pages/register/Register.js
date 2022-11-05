@@ -4,7 +4,7 @@ import Logo from "../../assets/logo-groupo.svg";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-export default function Login() {
+export default function Register() {
     /////////////////////////////////////////////////////////
     const [showPassword, setShowPassword] = useState(false);
 
@@ -12,23 +12,23 @@ export default function Login() {
         setShowPassword(!showPassword);
     };
 
-    ////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////
     const initialValues = {
         lastname: "",
         firstname: "",
         email: "",
-        password: "",
+        password: ""
     };
     const [formValues, setFormValues] = useState(initialValues);
     const [formError, setFormError] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
 
-    const handleChange = (e) => {
+    const handleChange = e => {
         const { name, value } = e.target;
         setFormValues({ ...formValues, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = e => {
         e.preventDefault();
         setFormError(validate(formValues));
         setIsSubmit(true);
@@ -48,33 +48,33 @@ export default function Login() {
     useEffect(() => {
         if (Object.keys(formError).length === 0 && isSubmit) {
             console.log("User registered");
-        }
+        }              
     });
 
     const validate = (values) => {
         const error = {}
-        const emailRegex = /^([A-Za-z|\s]{3,15})?([-]{0,1})?([A-Za-z|\s]{3,15})$/;
+        const emailRegex = /([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|"([]!#-[^-~ \t]|(\\[\t -~]))+")@([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|\[[\t -Z^-~]*])/;
         const nameRegex = /^([A-Za-z|\s]{3,15})?([-]{0,1})?([A-Za-z|\s]{3,15})$/;
-        const passwordRegex = /^(?=(.*[a-z]){3,})(?=(.*[A-Z]){2,})(?=(.*[0-9]){2,})(?=(.*[!@#$%^&*()\-__+.]){1,}).{8,20}$/;
+        const passwordRegex = /^(?=(.*[a-z]){3,})(?=(.*[A-Z]){2,})(?=(.*[0-9]){2,})(?=(.*[!@#$%^&*()\-__+.]){1,}).{8,15}$/;
         if(!values.lastname){
-            error.lastname = 'lastname is required';
+            error.lastname = 'Le nom est obligatoire';
         } else if(!nameRegex.test(values.lastname)){
-            error.lastname = 'Entre 3 et 15 caractères. Les chiffres et caractères spéciaux différents de - ne sont pas autorisés';
+            error.lastname = 'Entre 3 et 15 caractères. Chiffres et caractères spéciaux différents de - non autorisés';
         }
         if(!values.firstname){
-            error.firstname = 'name is required';
+            error.firstname = 'Le prénom est obligatoire';
         } else if(!nameRegex.test(values.firstname)){
-            error.firstname = 'Entre 3 et 15 caractères. Les chiffres et caractères spéciaux différents de - ne sont pas autorisés';
+            error.firstname = 'Entre 3 et 15 caractères. Chiffres et caractères spéciaux différents de - non autorisés';
         }
         if(!values.email){
-            error.email = 'email is required';
+            error.email = `L' email est obligatoire`;
         } else if(!emailRegex.test(values.email)) {
             error.email = 'Veuillez renseigner une adresse mail valide';
         }
         if(!values.password){
-            error.password = 'password is required';
+            error.password = 'Le mot de passe est obligatoire';
         } else if(!passwordRegex.test(values.password)){
-            error.password = '2 chiffres, 2 majuscules, 3 minuscules, 1 caractère spécial, 8 caractères minimum';
+            error.password = 'Entre 8 et 15 caractères. 2 chiffres, 2 majuscules, 3 minuscules et 1 caractère spécial obligatoires';
         }
 
         return error;
@@ -103,9 +103,9 @@ export default function Login() {
                                 id="lastname"
                                 value={formValues.lastname}
                                 onChange={handleChange}
-                                className={formError.lastname && 'showError'}
+                                // className={formError.lastname && 'showError'}
                             />
-                            <label htmlFor="lastname">Nom</label>
+                            <label htmlFor="lastname" className={formValues.lastname && 'animLabel'}>Nom</label>
                             {formError.lastname && <p>{formError.lastname}</p>}
                         </div>
                         <div className="form_control">
@@ -115,9 +115,8 @@ export default function Login() {
                                 id="firstname"
                                 value={formValues.firstname}
                                 onChange={handleChange}
-                                className={formError.firstname && 'showError'}
                             />
-                            <label htmlFor="firstname">Prénom</label>
+                            <label htmlFor="firstname" className={formValues.firstname && 'animLabel'}>Prénom</label>
                             {formError.firstname && <p>{formError.firstname}</p>}
                         </div>
                         <div className="form_control">
@@ -127,9 +126,8 @@ export default function Login() {
                                 id="email"
                                 value={formValues.email}
                                 onChange={handleChange}
-                                className={formError.email && 'showError'}
                             />
-                            <label htmlFor="email">Email</label>
+                            <label htmlFor="email" className={formValues.email && 'animLabel'}>Email</label>
                             {formError.email && <p>{formError.email}</p>}
                         </div>
                         <div className="form_control">
@@ -145,9 +143,8 @@ export default function Login() {
                                 id="password"
                                 value={formValues.password}
                                 onChange={handleChange}
-                                className={formError.password && 'showError'}
                             />
-                            <label htmlFor="password">Mot de passe</label>
+                            <label htmlFor="password" className={formValues.password && 'animLabel'}>Mot de passe</label>
                             {formError.password && <p>{formError.password}</p>}
                         </div>
                         <button type="submit">Valider</button>

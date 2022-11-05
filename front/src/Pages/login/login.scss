@@ -68,7 +68,12 @@
         flex-direction: column;
         position: relative;
         margin-bottom: 50px;
-
+        p{
+            position: relative;
+            top: 20px;
+            color: #FD2D01;
+            text-align: center;
+        }
         input{
             outline: none;
             border: none;
@@ -78,16 +83,8 @@
             border-radius: 10px;
             box-shadow: inset 8px 8px 8px #cbced1,
                         inset -8px -8px 8px #fff;
-            &:focus,
-            &:valid{
+            &:focus{
                 border-bottom: 2px solid royalblue;
-                transition: all 0.2s ease-in-out;
-            }
-            &:focus + label,
-            &:valid + label{
-                color: royalblue;
-                transform: translateY(-25px);
-                font-size: 1.1rem;
                 transition: all 0.2s ease-in-out;
             }
         }
@@ -96,6 +93,13 @@
             position: absolute;
             top: 15px;
             left: 15px;
+            pointer-events: none;
+            transition: all 0.2s ease-in-out;
+        }
+        .animLabel{
+            color: royalblue;
+            transform: translateY(-25px);
+            font-size: 1.1rem;
             transition: all 0.2s ease-in-out;
         }
     }

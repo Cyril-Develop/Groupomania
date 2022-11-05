@@ -68,8 +68,10 @@
         display: flex;
         flex-direction: column;
         position: relative;
-        margin-bottom: 50px;
+        margin-bottom: 50px;   
         p{
+            position: relative;
+            top: 20px;
             color: #FD2D01;
             text-align: center;
         }
@@ -86,12 +88,6 @@
                 border-bottom: 2px solid royalblue;
                 transition: all 0.2s ease-in-out;
             }
-            &:focus + label{
-                color: royalblue;
-                transform: translateY(-25px);
-                font-size: 1.1rem;
-                transition: all 0.2s ease-in-out;
-            }
         }
         label{
             font-size: 1.2rem;
@@ -99,6 +95,12 @@
             top: 15px;
             left: 15px;
             pointer-events: none;
+            transition: all 0.2s ease-in-out;
+        }
+        .animLabel{
+            color: royalblue;
+            transform: translateY(-25px);
+            font-size: 1.1rem;
             transition: all 0.2s ease-in-out;
         }
     }
@@ -145,7 +147,7 @@
     }
 };
 
-//Input validation
+//Modal input validation
 
 .success{
     position: absolute;

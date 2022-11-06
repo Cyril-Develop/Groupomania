@@ -4,7 +4,9 @@ export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
 
-    const [curentUser, setCurrentUser] = useState(
+    const [formError, setFormError] = useState(false)
+
+    const [currentUser, setCurrentUser] = useState(
         JSON.parse(localStorage.getItem("user")) || null
     );
 
@@ -12,27 +14,29 @@ export const AuthContextProvider = ({ children }) => {
         fetch("http://localhost:8080/api/user/login", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json;charset=utf-8",
+                "Content-Type": "application/json",
             },
             body: JSON.stringify(formValues),
         })
         .then(res => {
             if (res.ok) {
                 res.json().then(data => {
-                    console.log(data);
-                    setCurrentUser(data);
                     localStorage.setItem("user", JSON.stringify(data));
+                    setCurrentUser(data);
+                    setFormError(false);
                 })
-            } 
+            } else {
+                setFormError(true)
+            }
         })
     };
 
     useEffect(() => {
-        localStorage.setItem("user", JSON.stringify(curentUser));
-    }, [curentUser]);
+        localStorage.setItem("user", JSON.stringify(currentUser));
+    }, [currentUser]);
 
     return (
-        <AuthContext.Provider value={{ curentUser, login }}>
+        <AuthContext.Provider value={{ currentUser, formError, login }}>
             {children}
         </AuthContext.Provider>
     );

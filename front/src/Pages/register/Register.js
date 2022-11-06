@@ -1,10 +1,10 @@
-import React from "react";
 import "./register.scss";
 import Logo from "../../assets/logo-groupo.svg";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function Register() {
+    
     /////////////////////////////////////////////////////////
     const [showPassword, setShowPassword] = useState(false);
 
@@ -33,11 +33,12 @@ export default function Register() {
         e.preventDefault();
         setFormError(validate(formValues));
         setIsSubmit(true);
+        setSuccessfulRegister(true)
 
         fetch("http://localhost:8080/api/user/signup", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json;charset=utf-8",
+                "Content-Type": "application/json",
             },
             body: JSON.stringify(formValues),
         })
@@ -87,9 +88,22 @@ export default function Register() {
         return error;
     };
 
+    //////////////////////////////////////////////////////////
+
+    const [successfulRegister, setSuccessfulRegister] = useState(false);
+
+    useEffect(() => {
+        if (successfulRegister) {
+            const timer = setTimeout(() => {
+            setSuccessfulRegister(false);
+        }, 2000);   
+        return () => clearTimeout(timer);
+        }
+    }, [successfulRegister]);
+
     return (
         <div className="register">
-            {Object.keys(formError).length === 0 && isSubmit && <div className='success'>Compte créé</div>}
+            {Object.keys(formError).length === 0 && successfulRegister && isSubmit && <div className='success'>Compte créé</div>}
             <div className="card">
                 <div className="card_right">
                     <img src={Logo} alt="logo groupomania" />
@@ -105,7 +119,6 @@ export default function Register() {
                                 id="lastname"
                                 value={formValues.lastname}
                                 onChange={handleChange}
-                                // className={formError.lastname && 'showError'}
                             />
                             <label htmlFor="lastname" className={formValues.lastname && 'animLabel'}>Nom</label>
                             {formError.lastname && <p>{formError.lastname}</p>}

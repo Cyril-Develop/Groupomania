@@ -9,7 +9,7 @@ export default function NotFound() {
                 <span>404</span>
                 <span>Page not found.</span>
             </p>
-            <Link to="/register"><span className='arrow'></span></Link>
+            <Link to="/login"><span className='arrow'></span></Link>
         </div>
     )
 }

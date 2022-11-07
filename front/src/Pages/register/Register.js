@@ -2,6 +2,7 @@ import "./register.scss";
 import Logo from "../../assets/logo-groupo.svg";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function Register() {
     
@@ -29,28 +30,18 @@ export default function Register() {
         setFormValues({ ...formValues, [name]: value });
     };
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
         setFormError(validate(formValues));
         setIsSubmit(true);
         setSuccessfulRegister(true)
 
-        fetch("http://localhost:8080/api/user/signup", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formValues),
-        })
-        .then(res => {
-            if (res.ok) {
-                res.json().then(data => {
-                    console.log(data);
-                    setFormValues(initialValues);
-                })
-            } 
-        })
-        .catch((error) => console.log(error));
+        try{
+          await axios.post("http://localhost:8080/api/user/signup", formValues)
+          setFormValues(initialValues);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     useEffect(() => {
@@ -111,7 +102,7 @@ export default function Register() {
                 </div>
                 <div className="card_left">
                     <h2>Inscription</h2>
-                    <form className="form" onSubmit={handleSubmit}>
+                    <form className="form">
                         <div className="form_control">
                             <input
                                 type="text"
@@ -162,7 +153,7 @@ export default function Register() {
                             <label htmlFor="password" className={formValues.password && 'animLabel'}>Mot de passe</label>
                             {formError.password && <p>{formError.password}</p>}
                         </div>
-                        <button type="submit">Valider</button>
+                        <button onClick={handleSubmit} type="submit">Valider</button>
                     </form>
                 </div>
             </div>

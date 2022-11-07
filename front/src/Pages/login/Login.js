@@ -1,44 +1,50 @@
 import './login.scss'
 import Logo from '../../assets/logo-groupo.svg'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/authContext';
 
 export default function Login() {
 
-	const [showPassword, setShowPassword] = useState(false)
+	const [showPassword, setShowPassword] = useState(false);
 
 	const togglePassword = () => {
 		setShowPassword(!showPassword)
-	}
+	};
 
 	///////////////////////////////////////////////////////////////
 	const [formValues, setFormValues] = useState({
 		email: '',
 		password: ''
-	})
+	});
 
 	const handleChange = e => {
 		const { name, value } = e.target
 		setFormValues({ ...formValues, [name]: value })
-	}
+	};
 
 	///////////////////////////////////////////////////////////////
-	const {formError} = useContext(AuthContext);
+	const {formError, login, successfulLogin} = useContext(AuthContext);
 
-	const navigate = useNavigate()
-
-	const {login} = useContext(AuthContext);
+	const navigate = useNavigate();
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
 		try {
-		  await login(formValues);
-		  navigate("/")
+			await login(formValues);
 		} catch (err) {
 		  console.log(err);
 		}
 	  };
+
+	  useEffect(() => {
+		if (successfulLogin) {
+		  console.log('User logged in');
+		  navigate("/");
+		} else{
+			console.log("User not logged in");
+		}
+	  });
 
 	return (
 		<div className="login">
@@ -49,7 +55,7 @@ export default function Login() {
 				</div>
 				<div className="card_left">
 					<h2>Connexion</h2>
-					<form className='form' onSubmit={handleLogin}>
+					<form className='form'>
 						<div className='form_control'>
 							<input 
 								type="email" 
@@ -71,7 +77,7 @@ export default function Login() {
 							<label htmlFor="password" className={formValues.password && 'animLabel'}>Mot de passe</label>
 							{formError && <p>Email ou mot de passe incorrect</p>}
 						</div>
-						<button type='submit'>Valider</button>
+						<button onClick={handleLogin} type='submit'>Valider</button>
 					</form>
 				</div>
 			</div>

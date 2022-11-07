@@ -5,6 +5,7 @@
     justify-content: space-between;
     align-items: center;
     height: 80px;
+    padding: 0 20px;
     border-bottom: 1px solid #00000028;
     background-color: #ecf0f3;
     &_logo{
@@ -17,4 +18,21 @@
             object-position: contain;
         }
     }
+    &_user{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        img{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+}
+
+.logout{
+    cursor: pointer;
+    font-size: 30px;
 }

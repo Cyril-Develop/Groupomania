@@ -1,3 +1,5 @@
+@import '../../index.scss';
+
 .register{
     display: flex;
     justify-content: center;
@@ -72,7 +74,7 @@
         p{
             position: relative;
             top: 20px;
-            color: #FD2D01;
+            color: $color-primary;
             text-align: center;
         }
         input{
@@ -105,19 +107,9 @@
         }
     }
     button{
+        @include btn;
         display: block;
-        margin: 0 auto;
-        padding: 5px 10px;
-        border-radius: 10px;
-        font-size: 1.1rem;
-        border: none;
-        box-shadow: -3px -3px 7px #ffffff,
-                    3px 3px 5px rgba(94, 104, 121, .288);
-        transition: all 0.2s ease-in-out;
-        &:active{
-            box-shadow: inset -3px -3px 7px #ffffff,
-                    inset 3px 5px 5px rgba(94, 104, 121, .288);
-        }
+	    margin: 0 auto;
     }}  
 };
 

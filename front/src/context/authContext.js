@@ -20,8 +20,6 @@ export const AuthContextProvider = ({ children }) => {
                 setCurrentUser(res.data);
                 setSuccessfulLogin(true);
                 setFormError(false);
-                console.log(res.data);
-                localStorage.setItem("user", JSON.stringify(res.data));
             })
             .catch(err => { 
                 console.log(err);

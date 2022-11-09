@@ -25,9 +25,12 @@ export default function Navbar() {
 				<FontAwesomeIcon icon={faMagnifyingGlass} className="logo_search"/>
 			</div>
 			<div className="navbar_user">
+				<div className="navbar_user_info">
 				<Link to={`/profile/${currentUser.userId}`}>
 					<img src={profilePicture} alt="avatar de l'utilisateur" />
 				</Link>
+				{currentUser.lastname} {currentUser.firstname}
+				</div>
 				<FontAwesomeIcon icon={faRightFromBracket} onClick={handleLogout} className='logout'/>
 			</div>
 		</nav>

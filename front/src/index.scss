@@ -1,0 +1,51 @@
+*,
+::before,
+::after {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: 'Lato', sans-serif;
+}
+
+$color-primary: #FD2D01;
+$color-secondary: #FFD7D7;
+$color-tertiary: #4E5166;
+
+*::selection {
+	background: $color-tertiary;
+	color: white;
+}
+
+a {
+	text-decoration: none;
+}
+
+li {
+	list-style: none;
+}
+
+button {
+	cursor: pointer;
+}
+
+//MIXIN
+
+@mixin flex($justify: center, $align: center) {
+	display: flex;
+	justify-content: $justify;
+	align-items: $align;
+}
+
+@mixin btn {
+	padding: 5px 10px;
+	border-radius: 10px;
+	font-size: 1.1rem;
+	border: none;
+	box-shadow: -3px -3px 7px #ffffff,
+				3px 3px 5px rgba(94, 104, 121, .288);
+	transition: all 0.2s ease-in-out;
+	&:active{
+		box-shadow: inset -3px -3px 7px #ffffff,
+				inset 3px 5px 5px rgba(94, 104, 121, .288);
+	}
+}

@@ -84,10 +84,10 @@
             border-bottom: 2px solid transparent;
             padding: 15px;
             border-radius: 10px;
-            box-shadow: inset 8px 8px 8px #cbced1,
-                        inset -8px -8px 8px #fff;
+            box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
             &:focus{
                 border-bottom: 2px solid royalblue;
+                box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
                 transition: all 0.2s ease-in-out;
             }
         }

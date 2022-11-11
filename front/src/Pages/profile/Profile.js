@@ -1,6 +1,7 @@
 import './profile.scss';
 import { AuthContext } from '../../context/authContext';
 import { useContext, useState, useEffect } from 'react';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import axios from 'axios';
 
 export default function Profile() {
@@ -46,18 +47,20 @@ export default function Profile() {
 	return (
 		<div className='profile'>
 			<div className='profile_card'>
-				<div className="profile_card_img">
+				<div className="profile_card_head">
 					<img src={profilePicture} alt="avatar de profil" />					
-				</div>
-				<div className="profile_card_interaction">
-					<label  htmlFor="picture">Modifier</label>		
+					<label htmlFor="picture" >
+                        <AddPhotoAlternateIcon/>
+                    </label>		
 					<input 
 						type="file" 
 						id="picture" 
 						style={{display:"none"}}
 						onChange={handleFile}
 					/>
-					<button>Supprimer</button>
+				</div>
+				<div className="profile_card_infos">
+                    <h2>{currentUser.lastname} {currentUser.firstname}</h2>
 				</div>		
 			</div>
 		</div>	

@@ -1,10 +1,10 @@
 import './home.scss';
-import Accord from '../../components/Accord/Accord';
+import Posts from '../../components/posts/Posts';
 
 export default function Home() {
   return (
     <main className='home'>
-        <Accord/>
+        <Posts/>
     </main>
   )
 }

@@ -3,6 +3,8 @@ import Logo from '../../assets/logo-groupo.svg'
 import { useState, useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/authContext';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 export default function Login() {
 
@@ -45,7 +47,7 @@ export default function Login() {
 		} else{
 			console.log("User not logged in");
 		}
-	  });
+	  }, [successfulLogin]);
 
 	return (
 		<div className="login">
@@ -67,8 +69,8 @@ export default function Login() {
 							<label htmlFor="email" className={formValues.email && 'animLabel'}>Email</label>
 						</div>
 						<div className='form_control'>
-							<div 
-								onClick={() => togglePassword()} className={showPassword ? "close-eye" : "open-eye"}>
+							<div onClick={() => togglePassword()}>
+                                {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
 							</div>
 							<input 
 								type={showPassword ? "text" : "password"} 

@@ -2,6 +2,8 @@ import "./register.scss";
 import Logo from "../../assets/logo-groupo.svg";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import axios from "axios";
 
 export default function Register() {
@@ -137,12 +139,9 @@ export default function Register() {
                             {formError.email && <p>{formError.email}</p>}
                         </div>
                         <div className="form_control">
-                            <div
-                                onClick={() => togglePassword()}
-                                className={
-                                    showPassword ? "close-eye" : "open-eye"
-                                }
-                            ></div>
+                            <div onClick={() => togglePassword()}>
+                                {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+							</div>
                             <input
                                 type={showPassword ? "text" : "password"}
                                 name="password"

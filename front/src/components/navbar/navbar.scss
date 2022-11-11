@@ -5,34 +5,36 @@
     justify-content: space-between;
     align-items: center;
     height: 80px;
-    padding: 0 40px;
+    padding: 0 60px;
     border-bottom: 2px solid #0000002c;
     background-color: #ecf0f3;
     &_left{
-        position: relative;
         display: flex;
         gap: 60px;
-        input{
-            outline: none;
-            border: none;
-            width: 400px;
-            font-size: 1.2rem;
-            border-bottom: 2px solid transparent;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
-            &:focus{
-                box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
-                border-bottom: 2px solid royalblue;
-                transition: all 0.2s ease-in-out;
+        width: 400px;
+        div{
+            position: relative;
+            input{
+                outline: none;
+                border: none;
+                font-size: 1.2rem;
+                border-bottom: 2px solid transparent;
+                padding: 15px;
+                border-radius: 10px;
+                box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
+                &:focus{
+                    box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+                    border-bottom: 2px solid royalblue;
+                    transition: all 0.2s ease-in-out;
+                }
             }
-        }
-        .logo_search{
-            position: absolute;
-            top: 50%;
-            height: 20px;
-            transform: translateY(-50%);
-            right: 10px;
+            .logo_search{
+                position: absolute;
+                top: 50%;
+                height: 20px;
+                transform: translateY(-50%);
+                right: 10px;
+            }
         }
         img{
             width: 50px;
@@ -40,31 +42,66 @@
         }
     }
     &_user{
+        position: relative;
         display: flex;
         align-items: center;
-        gap: 60px;
-        &_info{
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            img{
-                padding: 5px;
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                object-fit: cover;
-                object-position: center;
-                box-shadow: -3px -3px 7px #ffffff,
-                            3px 3px 5px rgba(94, 104, 121, .288);
-                &:active{
-                    box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #fff;
-                }
+        gap: 20px;
+        img{
+            cursor: pointer;
+            padding: 5px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+            box-shadow: -3px -3px 7px #ffffff,
+                        3px 3px 5px rgba(94, 104, 121, .288);
+            &:active{
+                box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #fff;
             }
         }
-        .logout{
-            cursor: pointer;
-            font-size: 25px;
-            color: rgb(0, 0, 0);
+        span{
+            white-space: nowrap;
         }
     }
 }
+
+
+//////menu
+
+.menu{
+    position: absolute;
+    visibility: hidden;
+    top: 64px;
+    right: -40px;
+    opacity: 0;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    transition: all 0.2s ease-in-out;
+    &_item{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        white-space: nowrap;
+        width: 100%;
+        padding: 10px;
+        background-color: #ecf0f3;
+        cursor: pointer;
+        &:hover{
+            background-color: #c5cace;
+        }
+        &:nth-child(3){
+            &:hover{
+                background-color: crimson;
+                color: white;
+            }
+        }
+    }
+}
+
+.visible{
+    opacity: 1;
+    visibility: visible;
+}
+

@@ -2,11 +2,11 @@ import "./posts.scss";
 import Post from "../post/Post";
 import AddIcon from "@mui/icons-material/Add";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import { useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
 import axios from "axios";
+import { useState, useContext } from "react";
 import { AuthContext } from "../../context/authContext";
-import { useContext } from "react";
+import { useQuery } from '@tanstack/react-query';
 
 export default function Posts() {
 
@@ -16,68 +16,49 @@ export default function Posts() {
         setmodal(!modal);
     };
 
-    const posts = [
-        {
-            id: 1,
-            name: "John Doe",
-            userId: 1,
-            title: "Lorem ipsum dolor sit amet consectetur adipisicing elit. ",
-            profilePic:
-                "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-            img: "https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        },
-        {
-            id: 2,
-            name: "John Doe",
-            userId: 1,
-            title: "Lorem ipsum dolor sit amet consectetur adipisicing elit. ",
-            profilePic:
-                "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-            img: "https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        },
-        {
-            id: 3,
-            name: "Jane Doe",
-            userId: 2,
-            title: "Lorem ipsum dolor sit amet consectetur adipisicing elit. ",
-            profilePic:
-                "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
-            desc: "Tenetur iste voluptates dolorem rem commodi voluptate pariatur, voluptatum, laboriosam consequatur enim nostrum cumque! Maiores a nam non adipisci minima modi tempore.",
-        },
-    ];
+    ////////////////////////////////////////////////////////
 
-    const { currentUser } = useContext(AuthContext);
-
+    const {currentUser} = useContext(AuthContext);
     const token = currentUser.token;
 
-    const [image, setImage] = useState(null);
-    const [title, setTitle] = useState('');
-    const [description, setdescription] = useState('');
+    const { isLoading, error, data } = useQuery(['posts'], () =>
 
+        axios.get("http://localhost:8080/api/post", {
+            headers: {
+                'authorization': `bearer ${token}`
+            }
+        })
+            .then(res => {
+                 return res.data; 
+            })        
+    );
+
+console.log(data);
+
+////////////////////////////////////////////////////////
+
+    const [image, setImage] = useState(null);
+    const [inputValues, setInputValues] = useState({
+        title: '',
+        description: ''
+    });
+
+    const handleValues = (e) => {
+        const { name, value } = e.target;
+        setInputValues({...inputValues,[name]: value});    
+    }
+    
 	const handleFile = (e) => {
-		setImage(e.target.files[0]);     
+        setImage(e.target.files[0]);     
 	}
 
-    const handleTitle = (e) => {
-        setTitle(e.target.value);
-    }
-
-    const handleDesc = (e) => {
-        setdescription(e.target.value);
-    }
-
-   
-
     const handlePost  = (e) => {
-
         e.preventDefault();
    
         const formData = new FormData();
         formData.append('image', image);
-        formData.append('title', title);
-        formData.append('content', description);
+        formData.append('title', inputValues.title);
+        formData.append('content', inputValues.description);
         axios.post('http://localhost:8080/api/post', formData, {
             headers: {
                 'authorization': `bearer ${token}`
@@ -85,7 +66,8 @@ export default function Posts() {
         })
             .then(res => {
                 console.log(res);
-                setmodal(!modal);
+                //setmodal(!modal);
+                window.location.reload();
             })
             .catch(err => { 
                 console.log(err);
@@ -105,25 +87,28 @@ export default function Posts() {
                 </button>
                     <form>
                         <div>
-                            <label htmlFor="titlePost">Titre</label>
-                            <input type="text" id="titlePost" onChange={handleTitle}/>
+                            <label htmlFor="title">Titre</label>
+                            <input type="text" id="title" name="title" onChange={handleValues}/>
                         </div>
                         <div>
-                            <label htmlFor="descPost">Description</label>
-                            <textarea id="descPost" cols="50" rows="5" style={{resize : 'none'}} onChange={handleDesc}></textarea>
+                            <label htmlFor="description">Description</label>
+                            <textarea id="description" cols="50" rows="5" name="description" style={{resize : 'none'}} onChange={handleValues}></textarea>
                         </div>
                         <div>
-                            <label className="change_image" htmlFor="imagePost">
-                                <AddPhotoAlternateIcon />Ajouter un image
+                            <label className="change_image" htmlFor="image">
+                                <AddPhotoAlternateIcon />Ajouter une image
                             </label>
-                            <input type="file" id="imagePost" style={{display:'none'}} onChange={handleFile}/>
+                            <input type="file" id="image" style={{display:'none'}} name="image" onChange={handleFile}/>
                             <button onClick={handlePost} type="submit">Publier</button>
                         </div>
                     </form>
                 </div>
             </div>
 }
-            {posts.map((post) => (
+            {error ? "Impossible d'afficher les publications" 
+                : isLoading 
+                ? "Chargement..." 
+                : data.map((post) => (
                 <Post post={post} key={post.id} />
             ))}
         </div>

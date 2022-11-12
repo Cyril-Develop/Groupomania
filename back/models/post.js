@@ -3,7 +3,7 @@ class Post  {
     constructor(post) {
         this.title = post.title;
         this.content = post.content;
-        this.imageUrl = post.imageUrl;
+        this.imagePost = post.imagePost;
         this.dateCreation = new Date();
         this.userId = post.userId;
     }

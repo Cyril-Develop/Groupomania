@@ -12,13 +12,12 @@ export default function Navbar() {
 
 	const {currentUser} = useContext(AuthContext);
 
-    const profilePicture = "http://localhost:8080/images/" + currentUser.imageUrl.split('/images/')[1];
+    const profilePicture = "http://localhost:8080/images/" + currentUser.imageProfile.split('/images/')[1];
 
     const [toggle, setToggle] = useState(false);
 
     const handleToggle = () => {
         setToggle(!toggle);
-        console.log(toggle);
     };
 
     const handleLogout = () => {

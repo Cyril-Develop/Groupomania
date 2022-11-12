@@ -1,9 +1,9 @@
-@import '../../index.scss';
+@import '../../sass/index.scss';
 
 .register{
     height: 100vh;
     @include flex;
-    @include theme;
+    @include background;
     .card{
         display: flex;
         flex-direction: row-reverse;

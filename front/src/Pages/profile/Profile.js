@@ -8,7 +8,7 @@ export default function Profile() {
 
 	const {currentUser} = useContext(AuthContext);
 
-	const profilePicture = "http://localhost:8080/images/" + currentUser.imageUrl.split('/images/')[1];
+	const profilePicture = "http://localhost:8080/images/" + currentUser.imageProfile.split('/images/')[1];
 
 	///////////////////////////////////////////////////////////////////////////////
 	const token = currentUser.token;
@@ -33,7 +33,7 @@ export default function Profile() {
 				console.log(res);
 				axios.get(`http://localhost:8080/api/user/${currentUser.userId}`,{headers: {'authorization': `bearer ${token}`}})
 				.then(res => {
-					const newCurrentUser = {...currentUser, imageUrl: res.data.imageUrl};
+					const newCurrentUser = {...currentUser, imageProfile: res.data.imageProfile};
 					localStorage.setItem('user', JSON.stringify(newCurrentUser));
 					window.location.reload();
 				})		
@@ -48,7 +48,7 @@ export default function Profile() {
 		<div className='profile'>
 			<div className='profile_card'>
 				<div className="profile_card_head">
-					<img src={profilePicture} alt="avatar de profil" />					
+					<img src={profilePicture} alt="avatar de profil"/>					
 					<label htmlFor="picture" >
                         <AddPhotoAlternateIcon/>
                     </label>		

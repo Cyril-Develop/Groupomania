@@ -9,7 +9,6 @@ exports.signup = (req, res) => {
     const emailCrypt = cryptojs.HmacSHA256(req.body.email, `${process.env.PASSWORD_CRYPTOJS}`).toString();
 	bcrypt.hash(req.body.password, 10)
 	.then(hash => {
-		//obligation de rentrer les 4 infos
 		const user = new User ({
 			email: emailCrypt,
 			password: hash,
@@ -20,7 +19,6 @@ exports.signup = (req, res) => {
         dbConnection.query('INSERT INTO users SET ?', user, (err, result) => {
             if(err) res.status(400).json({error: 'Email already used !'});
             else res.status(201).json({message: 'User created !'});
-			//else res.status(201).json({userId :result.insertId});
         });
     })
     	.catch(error => res.status(500).json({error}));
@@ -42,7 +40,7 @@ exports.login = (req, res) => {
 						res.status(200).json({
                             lastname: result[0].lastname,
                             firstname: result[0].firstname,
-                            imageUrl: result[0].imageUrl,
+                            imageProfile: result[0].imageProfile,
 							userId : result[0].id,
 							token : jwt.sign({userId: result[0].id}, `${process.env.PASSWORD_JWT}`, {expiresIn: "24h"})
 						});
@@ -66,7 +64,7 @@ exports.userInfos = (req, res) => {
         const dataUser = {
             lastname: result[0].lastname,
             firstname: result[0].firstname,
-            imageUrl: result[0].imageUrl
+            imageProfile: result[0].imageProfile
         }
 		res.status(200).json(dataUser);
 	});
@@ -75,22 +73,22 @@ exports.userInfos = (req, res) => {
 //Supprimer le compte d'un user
 exports.deleteAccount = (req, res) => {
 	//Delete all posts images from directory
-    dbConnection.query('SELECT imageUrl FROM post WHERE userId = ?', req.params.id, (err, result) => {
+    dbConnection.query('SELECT imagePost FROM post WHERE userId = ?', req.params.id, (err, result) => {
         result.forEach(image => {
-            const filename = image.imageUrl.split('/images/')[1];
+            const filename = image.imagePost.split('/images/')[1];
             fs.unlink(`images/${filename}`, () => {
                 if (err) return res.status(500).json(err);
             })
         })
     //Delete user and all his posts from database
-    dbConnection.query('SELECT imageUrl FROM users WHERE id = ?', req.params.id, (err, result) => {
-           if (result[0].imageUrl === `http://localhost:3000/images/profilePictures/defaultPicture.jpg`) {
+    dbConnection.query('SELECT imagePost FROM users WHERE id = ?', req.params.id, (err, result) => {
+           if (result[0].imagePost === `http://localhost:3000/images/profilePictures/defaultPicture.jpg`) {
                 dbConnection.query('DELETE FROM users WHERE id = ?', req.params.id, (err, result) => {
                     if (err) res.status(500).json(err);
                     res.status(200).json({message: 'User deleted !'});
                 });
            } else {
-                const profilPicture = result[0].imageUrl.split('/images/')[1];
+                const profilPicture = result[0].imagePost.split('/images/')[1];
                 fs.unlink(`images/${profilPicture}`, () => {
                     dbConnection.query('DELETE FROM users WHERE id = ?', req.params.id, (err, result) => {
                         if (err) res.status(500).json(err);
@@ -102,17 +100,17 @@ exports.deleteAccount = (req, res) => {
 };
 
 exports.editPicture = (req, res) => {
-	dbConnection.query('SELECT imageUrl FROM users WHERE id = ?', req.params.id, (err, result) => {
+	dbConnection.query('SELECT imageProfile FROM users WHERE id = ?', req.params.id, (err, result) => {
         if (err) return res.status(500).json(err);
-        if (result[0].imageUrl !== `http://localhost:3000/images/profilePictures/defaultPicture.jpg`) {
-            const filename = result[0].imageUrl.split('/images/')[1];
+        if (result[0].imageProfile !== `http://localhost:3000/images/profilePictures/defaultPicture.jpg`) {
+            const filename = result[0].imageProfile.split('/images/')[1];
              fs.unlink(`images/${filename}`, () => {
-                 dbConnection.query('UPDATE users SET imageUrl = ? WHERE id = ?', [`${req.protocol}://${req.get('host')}/images/profilePictures/${req.file.filename}`, req.params.id], (err, result) => {
+                 dbConnection.query('UPDATE users SET imageProfile = ? WHERE id = ?', [`${req.protocol}://${req.get('host')}/images/profilePictures/${req.file.filename}`, req.params.id], (err, result) => {
                     if (err) return res.status(500).json(err);
                     return res.status(200).json({message: 'Updated profile picture !'});
              }) 
         })} else {
-            dbConnection.query('UPDATE users SET imageUrl = ? WHERE id = ?', [`${req.protocol}://${req.get('host')}/images/profilePictures/${req.file.filename}`, req.params.id], (err, result) => {
+            dbConnection.query('UPDATE users SET imageProfile = ? WHERE id = ?', [`${req.protocol}://${req.get('host')}/images/profilePictures/${req.file.filename}`, req.params.id], (err, result) => {
                     if (err) return res.status(500).json(err);
                     return res.status(200).json({message: 'Updated profile picture !'});
             }) 

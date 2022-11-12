@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider, Navigate, Outlet} from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useContext } from 'react';
 import { AuthContext } from './context/authContext';
 import Login from './Pages/login/Login';
@@ -11,12 +12,16 @@ import Profile from './Pages/profile/Profile';
 function App() {
 	const {currentUser} = useContext(AuthContext);
 
+	const queryClient = new QueryClient();
+
 	const Layout = () => {
 		return (
-			<>
-				<Navbar/>
-				<Outlet/>
-			</>
+			<QueryClientProvider client={queryClient}>
+				<>
+					<Navbar/>
+					<Outlet/>
+				</>
+			</QueryClientProvider>
 		)
 	};
 	

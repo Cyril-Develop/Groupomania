@@ -26,7 +26,7 @@ export default function Login() {
 	};
 
 	///////////////////////////////////////////////////////////////
-	const {formError, login, successfulLogin} = useContext(AuthContext);
+	const { formError, login, successfulLogin } = useContext(AuthContext);
 
 	const navigate = useNavigate();
 
@@ -36,18 +36,18 @@ export default function Login() {
 			await login(formValues);
 			navigate("/");
 		} catch (err) {
-		  console.log(err);
+			console.log(err);
 		}
-	  };
+	};
 
-	  useEffect(() => {
+	useEffect(() => {
 		if (successfulLogin) {
-		  console.log('User logged in');
-		  navigate("/");
-		} else{
+			console.log('User logged in');
+			navigate("/");
+		} else {
 			console.log("User not logged in");
 		}
-	  }, [successfulLogin]);
+	}, [successfulLogin]);
 
 	return (
 		<div className="login">
@@ -60,21 +60,21 @@ export default function Login() {
 					<h2>Connexion</h2>
 					<form className='form'>
 						<div className='form_control'>
-							<input 
-								type="email" 
-								name="email" 
-								id="email" 
+							<input
+								type="email"
+								name="email"
+								id="email"
 								onChange={handleChange}
 							/>
 							<label htmlFor="email" className={formValues.email && 'animLabel'}>Email</label>
 						</div>
 						<div className='form_control'>
 							<div onClick={() => togglePassword()}>
-                                {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+								{showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
 							</div>
-							<input 
-								type={showPassword ? "text" : "password"} 
-								name="password" id="password" 
+							<input
+								type={showPassword ? "text" : "password"}
+								name="password" id="password"
 								onChange={handleChange}
 							/>
 							<label htmlFor="password" className={formValues.password && 'animLabel'}>Mot de passe</label>

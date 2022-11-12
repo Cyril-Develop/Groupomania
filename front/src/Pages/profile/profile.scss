@@ -1,8 +1,8 @@
-@import '../../index.scss';
+@import '../../sass/index.scss';
 
 .profile{
     min-height: calc(100vh - 80px);
-    @include theme;
+    @include background;
     &_card{
         position: relative;
         top: 80px;
@@ -32,9 +32,7 @@
                 object-fit: cover;
             }
             label{
-                display: flex;
-                justify-content: center;
-                align-items: center;
+                @include flex();
                 position: absolute;
                 right: 0px;
                 bottom: 0;
@@ -44,7 +42,7 @@
                 border: none;
                 background-color: #76a3f1;
                 color: white;
-                box-shadow: -2px -2px 5px rgba(255, 255, 255, 0.451), 2px 2px 5px rgb(34, 35, 36);
+                box-shadow: -2px -2px 5px rgba(255, 255, 255, 0.451), 2px 2px 5px rgba(34, 35, 36, 0.688);
                 cursor: pointer;
                 transition: all 0.2s ease-in-out;
                 &:active{

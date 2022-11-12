@@ -1,14 +1,11 @@
+@import '../../sass/index.scss';
+
 .container-page{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+    @include flex(column, space-around, center);
     background-color: #ecf0f3;
     height: 100vh;
-
     p{
         text-align: center;
-
         span {
             font-size: 150px;
             margin: 0 20px;

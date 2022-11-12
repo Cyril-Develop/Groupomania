@@ -1,9 +1,9 @@
+@import '../../sass/index.scss';
+
 .navbar{
     position: sticky;
     top: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include flex(row, space-between, center);
     height: 80px;
     padding: 0 60px;
     border-bottom: 2px solid #0000002c;
@@ -60,6 +60,40 @@
                 box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #fff;
             }
         }
+        .menu{
+            position: absolute;
+            visibility: hidden;
+            top: 64px;
+            right: -40px;
+            opacity: 0;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            transition: all 0.2s ease-in-out;
+            &_item{
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                white-space: nowrap;
+                width: 100%;
+                padding: 10px;
+                background-color: #ecf0f3;
+                cursor: pointer;
+                &:hover{
+                    background-color: #c5cace;
+                }
+                &:nth-child(3){
+                    &:hover{
+                        background-color: crimson;
+                        color: white;
+                    }
+                }
+            }
+        }
+        .visible{
+            opacity: 1;
+            visibility: visible;
+        }
         span{
             white-space: nowrap;
         }
@@ -67,41 +101,4 @@
 }
 
 
-//////menu
-
-.menu{
-    position: absolute;
-    visibility: hidden;
-    top: 64px;
-    right: -40px;
-    opacity: 0;
-    overflow: hidden;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    transition: all 0.2s ease-in-out;
-    &_item{
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        white-space: nowrap;
-        width: 100%;
-        padding: 10px;
-        background-color: #ecf0f3;
-        cursor: pointer;
-        &:hover{
-            background-color: #c5cace;
-        }
-        &:nth-child(3){
-            &:hover{
-                background-color: crimson;
-                color: white;
-            }
-        }
-    }
-}
-
-.visible{
-    opacity: 1;
-    visibility: visible;
-}
 

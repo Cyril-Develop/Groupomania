@@ -28,8 +28,9 @@ export default function Navbar() {
     const navigate = useNavigate();
 
     const profilePage = () => {
-        navigate(`/profile/${currentUser.userId}`);   
-        setToggle(!toggle);
+        navigate(`/profile/${currentUser.userId}`);  
+        window.location.reload();
+        //setToggle(!toggle);
     };
 
 	return (

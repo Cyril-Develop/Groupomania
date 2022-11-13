@@ -17,7 +17,6 @@ export default function Posts() {
     };
 
     ////////////////////////////////////////////////////////
-
     const {currentUser} = useContext(AuthContext);
     const token = currentUser.token;
 
@@ -28,15 +27,14 @@ export default function Posts() {
                 'authorization': `bearer ${token}`
             }
         })
-            .then(res => {
-                 return res.data; 
-            })        
+        .then(res => {
+                return res.data; 
+        })        
     );
 
 console.log(data);
 
 ////////////////////////////////////////////////////////
-
     const [image, setImage] = useState(null);
     const [inputValues, setInputValues] = useState({
         title: '',

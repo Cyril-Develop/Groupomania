@@ -4,7 +4,8 @@ import { useContext, useState, useEffect } from 'react';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import ScrollToTop from '../../components/scrollToTop/ScrollToTop';
 
 export default function Profile() {
 
@@ -18,12 +19,8 @@ export default function Profile() {
 
 	const [image, setImage] = useState(null);
 
-	const handleFile = (e) => {
-		setImage(e.target.files[0]);
-	};
-
-///////////////////////////////////////////////////////////////////////////////
-//Affichage profil utilisateur par rapport a l'identifiant de l'url
+	///////////////////////////////////////////////////////////////////////////////
+	//Affichage profil utilisateur par rapport a l'identifiant de l'url
 
 	const { isLoading, error, data } = useQuery(['user'], () =>
 		axios.get(`http://localhost:8080/api/user/${id}`, {
@@ -32,11 +29,38 @@ export default function Profile() {
 			}
 		})
 		.then(res => {
-				return res.data; 
+			return res.data; 
 		})        
 	);
-///////////////////////////////////////////////////////////////////////////////
-//Changement de photo de profil si l'utilisateur est le propriétaire du profil
+	///////////////////////////////////////////////////////////////////////////////
+	//Affichage des posts de l'utilisateur
+
+	///////////////////////////////////////////////////////////////////////////////
+	//Changement de photo de profil si l'utilisateur est le propriétaire du profil
+
+	// const queryClient = useQueryClient();
+
+	// const mutation = useMutation( (image) => {
+	// 	if(profileOwner && image) {
+	// 		const formImage = new FormData();
+	// 		formImage.append('image', image);
+	// 		return axios.put(`http://localhost:8080/api/user/${currentUser.userId}`, formImage, {
+	// 			headers: {
+	// 				'authorization': `bearer ${token}`
+	// 			}
+	// 		})
+	// 	}},{
+	// 	onSuccess: () => {
+	// 	  // Invalidate and refetch
+	// 	  queryClient.invalidateQueries(['user']);
+	// 	},
+	//   })
+
+	// useEffect(() => {
+	// 	mutation.mutate(image);
+	// }, [image])
+	
+
 	useEffect(() => {
 		if(profileOwner && image) {
 			const formData = new FormData();
@@ -66,7 +90,7 @@ export default function Profile() {
 {error ? `Impossible d'afficher le profil...` : isLoading ? 'Chargement..' : 
 			<div className='profile_card'>
 				<div className="profile_card_head">
-					<img src={data.imageProfile} alt="avatar de profil"/>	
+					<img src={profileOwner? currentUser.imageProfile : data.imageProfile} alt="avatar de profil"/>	
 					{profileOwner &&				
 						<label htmlFor="picture" >
                         	<AddPhotoAlternateIcon/>
@@ -76,14 +100,17 @@ export default function Profile() {
 						type="file" 
 						id="picture" 
 						style={{display:"none"}}
-						onChange={handleFile}
+						onChange={e => setImage(e.target.files[0])}
 					/>
 				</div>
 				<div className="profile_card_infos">
-                    <h2>{data.lastname} {data.firstname}</h2>
+                    <h2>
+						{profileOwner ? currentUser.lastname  : data.lastname} {profileOwner ? currentUser.firstname : data.firstname} 						
+					</h2>
 				</div>		
 			</div>
 }
+			<ScrollToTop/>
 		</div>	
 	)
 };

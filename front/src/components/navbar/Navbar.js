@@ -29,8 +29,6 @@ export default function Navbar() {
 
     const profilePage = () => {
         navigate(`/profile/${currentUser.userId}`);  
-        window.location.reload();
-        //setToggle(!toggle);
     };
 
 	return (
@@ -44,15 +42,17 @@ export default function Navbar() {
 			</div>
 			<div className="navbar_user">
                 <img onClick={handleToggle} src={profilePicture} alt="avatar de l'utilisateur" />
-                <div className={toggle ? 'menu visible' : 'menu'}>
-                    <div className="menu_item" onClick={profilePage}>
-                        <Person2Icon/><Link to={`/profile/${currentUser.userId}`}>Profil</Link>
-                    </div>
-                    <div className="menu_item" onClick={handleLogout}>
-                        <ExitToAppIcon/> Se déconnecter
-                    </div>
-                    <div className="menu_item">
-                        <DeleteForeverIcon />Supprimer mon compte
+                <div onClick={handleToggle} className={toggle ? 'menu visible' : 'menu'}>
+                    <div className='menu_table'>
+                        <div className="menu_table_item" onClick={profilePage}>
+                            <Person2Icon/><Link to={`/profile/${currentUser.userId}`}>Profil</Link>
+                        </div>
+                        <div className="menu_table_item" onClick={handleLogout}>
+                            <ExitToAppIcon/> Se déconnecter
+                        </div>
+                        <div className="menu_table_item">
+                            <DeleteForeverIcon />Supprimer mon compte
+                        </div>
                     </div>
                 </div>
                 <span>{currentUser.lastname} {currentUser.firstname}</span>	

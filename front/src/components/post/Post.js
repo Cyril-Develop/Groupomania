@@ -1,11 +1,17 @@
 import './post.scss'
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import { Link } from 'react-router-dom';
+import dayjs from "dayjs";
+require("dayjs/locale/fr");
+const relativeTime = require('dayjs/plugin/relativeTime');
+dayjs.extend(relativeTime);
 
 export default function posts({ post }) {
 
-	
+
+	const liked = false;
 
 	return (
 		<div className='post'>
@@ -15,7 +21,7 @@ export default function posts({ post }) {
 					<Link to={`/profile/${post.userId}`}>
 						<span>{post.firstname} {post.lastname}</span>
 					</Link>
-					<span className='date'>il y a 10 secondes</span>
+					<span className='date'>{dayjs(post.createdAt).locale("fr").fromNow()}</span>
 				</div>
 				<MoreHorizIcon style={{ marginLeft: "auto" }} />
 			</div>
@@ -25,7 +31,7 @@ export default function posts({ post }) {
 				<p>{post.content}</p>
 			</div>
 			<div className="post_footer">
-				<FavoriteBorderIcon style={{ cursor: 'pointer' }} /> 18 Likes
+				{liked ? <FavoriteOutlinedIcon style={{ cursor: 'pointer', color:'crimson' }}/> : <FavoriteBorderOutlinedIcon style={{ cursor: 'pointer' }}/>} 18 Likes
 			</div>
 		</div>
 	)

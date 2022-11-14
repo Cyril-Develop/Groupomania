@@ -2,19 +2,12 @@ const Post = require('../models/post.js');
 const dbConnection = require('../db/mysql');
 const fs = require('fs');
 
-const moment = require('moment');
-
-
 exports.createPost = (req, res) => {
-    //Rendre l'envoie impossible côté front si il n'y a pas de titre et de contenu si égal à '' ?
-    //ou permettre d'envoyer des posts avec uniquement une image ?
-    //l'image est facultative
     const post = new Post({
         title: req.body.title ? req.body.title : '',
         content: req.body.content ? req.body.content : '',
         userId: req.auth.userId,
-        imagePost: req.file ? `${req.protocol}://${req.get('host')}/images/articleImages/${req.file.filename}` : '',
-        // moment(Date.now()).format('DD/MM/YYYY HH:mm:ss')
+        imagePost: req.file ? `${req.protocol}://${req.get('host')}/images/articleImages/${req.file.filename}` : ''    
     });
     dbConnection.query('INSERT INTO post SET ? ', post, (err, result) => {
         if (err) return res.status(500).json(err);
@@ -23,20 +16,12 @@ exports.createPost = (req, res) => {
 };
 
 exports.getAllPost = (req, res) => {
-    dbConnection.query('SELECT p.*, u.lastname, firstname, imageProfile FROM post AS p JOIN users AS u ON (u.id = p.userId)', (err, result) => {
+    dbConnection.query('SELECT p.*, u.lastname, firstname, imageProfile FROM post AS p JOIN users AS u ON (u.id = p.userId) ORDER BY p.createdAt DESC', (err, result) => {
         if (err) return res.status(500).json(err);
         if(result == 0) return res.status(404).json({error: 'No posts to display !'});
         res.status(200).json(result);
     });
 };
-    
-// exports.getAllPost = (req, res) => {
-//     dbConnection.query('SELECT * FROM post ', (err, result) => {
-//         if (err) return res.status(500).json(err);
-//         if(result == 0) return res.status(404).json({error: 'No posts to display !'});
-//         res.status(200).json(result);
-//     });
-// };
 
 exports.getPost = (req, res) => {
     dbConnection.query('SELECT * FROM post WHERE id = ?', req.params.id, (err, result) => {
@@ -101,3 +86,11 @@ exports.likePost = (req, res) => {
     })
 };
     
+exports.getLikes = (req, res) => {
+    dbConnection.query('SELECT * FROM likes WHERE postId = ?', req.params.id, (err, result) => {
+        if (err) return res.status(500).json(err);
+        if(result == 0) return res.status(404).json({error: 'No likes to display !'});
+        res.status(200).json(result);
+    });
+};
+

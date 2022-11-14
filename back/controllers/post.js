@@ -71,9 +71,9 @@ exports.deletePost = (req, res) => {
 exports.likePost = (req, res) => {
     dbConnection.query('SELECT userId FROM likes WHERE postId = ?', req.params.id, (err, result) => {
         if (err) return res.status(500).json(err);
-        const userLiked = result.find(user => user.userId === req.auth.userId);
+        const userLiked = result.find(user => user.userId == req.auth.userId);
         if (userLiked) {
-            dbConnection.query('DELETE FROM likes WHERE userId = ?', req.auth.userId, (err, result) => {
+            dbConnection.query('DELETE FROM likes WHERE userId = ? AND postId = ?', [req.auth.userId, req.params.id], (err, result) => {
                 if (err) return res.status(500).json(err);
                 res.status(200).json({message: 'Like removed !'});
             });
@@ -87,10 +87,9 @@ exports.likePost = (req, res) => {
 };
     
 exports.getLikes = (req, res) => {
-    dbConnection.query('SELECT * FROM likes WHERE postId = ?', req.params.id, (err, result) => {
+    dbConnection.query('SELECT userId FROM likes WHERE postId = ?', req.params.id, (err, result) => {
         if (err) return res.status(500).json(err);
-        if(result == 0) return res.status(404).json({error: 'No likes to display !'});
-        res.status(200).json(result);
+        res.status(200).json(result.map(like=>like.userId));
     });
 };
 

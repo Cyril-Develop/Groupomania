@@ -33,8 +33,6 @@ export default function Posts({ post }) {
 		})        
 	);
 
-	console.log(currentUser.role);
-
 	const queryClient = useQueryClient();
 		
 	const mutation = useMutation(() => {
@@ -64,10 +62,10 @@ export default function Posts({ post }) {
 					<span className='date'>{dayjs(post.createdAt).locale("fr").fromNow()}</span>
 				</div>
 				
-				{(post.userId === currentUser.userId || currentUser.role == 'admin') &&
+				{(post.userId === currentUser.userId || currentUser.role === 'admin') &&
 				 	<MoreHorizIcon style={{ marginLeft: "auto", cursor: 'pointer' }} onClick={() => setModalMenu(!modalMenu)} />
 				}	
-				{modalMenu && <div className="post_header_menu"><MenuPost setModalMenu={setModalMenu}/></div>}
+				{modalMenu && <div className="post_header_menu"><MenuPost post={post} setModalMenu={setModalMenu}/></div>}
 			</div>
 			<div className="post_content">
 				<h3>{post.title}</h3>

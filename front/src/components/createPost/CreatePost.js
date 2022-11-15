@@ -19,7 +19,7 @@ export default function CreatePost({setModalCreate}) {
     const queryClient = useQueryClient();
 
     const formData = new FormData();
-    const mutation = useMutation((formData) => {
+    const mutation = useMutation(() => {
             formData.append('image', image);
             formData.append('title', title);
             formData.append('content', content);
@@ -40,7 +40,7 @@ export default function CreatePost({setModalCreate}) {
         if(title === "" || content === ""){
             setFormError('Veuillez remplir tous les champs');
         } else {
-            mutation.mutate(formData);
+            mutation.mutate();
             setFormError('');
             setTitle("");
             setContent("");

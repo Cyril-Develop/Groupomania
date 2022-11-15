@@ -42,6 +42,7 @@ exports.login = (req, res) => {
                             firstname: result[0].firstname,
                             imageProfile: result[0].imageProfile,
 							userId : result[0].id,
+                            role : result[0].role,
 							token : jwt.sign({userId: result[0].id}, `${process.env.PASSWORD_JWT}`, {expiresIn: "24h"})
 						});
 					})

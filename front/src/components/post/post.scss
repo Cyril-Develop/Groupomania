@@ -11,6 +11,7 @@
     padding: 15px;
     background-color: #ecf0f3;
     &_header{
+        position: relative;
         display: flex;
         align-items: center;
         gap: 10px;
@@ -29,6 +30,15 @@
             border-radius: 50%;
             object-fit: cover;
             object-position: center;
+        }
+        &_menu{
+            position: absolute;
+            top: 40px;
+            right: 0;
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: #ecf0f3;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);  
         }
     }
     &_content{

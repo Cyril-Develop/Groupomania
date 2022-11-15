@@ -4,7 +4,7 @@ import { useContext, useState, useEffect } from 'react';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import ScrollToTop from '../../components/scrollToTop/ScrollToTop';
 
 export default function Profile() {
@@ -14,13 +14,14 @@ export default function Profile() {
 
 	const {id} = useParams();
 	let profileOwner = false;
-	id == currentUser.userId ? profileOwner = true : profileOwner = false;
+	parseFloat(id) === currentUser.userId ? profileOwner = true : profileOwner = false;
 	///////////////////////////////////////////////////////////////////////////////
 
 	const [image, setImage] = useState(null);
 
 	///////////////////////////////////////////////////////////////////////////////
 	//Affichage profil utilisateur par rapport a l'identifiant de l'url
+	//Ca c'est ok
 
 	const { isLoading, error, data } = useQuery(['user'], () =>
 		axios.get(`http://localhost:8080/api/user/${id}`, {
@@ -36,6 +37,15 @@ export default function Profile() {
 	//Affichage des posts de l'utilisateur
 
 	///////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
 	//Changement de photo de profil si l'utilisateur est le propriétaire du profil
 
 	// const queryClient = useQueryClient();

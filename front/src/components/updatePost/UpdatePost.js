@@ -1,3 +1,4 @@
+import './updatePost.scss';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CloseIcon from '@mui/icons-material/Close';
 import { useState, useContext } from 'react';
@@ -12,7 +13,6 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
         setModalUpdate(true);
     };
     ///////////////////////////////////////////////////////////
-    //Modification d'un post
 
     const { currentUser } = useContext(AuthContext);
     const token = currentUser.token;
@@ -23,35 +23,26 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
 
     const queryClient = useQueryClient();
 
-    const formData = new FormData();
-    const mutation = useMutation(() => {
-        if(image !== post.imagePost){
-        formData.append('image', image);
-        formData.append('title', title);
-        formData.append('content', content);
+    const mutation = useMutation((formData) => {
         return axios.put(`http://localhost:8080/api/post/${post.id}`, formData, {
             headers: {
                 'authorization': `bearer ${token}`
             }
         })}
-        else {
-            formData.append('title', title);
-            formData.append('content', content);
-            formData.append('image', post.imagePost);
-            return axios.put(`http://localhost:8080/api/post/${post.id}`, formData, {
-                headers: {
-                    'authorization': `bearer ${token}`
-                }
-            })}         
-        }
     ,{
         onSuccess: () => {
         queryClient.invalidateQueries( ['posts'] )
         },
     });
 
-    const editPost = () => {
-        mutation.mutate();
+    const editPost = (e) => {
+        e.preventDefault();
+        console.log('Clique sur le bouton');
+        const formData = new FormData();
+        formData.append('image', image !== post.imagePost ? image : post.imagePost);
+        formData.append('title', title);
+        formData.append('content', content);
+        mutation.mutate(formData);
         setModalMenu(false);
     };
 
@@ -76,7 +67,7 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
                                 <AddPhotoAlternateIcon />Remplacer l'image
                             </label>
                             <input type="file" id="image" style={{display:'none'}} name="image" onChange={e => setImage(e.target.files[0])} />
-                            <button type="submit" onClick={editPost}>Modifier la publication</button>
+                            <button  type="submit" onClick={editPost}>Modifier la publication</button>
                         </div>
                         <div>
                             {image !== post.imagePost ? <img src={URL.createObjectURL(image)} alt="illustration de publication" className="image_preview"/> : <img src={image} alt="illustration de publication" className="image_preview"/>}

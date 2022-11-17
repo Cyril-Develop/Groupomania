@@ -13,12 +13,15 @@ export default function ProfilePost({id, token}) {
 		})
 		.then(res => {
 			return res.data; 
-		})        
+		}) 
+        .catch((error) => {
+            console.log(error)
+        })      
 	);
 
   return (
     <>
-        {error ? 
+        {error   ? 
         <img src={Logo} alt="logo groupomania" /> : 
         isLoading ? 
         'Chargement...' : 

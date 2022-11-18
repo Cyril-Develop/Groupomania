@@ -3,7 +3,7 @@ import Logo from '../../assets/logo-groupo.svg'
 import { useQuery } from '@tanstack/react-query';
 import Post from '../../components/post/Post';
 
-export default function ProfilePost({id, token}) {
+export default function ProfilePost({id, token}) {   
 
     const { isLoading, error, data } = useQuery(['posts'], () =>
 		axios.get(`http://localhost:8080/api/post/${id}`, {
@@ -12,7 +12,7 @@ export default function ProfilePost({id, token}) {
 			}
 		})
 		.then(res => {
-			return res.data; 
+            return res.data;       
 		}) 
         .catch((error) => {
             console.log(error)
@@ -21,7 +21,7 @@ export default function ProfilePost({id, token}) {
 
   return (
     <>
-        {error   ? 
+        { error ? 
         <img src={Logo} alt="logo groupomania" /> : 
         isLoading ? 
         'Chargement...' : 

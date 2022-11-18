@@ -27,36 +27,42 @@ export default function Navbar() {
 
     const navigate = useNavigate();
 
+    const homePage = () => {
+        navigate('/');
+        setToggle(false);
+    };
+
     const profilePage = () => {
         navigate(`/profile/${currentUser.userId}`);  
+        setToggle(!toggle);
     };
 
 	return (
-		<nav className='navbar'>
-			<div className='navbar_left'>
-				<Link to={'/'}><img src={Logo} alt="logo groupomania"/></Link>
-                <div>
-                    <input type="text" placeholder='Rechercher...'/>
-                    <SearchIcon className="logo_search"/>
-                </div>
-			</div>
-			<div className="navbar_user">
-                <img onClick={handleToggle} src={profilePicture} alt="avatar de l'utilisateur" />
-                <div onClick={handleToggle} className={toggle ? 'menu visible' : 'menu'}>
-                    <div className='menu_table'>
-                        <div className="menu_table_item" onClick={profilePage}>
-                            <Person2Icon/><Link to={`/profile/${currentUser.userId}`}>Profil</Link>
-                        </div>
-                        <div className="menu_table_item" onClick={handleLogout}>
-                            <ExitToAppIcon/> Se déconnecter
-                        </div>
-                        <div className="menu_table_item">
-                            <DeleteForeverIcon />Supprimer mon compte
-                        </div>
+        <header>
+            <nav className='navbar'>
+                <div className='navbar_left'>
+                    <img onClick={homePage} src={Logo} alt="logo groupomania"/>
+                    <div>
+                        <input type="text" placeholder='Rechercher...'/>
+                        <SearchIcon className="logo_search"/>
                     </div>
                 </div>
-                <span>{currentUser.lastname} {currentUser.firstname}</span>	
-			</div>
-		</nav>
+                <div className="navbar_user">
+                    <img onClick={handleToggle} src={profilePicture} alt="avatar de l'utilisateur" />
+                        <div  className={toggle ? 'menu_table visible' : 'menu_table'}>
+                            <div className="menu_table_item" onClick={profilePage}>
+                                <Person2Icon/><Link to={`/profile/${currentUser.userId}`}>Profil</Link>
+                            </div>
+                            <div className="menu_table_item" onClick={handleLogout}>
+                                <ExitToAppIcon/> Se déconnecter
+                            </div>
+                            <div className="menu_table_item">
+                                <DeleteForeverIcon />Supprimer mon compte
+                            </div>
+                        </div>
+                    <span>{currentUser.lastname} {currentUser.firstname}</span>	
+                </div>
+            </nav>
+        </header>
 	)
 };

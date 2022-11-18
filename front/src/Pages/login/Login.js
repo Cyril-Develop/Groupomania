@@ -14,7 +14,6 @@ export default function Login() {
 		setShowPassword(!showPassword)
 	};
 
-	///////////////////////////////////////////////////////////////
 	const [formValues, setFormValues] = useState({
 		email: '',
 		password: ''
@@ -25,7 +24,6 @@ export default function Login() {
 		setFormValues({ ...formValues, [name]: value })
 	};
 
-	///////////////////////////////////////////////////////////////
 	const { formError, login, successfulLogin } = useContext(AuthContext);
 
 	const navigate = useNavigate();
@@ -50,10 +48,10 @@ export default function Login() {
 	}, [successfulLogin]);
 
 	return (
-		<div className="login">
+		<main className="login">
 			<div className='card'>
 				<div className="card_right">
-					<img src={Logo} alt="logo groupomania" />
+					<h1><img src={Logo} alt="logo groupomania" /></h1>
 					<p>Pas de compte ? <Link to='/register'>inscription</Link></p>
 				</div>
 				<div className="card_left">
@@ -84,6 +82,6 @@ export default function Login() {
 					</form>
 				</div>
 			</div>
-		</div>
+		</main>
 	)
 }

@@ -8,14 +8,12 @@ import axios from "axios";
 
 export default function Register() {
     
-    /////////////////////////////////////////////////////////
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePassword = () => {
         setShowPassword(!showPassword);
     };
 
-    //////////////////////////////////////////////////////
     const initialValues = {
         lastname: "",
         firstname: "",
@@ -81,8 +79,6 @@ export default function Register() {
         return error;
     };
 
-    //////////////////////////////////////////////////////////
-
     const [successfulRegister, setSuccessfulRegister] = useState(false);
 
     useEffect(() => {
@@ -95,11 +91,11 @@ export default function Register() {
     }, [successfulRegister]);
 
     return (
-        <div className="register">
+        <main className="register">
             {Object.keys(formError).length === 0 && successfulRegister && isSubmit && <div className='success'>Compte créé</div>}
             <div className="card">
                 <div className="card_right">
-                    <img src={Logo} alt="logo groupomania" />
+                    <h1><img src={Logo} alt="logo groupomania" /></h1> 
                     <p>Déjà inscrit ? <Link to="/login">se connecter</Link></p>
                 </div>
                 <div className="card_left">
@@ -156,6 +152,6 @@ export default function Register() {
                     </form>
                 </div>
             </div>
-        </div>
+        </main>
     );
 }

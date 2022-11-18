@@ -37,7 +37,6 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
 
     const editPost = (e) => {
         e.preventDefault();
-        console.log('Clique sur le bouton');
         const formData = new FormData();
         formData.append('image', image !== post.imagePost ? image : post.imagePost);
         formData.append('title', title);
@@ -70,7 +69,7 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
                             <button  type="submit" onClick={editPost}>Modifier la publication</button>
                         </div>
                         <div>
-                            {image !== post.imagePost ? <img src={URL.createObjectURL(image)} alt="illustration de publication" className="image_preview"/> : <img src={image} alt="illustration de publication" className="image_preview"/>}
+                            {!image ? '' : image !== post.imagePost ? <img src={URL.createObjectURL(image)} alt="illustration de publication" className="image_preview"/> : <img src={image} alt="illustration de publication" className="image_preview"/>}
                         </div>
                     </form>
                 </div>

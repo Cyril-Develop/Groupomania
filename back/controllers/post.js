@@ -26,7 +26,7 @@ exports.getAllPost = (req, res) => {
 exports.getPost = (req, res) => {
     dbConnection.query('SELECT p.*, u.lastname, firstname, imageProfile FROM post AS p JOIN users AS u ON (u.id = p.userId) WHERE userId = ? ORDER BY p.createdAt DESC', req.params.id, (err, result) => {
         if (err) return res.status(500).json(err);
-        if(result == 0) return res.status(404).json({error: 'Post not found !'});
+        if(result === 0) return res.status(404).json([]);
         res.status(200).json(result); 
     });    
 }

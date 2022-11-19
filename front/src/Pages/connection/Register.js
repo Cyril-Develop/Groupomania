@@ -1,4 +1,4 @@
-import "./register.scss";
+import "./connection.scss";
 import Logo from "../../assets/logo-groupo.svg";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -91,10 +91,10 @@ export default function Register() {
     }, [successfulRegister]);
 
     return (
-        <main className="register">
+        <main className="connection">
             {Object.keys(formError).length === 0 && successfulRegister && isSubmit && <div className='success'>Compte créé</div>}
-            <div className="card">
-                <div className="card_right">
+            <div className="card reverse" >
+                <div className="card_right card_register">
                     <h1><img src={Logo} alt="logo groupomania" /></h1> 
                     <p>Déjà inscrit ? <Link to="/login">se connecter</Link></p>
                 </div>

@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import ProfilePost from '../../components/profilePost/ProfilePost';
 import { useQuery } from '@tanstack/react-query';
 import ScrollToTop from '../../components/scrollToTop/ScrollToTop';
+import Loader from '../../components/loader/Loader';
 
 export default function Profile() {
 
@@ -81,9 +82,8 @@ export default function Profile() {
 				</div>		
 			</div>
 
-        {error ? <img src={Logo} alt="logo groupomania"/> : isLoading ? 'Chargement...' : 
 			<ProfilePost id={id} token={token} />
-        }
+        
 			<ScrollToTop/>
 		</div>	
 	)

@@ -2,8 +2,8 @@ import { createBrowserRouter, RouterProvider, Navigate, Outlet} from 'react-rout
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useContext } from 'react';
 import { AuthContext } from './context/authContext';
-import Login from './Pages/login/Login';
-import Register from './Pages/register/Register';
+import Login from './Pages/connection/Login';
+import Register from './Pages/connection/Register';
 import Home from './Pages/home/Home';
 import Navbar from './components/navbar/Navbar';
 import NotFound from './Pages/notFound/NotFound';

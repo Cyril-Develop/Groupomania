@@ -1,9 +1,12 @@
 @import '../../sass/index.scss';
 
-.login{
+.connection{
     height: 100vh;
     @include flex;
     @include background;
+    .reverse{
+        flex-direction: row-reverse;
+    }
     .card{
         display: flex;
         max-width: 800px;
@@ -15,10 +18,15 @@
         @media screen and (max-width: 700px){
             @include flex($direction: column, $justify: center, $align: center)
         }
+            &_register{
+                background-image: linear-gradient(#4e5166ac 5%, rgba(255, 255, 255, 0.145)), url('../../assets/bg-register-card.jpg');
+            }
+            &_login{
+                background-image: linear-gradient(#4e5166ac 5%, rgba(255, 255, 255, 0.145)), url('../../assets/bg-login-card.jpg');
+            }
             &_right{
                 @include flex(column, space-between, center);
                 flex: 1;
-                background-image: linear-gradient(#4e5166ac 5%, rgba(255, 255, 255, 0.145)), url('../../assets/bg-login-card.jpg');
                 background-size: cover;
                 background-position: center;
                 padding: 20px;
@@ -27,21 +35,16 @@
                     width: 100%;
                     flex: none;
                     gap: 10px;
-                    background-image: linear-gradient(#4e5166ac 20%, rgb(255, 255, 255))
+                    background-image: linear-gradient(#4e5166ac 10%, rgb(255, 255, 255));
                 }
                     h1{
                         text-align: center;
                     }
                     img{
-                        width: 100%;
-                        object-fit: contain;
-                        object-position:50% 40%;
-                        @media screen and (max-width: 700px){
-                            width: 90%;
-                        }
+                        width: 100%;   
                     }
                     p{
-                        font-size: clamp(13px, 2.5vw, 1.1rem);
+                        font-size: clamp(13px, 2.5vw, 1.1rem);    
                         a{
                             position: relative;
                             color: royalblue;
@@ -58,7 +61,7 @@
                             &:hover::after{
                                 width: 100%;
                             }
-                        }                       
+                        } 
                     }
             }
             &_left{
@@ -69,13 +72,13 @@
                     width: 100%;
                 }
                     h2{
-                        font-size: clamp(1.3rem, 3.5vw, 1.3rem); 
                         text-align: center;
                         margin-bottom: 30px;
+                        font-size: clamp(1.3rem, 3.5vw, 1.3rem); 
                         @media screen and (max-width: 700px){
                             margin-bottom: 20px;
                         }
-                    }  
+                    }              
     }
 };
 
@@ -84,7 +87,7 @@
         display: flex;
         flex-direction: column;
         position: relative;
-        margin-bottom: 50px;
+        margin-bottom: 50px;   
         @media screen and (max-width: 700px){
             margin-bottom: 30px;
         }
@@ -101,7 +104,7 @@
             text-align: center;
             font-size: clamp(0.9rem, 3.5vw, 1.1rem); 
             @media screen and (max-width: 700px){
-                top: 10px;
+                top: 15px;
             }
         }
         input{
@@ -123,9 +126,6 @@
         }
     }
     button{
-        @include btn-connection;
-        display: block;
-	    margin: 0 auto;
-    }     
-}};
-
+        @include btn-connection;     
+    }}  
+};

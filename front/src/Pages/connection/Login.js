@@ -1,4 +1,4 @@
-import './login.scss'
+import './connection.scss'
 import Logo from '../../assets/logo-groupo.svg'
 import { useState, useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
@@ -48,9 +48,9 @@ export default function Login() {
 	}, [successfulLogin]);
 
 	return (
-		<main className="login">
+		<main className="connection">
 			<div className='card'>
-				<div className="card_right">
+				<div className="card_right card_login">
 					<h1><img src={Logo} alt="logo groupomania" /></h1>
 					<p>Pas de compte ? <Link to='/register'>inscription</Link></p>
 				</div>

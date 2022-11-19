@@ -7,6 +7,7 @@ import { useState, useContext } from "react";
 import { AuthContext } from "../../context/authContext";
 import { useQuery } from '@tanstack/react-query';
 import CreatePost from "../createPost/CreatePost";
+import Loader from "../loader/Loader";
 
 export default function Posts() {
     ////////////////////////////////////////////////////////
@@ -36,9 +37,9 @@ export default function Posts() {
                 Nouvelle publication <AddIcon />
             </button>
             {modalCreate && <CreatePost setModalCreate={setModalCreate}/>}
-            {error ? <img src={Logo} alt="logo groupomania" /> 
+            {error ? <img src={Logo} alt="logo groupomania" style={{width: "90%", maxWidth: "500px"}}/> 
                 : isLoading 
-                ? "Chargement..." 
+                ? <Loader/> 
                 : data.map((post) => (
                 <Post post={post} key={post.id} />
             ))}

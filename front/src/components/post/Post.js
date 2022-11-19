@@ -73,8 +73,8 @@ export default function Posts({ post }) {
 				<p>{post.content}</p>
 			</div>
 			{error ? 
-			<img src={Logo} alt="logo groupomania" /> : 
-			isLoading ? 'chargement' :
+			'Erreur de chargement' : 
+			isLoading ? 'Chargement' :
 			<div className="post_footer">
 				{data.includes(currentUser.userId) ? 
 					<FavoriteOutlinedIcon style={{ cursor: 'pointer', color:'crimson' }} onClick={handleLike} /> : 

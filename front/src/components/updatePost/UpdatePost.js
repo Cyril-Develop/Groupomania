@@ -63,7 +63,8 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
                         </div>
                         <div>
                             <label className="change_image" htmlFor="image">
-                                <AddPhotoAlternateIcon />Remplacer l'image
+                                {/* <AddPhotoAlternateIcon /> */}
+                                Remplacer l'image
                             </label>
                             <input type="file" id="image" style={{display:'none'}} name="image" onChange={e => setImage(e.target.files[0])} />
                             <button  type="submit" onClick={editPost}>Modifier la publication</button>

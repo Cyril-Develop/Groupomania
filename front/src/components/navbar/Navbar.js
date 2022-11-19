@@ -42,10 +42,10 @@ export default function Navbar() {
             <nav className='navbar'>
                 <div className='navbar_left'>
                     <img onClick={homePage} src={Logo} alt="logo groupomania"/>
-                    <div>
+                    {/* <div> */}
                         <input type="text" placeholder='Rechercher...'/>
-                        <SearchIcon className="logo_search"/>
-                    </div>
+                        {/* <SearchIcon className="logo_search"/> */}
+                    {/* </div> */}
                 </div>
                 <div className="navbar_user">
                     <img onClick={handleToggle} src={profilePicture} alt="avatar de l'utilisateur" />

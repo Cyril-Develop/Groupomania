@@ -5,18 +5,19 @@
     gap: 20px;
     padding: 20px 0;
     button{
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        padding: 10px;
-        font-size: 20px;
-        border: none;
-        border-radius: 10px;
-        color: white;
-        box-shadow: -2px -2px 5px rgba(255, 255, 255, 0.451), 2px 2px 5px rgba(34, 35, 36, 0.688);
-        background-color: #76a3f1;
-        &:active{
-            box-shadow: inset 1px 1px 2px rgb(34, 35, 36), inset -1px -1px 2px rgba(255, 255, 255, 0.664);
-        }
+        // display: flex;
+        // align-items: center;
+        // gap: 5px;
+        // padding: 10px;
+        // font-size: 20px;
+        // border: none;
+        // border-radius: 10px;
+        // color: white;
+        // box-shadow: -2px -2px 5px rgba(255, 255, 255, 0.451), 2px 2px 5px rgba(34, 35, 36, 0.688);
+        // background-color: #76a3f1;
+        // &:active{
+        //     box-shadow: inset 1px 1px 2px rgb(34, 35, 36), inset -1px -1px 2px rgba(255, 255, 255, 0.664);
+        // }
+        @include btn;
     }
 }

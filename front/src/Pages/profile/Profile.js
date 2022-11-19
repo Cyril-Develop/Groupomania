@@ -3,6 +3,7 @@ import { AuthContext } from '../../context/authContext';
 import { useContext, useState, useEffect } from 'react';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import axios from 'axios';
+import Logo from '../../assets/logo-groupo.svg'
 import { useParams } from 'react-router-dom';
 import ProfilePost from '../../components/profilePost/ProfilePost';
 import { useQuery } from '@tanstack/react-query';
@@ -43,7 +44,6 @@ export default function Profile() {
 				}
 			})
 			.then(res => {
-				console.log(res);
 				axios.get(`http://localhost:8080/api/user/${currentUser.userId}`,{headers: {'authorization': `bearer ${token}`}})
 				.then(res => {
 					const newCurrentUser = {...currentUser, imageProfile: res.data.imageProfile};
@@ -59,7 +59,6 @@ export default function Profile() {
 
 	return (
 		<div className='profile'>
-{error ? `Impossible d'afficher le profil...` : isLoading ? 'Chargement...' : 
 			<div className='profile_card'>
 				<div className="profile_card_head">
 					<img src={profileOwner? currentUser.imageProfile : data.imageProfile} alt="avatar de profil"/>	
@@ -81,8 +80,10 @@ export default function Profile() {
 					</h2>
 				</div>		
 			</div>
-}
+
+        {error ? <img src={Logo} alt="logo groupomania"/> : isLoading ? 'Chargement...' : 
 			<ProfilePost id={id} token={token} />
+        }
 			<ScrollToTop/>
 		</div>	
 	)

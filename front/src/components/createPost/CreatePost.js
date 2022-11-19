@@ -53,9 +53,9 @@ export default function CreatePost({setModalCreate}) {
     <>
         <div className='modal' >
             <div className="modal_content">
-            <button onClick={() => setModalCreate(false)} className="close-modal">
-                <CloseIcon/>
-            </button>
+                <button onClick={() => setModalCreate(false)} className="close-modal">
+                    <CloseIcon/>
+                </button>
                 <form>
                     <div>
                         <label htmlFor="title">Titre</label>
@@ -68,7 +68,8 @@ export default function CreatePost({setModalCreate}) {
                     </div>
                     <div>
                         <label className="change_image" htmlFor="image">
-                            <AddPhotoAlternateIcon />Ajouter une image
+                            {/* <AddPhotoAlternateIcon /> */}
+                            Ajouter une image
                         </label>
                         <input type="file" id="image" style={{display:'none'}} name="image" onChange={e => setImage(e.target.files[0])}/>
                         <button onClick={handlePost} type="submit">Publier</button>

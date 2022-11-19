@@ -125,7 +125,7 @@
         }
     }
     button{
-        @include btn;
+        @include btn-connection;
         display: block;
 	    margin: 0 auto;
     }}  

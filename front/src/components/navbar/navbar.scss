@@ -11,57 +11,45 @@
     border-bottom: 2px solid #0000002c;
     background-color: #ecf0f3;
     @media screen and (max-width: 700px){
-        justify-content: center;
         justify-content: space-around;
         padding: 10px 0;
-        height: 100%;
         width: 100%;
     }
     &_left{
         display: flex;
+        align-items: center;
         gap: 60px;
-        width: 400px;
         cursor: pointer;
         @media screen and (max-width: 700px){
-            gap: 10px;
-            width: auto;
+            gap: 5px;
         }
-        div{
-            width: 200px;
-            position: relative;
-            input{
-                width: 100%;
-                outline: none;
-                border: none;
-                font-size: clamp(1.1rem, 3.5vw, 1.2rem);
-                height: 50px;
-                border-bottom: 2px solid transparent;
-                padding: 15px;
-                border-radius: 10px;
-                box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
-                &:focus{
-                    box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
-                    border-bottom: 2px solid royalblue;
-                    transition: all 0.2s ease-in-out;
-                }
-            }
-            .logo_search{
-                position: absolute;
-                top: 50%;
-                height: 20px;
-                transform: translateY(-50%);
-                right: 10px;
+        input{
+            outline: none;
+            border: none;
+            font-size: clamp(1.1rem, 3.5vw, 1.2rem);
+            height: 45px;
+            border-bottom: 2px solid transparent;
+            padding-left: 10px;
+            border-radius: 10px;
+            box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
+            &:focus{
+                box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+                border-bottom: 2px solid royalblue;
+                transition: all 0.2s ease-in-out;
             }
         }
         img{
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
         }
     }
     &_user{
         display: flex;
         align-items: center;
         gap: 20px;
+        @media screen and (max-width: 700px){
+            gap: 10px;
+        }
         img{
             cursor: pointer;
             padding: 5px;

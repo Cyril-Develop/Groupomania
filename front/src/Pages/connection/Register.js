@@ -10,7 +10,8 @@ export default function Register() {
     
     const [showPassword, setShowPassword] = useState(false);
 
-    const togglePassword = () => {
+    const togglePassword = e => {
+        e.preventDefault();
         setShowPassword(!showPassword);
     };
 
@@ -135,9 +136,9 @@ export default function Register() {
                             {formError.email && <p>{formError.email}</p>}
                         </div>
                         <div className="form_control">
-                            <div onClick={() => togglePassword()}>
-                                {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-							</div>
+                            <button className='form_control_password' aria-label="Show password" onClick={e => togglePassword(e)}>
+                                {showPassword ? <VisibilityOffIcon/> : <VisibilityIcon />}
+							</button>
                             <input
                                 type={showPassword ? "text" : "password"}
                                 name="password"
@@ -148,7 +149,7 @@ export default function Register() {
                             <label htmlFor="password" className={formValues.password && 'animLabel'}>Mot de passe</label>
                             {formError.password && <p>{formError.password}</p>}
                         </div>
-                        <button onClick={handleSubmit} type="submit">Valider</button>
+                        <button className='btn_submit' onClick={handleSubmit} type="submit">Valider</button>
                     </form>
                 </div>
             </div>

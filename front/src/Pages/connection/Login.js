@@ -10,7 +10,8 @@ export default function Login() {
 
 	const [showPassword, setShowPassword] = useState(false);
 
-	const togglePassword = () => {
+	const togglePassword = e => {
+		e.preventDefault();
 		setShowPassword(!showPassword)
 	};
 
@@ -67,9 +68,9 @@ export default function Login() {
 							<label htmlFor="email" className={formValues.email && 'animLabel'}>Email</label>
 						</div>
 						<div className='form_control'>
-							<div onClick={() => togglePassword()}>
+							<button className='form_control_password' aria-label="Show password" onClick={e => togglePassword(e)}>
 								{showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-							</div>
+							</button>
 							<input
 								type={showPassword ? "text" : "password"}
 								name="password" id="password"
@@ -78,7 +79,7 @@ export default function Login() {
 							<label htmlFor="password" className={formValues.password && 'animLabel'}>Mot de passe</label>
 							{formError && <p>Email ou mot de passe incorrect</p>}
 						</div>
-						<button onClick={handleLogin} type='submit'>Valider</button>
+						<button className='btn_submit' onClick={handleLogin} type='submit'>Valider</button>
 					</form>
 				</div>
 			</div>

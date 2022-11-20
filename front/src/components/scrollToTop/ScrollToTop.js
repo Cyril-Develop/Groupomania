@@ -22,7 +22,7 @@ export default function ScrollToTop() {
     };
 
     return (
-        <button onClick={scrollToTop} className='scrollToTop'>
+        <button aria-label='Top page' type="button" rel="nofollow" onClick={scrollToTop} className='scrollToTop'>
             <KeyboardDoubleArrowUpIcon />
         </button>
     )

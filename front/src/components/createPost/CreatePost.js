@@ -51,9 +51,9 @@ export default function CreatePost({setModalCreate}) {
 
   return (
     <>
-        <div className='modal' >
+        <div className='modal'>
             <div className="modal_content">
-                <button onClick={() => setModalCreate(false)} className="close-modal">
+                <button aria-label='Close modal' type="button" rel="nofollow" onClick={() => setModalCreate(false)} className="close-modal">
                     <CloseIcon/>
                 </button>
                 <form>
@@ -71,7 +71,7 @@ export default function CreatePost({setModalCreate}) {
                             {/* <AddPhotoAlternateIcon /> */}
                             Ajouter une image
                         </label>
-                        <input type="file" id="image" style={{display:'none'}} name="image" onChange={e => setImage(e.target.files[0])}/>
+                        <input accept="image/png, image/jpeg, image/jpg, image/gif" type="file" id="image" style={{display:'none'}} name="image" onChange={e => setImage(e.target.files[0])}/>
                         <button onClick={handlePost} type="submit">Publier</button>
                     </div>
                     <div>

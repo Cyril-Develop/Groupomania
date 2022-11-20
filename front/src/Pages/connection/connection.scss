@@ -47,18 +47,20 @@
                         font-size: clamp(13px, 2.5vw, 1.1rem);    
                         a{
                             position: relative;
-                            color: royalblue;
+                            color: #1C42B5;
+                            outline: none;
                             &::after{
                                 content: '';
                                 position: absolute;
                                 width: 0%;
                                 height: 2px;
-                                background-color: royalblue;
+                                background-color: #1C42B5;
                                 left: 0;
                                 bottom: -5px;
                                 transition: all 0.2s ease-in-out;
                             }
-                            &:hover::after{
+                            &:hover::after, 
+                            &:focus::after{
                                 width: 100%;
                             }
                         } 
@@ -91,16 +93,13 @@
         @media screen and (max-width: 700px){
             margin-bottom: 30px;
         }
-        div{
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            cursor: pointer;
+        &_password{
+           @include btn-password;
         }
         p{
             position: relative;
             top: 20px;
-            color: $color-primary;
+            color: #931901;
             text-align: center;
             font-size: clamp(0.9rem, 3.5vw, 1.1rem); 
             @media screen and (max-width: 700px){
@@ -119,13 +118,40 @@
             transition: all 0.2s ease-in-out;
         }
         .animLabel{
-            color: royalblue;
+            color: #1C42B5;
             transform: translateY(-25px);
             font-size: clamp(1rem, 3.5vw, 1.2rem); 
             transition: all 0.2s ease-in-out;
         }
     }
-    button{
+    .btn_submit{
         @include btn-connection;     
     }}  
+};
+
+.success{
+    position: absolute;
+    @include flex;
+    top: 50px;
+    width: 200px;
+    height: 80px;
+    border-radius: 10px;
+    font-size: 1.3rem;
+    color: white;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.291);
+    background-color: #2B5F2B;
+    opacity: 0;
+    animation : show 0.5s ease-in-out forwards;
+};
+
+@keyframes show{
+    0%{
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
 };

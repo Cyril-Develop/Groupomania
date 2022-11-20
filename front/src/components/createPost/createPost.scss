@@ -28,6 +28,10 @@
             border-radius: 10px;
             color: white;
             background-color: $color-primary;
+            &:focus-visible{
+                border: none;
+                outline: 1px solid rgb(0, 0, 0);
+            }
         }
         form{
             display: flex;
@@ -50,22 +54,29 @@
                 flex-direction: column;
                 &:nth-child(3){
                     @include flex(row, space-around, center);
+                    button{
+                        &:focus-visible{
+                            border: none;
+                            outline: 1px solid rgb(0, 0, 0);
+                        }
+                    }
                 }
                 label{
-                    font-size: 20px;
+                    font-size: clamp(1.1rem, 3.5vw, 1.2rem); 
                     margin-bottom: 10px;
                 }
                 input, textarea{
                     @include form-input;
                 }
                 .error{
-                    color: $color-primary;
+                    color: #931901;
                     text-align: center;
                     margin-top: 10px;
                 }
             }
         }
-        .change_image{
+        .change_image, 
+        button{
             @include btn;
         }
     }

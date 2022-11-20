@@ -52,23 +52,25 @@ export default function Posts({ post }) {
 	};
 
 	return (
-		<div className='post'>
+		<article className='post'>
 			<div className="post_header">
 				<img src={post.imageProfile} alt="" className="post_profilePic" />
 				<div className="post_header_info">
-					<Link to={`/profile/${post.userId}`}>
+					<Link role={'link'} to={`/profile/${post.userId}`}>
 						<span>{post.firstname} {post.lastname}</span>
 					</Link>
 					<span className='date'>{dayjs(post.createdAt).locale("fr").fromNow()}</span>
 				</div>
 				
 				{(post.userId === currentUser.userId || currentUser.role === 'admin') &&
-				 	<MoreHorizIcon style={{ marginLeft: "auto", cursor: 'pointer' }} onClick={() => setModalMenu(!modalMenu)} />
+				 	<button aria-label='Show menu' onClick={() => setModalMenu(!modalMenu)} style={{ marginLeft: "auto", cursor: 'pointer' }}>
+						<MoreHorizIcon/>
+					</button>
 				}	
 				{modalMenu && <div className="post_header_menu"><MenuPost post={post} setModalMenu={setModalMenu}/></div>}
 			</div>
 			<div className="post_content">
-				<h3>{post.title}</h3>
+				<h2>{post.title}</h2>
 				<img src={post.imagePost} alt="" />
 				<p>{post.content}</p>
 			</div>
@@ -76,13 +78,14 @@ export default function Posts({ post }) {
 			'Erreur de chargement' : 
 			isLoading ? 'Chargement' :
 			<div className="post_footer">
-				{data.includes(currentUser.userId) ? 
-					<FavoriteOutlinedIcon style={{ cursor: 'pointer', color:'crimson' }} onClick={handleLike} /> : 
-					<FavoriteBorderOutlinedIcon style={{ cursor: 'pointer' }} onClick={handleLike} />} 
-				{data.length} Likes  
+				<button aria-label='Like this post' onClick={handleLike}>
+					{data.includes(currentUser.userId) ? 
+						<FavoriteOutlinedIcon style={{ cursor: 'pointer', color:'crimson' }}  /> : 
+						<FavoriteBorderOutlinedIcon style={{ cursor: 'pointer' }} />} 
+				</button> {data.length} Likes
 			</div>
 			}
-		</div>
+		</article>
 	)
 };
 

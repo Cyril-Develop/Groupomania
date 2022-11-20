@@ -57,14 +57,15 @@ export default function Profile() {
 			})	
 		}
 	}, [image]);
+	
 
 	return (
-		<div className='profile'>
+		<header className='profile'>
 			<div className='profile_card'>
 				<div className="profile_card_head">
 					<img src={profileOwner? currentUser.imageProfile : data.imageProfile} alt="avatar de profil"/>	
-					{(profileOwner || currentUser.role === 'admin') &&				
-						<label htmlFor="picture" >
+					{(profileOwner || currentUser.role === 'admin') &&		
+						<label aria-label='Change picture' htmlFor="picture">
                         	<AddPhotoAlternateIcon/>
                     	</label>	
 					}	
@@ -85,6 +86,6 @@ export default function Profile() {
 			<ProfilePost id={id} token={token} />
         
 			<ScrollToTop/>
-		</div>	
+		</header>	
 	)
 };

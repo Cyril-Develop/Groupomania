@@ -1,3 +1,4 @@
+import './profilePost.scss'
 import axios from 'axios'
 import Logo from '../../assets/logo-groupo.svg'
 import { useQuery } from '@tanstack/react-query';
@@ -20,7 +21,7 @@ export default function ProfilePost({id, token}) {
 	);
 
   return (
-    <>
+    <main className='profilePost'>
         { error ? 
         <img src={Logo} alt="logo groupomania" /> : 
         isLoading ? 
@@ -29,6 +30,6 @@ export default function ProfilePost({id, token}) {
             <Post key={p.id} post={p} />
         ))
         }
-    </>
+    </main>
   )
 }

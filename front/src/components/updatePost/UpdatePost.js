@@ -49,7 +49,7 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
         <>
             <div className='modal' >
                 <div className="modal_content">
-                    <button onClick={closeModal} className="close-modal">
+                    <button aria-label='Close modal' type="button" rel="nofollow" onClick={closeModal} className="close-modal">
                         <CloseIcon/>
                     </button>
                     <form>
@@ -66,8 +66,8 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
                                 {/* <AddPhotoAlternateIcon /> */}
                                 Remplacer l'image
                             </label>
-                            <input type="file" id="image" style={{display:'none'}} name="image" onChange={e => setImage(e.target.files[0])} />
-                            <button  type="submit" onClick={editPost}>Modifier la publication</button>
+                            <input accept="image/png, image/jpeg, image/jpg, image/gif" type="file" id="image" style={{display:'none'}} name="image" onChange={e => setImage(e.target.files[0])} />
+                            <button  type="submit" onClick={editPost}>Modifier</button>
                         </div>
                         <div>
                             {!image ? '' : image !== post.imagePost ? <img src={URL.createObjectURL(image)} alt="illustration de publication" className="image_preview"/> : <img src={image} alt="illustration de publication" className="image_preview"/>}

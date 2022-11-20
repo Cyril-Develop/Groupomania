@@ -32,8 +32,8 @@ export default function Posts() {
     );
 
     return (
-        <div className="posts">
-            <button onClick={() => setModalCreate(true)}>
+        <main className="posts">
+            <button type='button' onClick={() => setModalCreate(true)}>
                 Nouvelle publication <AddIcon />
             </button>
             {modalCreate && <CreatePost setModalCreate={setModalCreate}/>}
@@ -43,6 +43,6 @@ export default function Posts() {
                 : data.map((post) => (
                 <Post post={post} key={post.id} />
             ))}
-        </div>
+        </main>
     )
 };

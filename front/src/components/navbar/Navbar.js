@@ -7,6 +7,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Person2Icon from '@mui/icons-material/Person2';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+
 	
 export default function Navbar() {
 
@@ -28,38 +29,40 @@ export default function Navbar() {
     const navigate = useNavigate();
 
     const homePage = () => {
-        navigate('/');
         setToggle(false);
     };
 
     const profilePage = () => {
-        navigate(`/profile/${currentUser.userId}`);  
         setToggle(!toggle);
+    };
+
+    const handleDelete = () => {
     };
 
 	return (
         <header>
             <nav className='navbar'>
                 <div className='navbar_left'>
-                    <img onClick={homePage} src={Logo} alt="logo groupomania"/>
-                    {/* <div> */}
-                        <input type="text" placeholder='Rechercher...'/>
-                        {/* <SearchIcon className="logo_search"/> */}
-                    {/* </div> */}
+                    <h1>
+                        <Link role={'link'} to={`/`}><img onClick={homePage} src={Logo} alt="Groupomania - réseau social"/></Link>  
+                    </h1>
+                    <input aria-label='search bar' type="text" id='search' placeholder='Rechercher...'/>
                 </div>
                 <div className="navbar_user">
-                    <img onClick={handleToggle} src={profilePicture} alt="avatar de l'utilisateur" />
-                        <div  className={toggle ? 'menu_table visible' : 'menu_table'}>
-                            <div className="menu_table_item" onClick={profilePage}>
-                                <Person2Icon/><Link to={`/profile/${currentUser.userId}`}>Profil</Link>
-                            </div>
-                            <div className="menu_table_item" onClick={handleLogout}>
-                                <ExitToAppIcon/> Se déconnecter
-                            </div>
-                            <div className="menu_table_item">
-                                <DeleteForeverIcon />Supprimer mon compte
-                            </div>
-                        </div>
+                    <button type='button' onClick={handleToggle}>
+                        <img aria-haspopup='menu' src={profilePicture} alt="avatar de l'utilisateur" />
+                    </button>
+                    <ul className={toggle ? 'menu_table visible' : 'menu_table'}>
+                        <li >
+                            <Link role={'link'} onClick={profilePage} className="menu_table_item" to={`/profile/${currentUser.userId}`}><Person2Icon/>Profil</Link>
+                        </li>
+                        <li>
+                            <Link role={'link'} onClick={handleLogout} className="menu_table_item"><ExitToAppIcon/> Se déconnecter</Link>    
+                        </li>
+                        <li>
+                            <Link onClick={handleDelete} className="menu_table_item"><DeleteForeverIcon/>Supprimer mon compte</Link>
+                        </li>
+                    </ul>
                     <span>{currentUser.lastname} {currentUser.firstname}</span>	
                 </div>
             </nav>

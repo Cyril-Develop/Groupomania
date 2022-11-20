@@ -19,11 +19,11 @@
         display: flex;
         align-items: center;
         gap: 60px;
-        cursor: pointer;
         @media screen and (max-width: 700px){
             gap: 5px;
         }
         input{
+            position: relative;
             outline: none;
             border: none;
             font-size: clamp(1.1rem, 3.5vw, 1.2rem);
@@ -34,13 +34,19 @@
             box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
             &:focus{
                 box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
-                border-bottom: 2px solid royalblue;
+                border-bottom: 2px solid #1C42B5;
                 transition: all 0.2s ease-in-out;
             }
         }
-        img{
-            width: 50px;
-            height: 50px;
+        h1{
+            width: 45px;
+            height: 45px;  
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 50%;
+            }        
         }
     }
     &_user{
@@ -50,18 +56,31 @@
         @media screen and (max-width: 700px){
             gap: 10px;
         }
-        img{
+        button{
             cursor: pointer;
             padding: 5px;
             width: 50px;
             height: 50px;
             border-radius: 50%;
+            border: none;
             object-fit: cover;
             object-position: center;
+            background-color: transparent;
             box-shadow: -3px -3px 7px #ffffff,
                         3px 3px 5px rgba(94, 104, 121, .288);
             &:active{
                 box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #fff;
+            }
+            &:focus-visible{
+                border: none;
+                outline: 1px solid rgb(0, 0, 0);
+            }
+            img{
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                object-fit: cover;
+                object-position: center;
             }
         }
         .menu_table{
@@ -87,21 +106,20 @@
                 display: flex;
                 align-items: center;
                 gap: 5px;
-                white-space: nowrap;
                 width: 100%;
+                outline: none;
                 padding: 10px;
                 background-color: #ecf0f3;
-                cursor: pointer;
-                &:hover{
+                &:hover,
+                &:focus{
                     background-color: #c5cace;
                 }
-                &:nth-child(3){
-                    &:hover{
-                        background-color: crimson;
-                        color: white;
-                    }
-                }
             }
+            li:nth-child(3) a:hover,
+            li:nth-child(3) a:focus{
+                background-color: #A62D01;
+                color: white;
+            }     
         }
         .visible{
             opacity: 1;

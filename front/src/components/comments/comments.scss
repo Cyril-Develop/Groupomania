@@ -49,9 +49,8 @@
         display: flex;
         justify-content: space-around;
         gap: 20px;
-        &_date {
-            font-size: 12px;
-            color: #4D4D4D;
+        @media screen and (max-width: 500px){
+            gap: 10px;
         }
         img {
             width: 40px;
@@ -66,9 +65,17 @@
                 display: flex;
                 justify-content: space-around;
                 .date{
+                    display: flex;
+                    align-items: center;
                     font-size: 12px;
                     color: #4D4D4D;
                     margin-left: auto;
+                    button{
+                        @include btn-hidden;
+                        :hover{
+                            color: crimson;
+                        }
+                    }
                 }
             }
         }

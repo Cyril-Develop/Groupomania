@@ -1,5 +1,4 @@
 import './updatePost.scss';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CloseIcon from '@mui/icons-material/Close';
 import { useState, useContext } from 'react';
 import { AuthContext } from "../../context/authContext";
@@ -63,7 +62,6 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
                         </div>
                         <div>
                             <label className="change_image" htmlFor="image">
-                                {/* <AddPhotoAlternateIcon /> */}
                                 Remplacer l'image
                             </label>
                             <input accept="image/png, image/jpeg, image/jpg, image/gif" type="file" id="image" style={{display:'none'}} name="image" onChange={e => setImage(e.target.files[0])} />

@@ -54,8 +54,6 @@ export default function Posts({ post }) {
 
 	const [showComments, setShowComments] = useState(false);
 
-	console.log(showComments);
-
 	return (
 		<article className='post'>
 			<div className="post_header">
@@ -76,7 +74,7 @@ export default function Posts({ post }) {
 			</div>
 			<div className="post_content">
 				<h2>{post.title}</h2>
-				<img src={post.imagePost} alt="" />
+				{post.imagePost && <img src={post.imagePost} alt="Illustration publication Groupomania" />} 
 				<p>{post.content}</p>
 			</div>
 			{error ? 
@@ -95,11 +93,11 @@ export default function Posts({ post }) {
 					<button className='post_footer_btn' aria-label='Comments post' onClick={() => setShowComments(!showComments)}>
 						<CommentIcon/> 
 					</button>
-					12 Commentaires
+					Commentaires
 				</div>
 			</div>
 			}
-			{showComments && <Comments post={post}/>} 
+			{showComments && <Comments postId={post.id}/>} 
 		</article>
 	)
 };

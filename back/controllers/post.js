@@ -1,4 +1,5 @@
 const Post = require('../models/post.js');
+const Comment = require('../models/comment.js');
 const dbConnection = require('../db/mysql');
 const fs = require('fs');
 
@@ -61,8 +62,8 @@ exports.deletePost = (req, res) => {
                 });
             } else {
                 dbConnection.query('UPDATE post SET imagePost = ?, title = ?, content = ?  WHERE id = ?', [image, title, content, req.params.id], (err, result) => {
-                        if (err) return res.status(500).json(err);
-                        res.status(200).json({message: 'Post updated !'});
+                    if (err) return res.status(500).json(err);
+                    res.status(200).json({message: 'Post updated !'});
             });
         }
     }); 
@@ -92,4 +93,33 @@ exports.getLikes = (req, res) => {
         res.status(200).json(result.map(like=>like.userId));
     });
 };
+
+exports.addComment = (req, res) => {
+    const comment = new Comment({
+        content: req.body.content ? req.body.content : '',
+        userId: req.auth.userId,
+        postId: req.params.id
+    });
+    dbConnection.query('INSERT INTO comments SET ? ', comment, (err, result) => {
+        if (err) return res.status(500).json(err);
+        res.status(201).json({message: 'Comment created !'});
+    });
+};
+
+exports.getComments = (req, res) => {
+    dbConnection.query('SELECT c.*, u.lastname, firstname, imageProfile FROM comments AS c JOIN users AS u ON (u.id = c.userId) WHERE postId = ? ORDER BY c.createdAt DESC', req.params.id, (err, result) => {
+        if (err) return res.status(500).json(err);
+        if(result === 0) return res.status(404).json([]);
+        res.status(200).json(result);
+    });
+};
+
+exports.deleteComment = (req, res) => {
+    dbConnection.query('DELETE FROM comments WHERE commentId = ?', req.params.id, (err, result) => {
+        if (err) return res.status(500).json(err);
+        res.status(200).json({message: 'Comment deleted !'});
+    });
+};
+
+
 

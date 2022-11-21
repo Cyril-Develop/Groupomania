@@ -12,6 +12,7 @@ export default function SearchUser() {
     const [query, setQuery] = useState('');
     const [searchResult, setSearchResult] = useState([]);
 
+
     useEffect(() => {
         const fetchUsers = async () => {
             const res = await axios.get(`http://localhost:8080/api/user`, {
@@ -37,7 +38,8 @@ export default function SearchUser() {
                 onChange={(e) => setQuery(e.target.value)} 
             />   
             <ul className='search_list'>
-                {query && searchResult.filter(user => user.lastname.toLowerCase().includes(query.toLowerCase())
+                {query && searchResult.filter(user => (user.lastname.toLowerCase().includes(query.toLowerCase()) || 
+                user.firstname.toLowerCase().includes(query.toLowerCase()))
                 ).map(user => (
                     <li className='search_list_item' key={user.id} >
                         <Link to={`/profile/${user.id}`} onClick={resetSearch}>

@@ -2,8 +2,9 @@ import './post.scss'
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
+import CommentIcon from '@mui/icons-material/Comment';
 import { Link } from 'react-router-dom';
-import Logo from '../../assets/logo-groupo.svg'
+import Comment from '../comment/Comment';
 import axios from 'axios';
 import MenuPost from '../menuPost/MenuPost';
 import { AuthContext } from '../../context/authContext';
@@ -78,11 +79,20 @@ export default function Posts({ post }) {
 			'Erreur de chargement' : 
 			isLoading ? 'Chargement' :
 			<div className="post_footer">
-				<button className='post_footer_btn' aria-label='Like this post' onClick={handleLike}>
-					{data.includes(currentUser.userId) ? 
-						<FavoriteOutlinedIcon style={{color:'crimson'}}/> : 
-						<FavoriteBorderOutlinedIcon/>} 
-				</button> {data.length} Likes
+				<div>
+					<button className='post_footer_btn' aria-label='Like this post' onClick={handleLike}>
+						{data.includes(currentUser.userId) ? 
+							<FavoriteOutlinedIcon style={{color:'crimson'}}/> : 
+							<FavoriteBorderOutlinedIcon/>} 
+					</button> 
+					{data.length} Likes
+				</div>	
+				<div>
+					<button className='post_footer_btn' aria-label='Comments post'>
+						<CommentIcon/>
+					</button>
+					<Comment/>
+				</div>
 			</div>
 			}
 		</article>

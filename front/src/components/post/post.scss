@@ -58,10 +58,14 @@
     }
     &_footer{
         display: flex;
-        align-items: center;
-        gap: 5px;
+        gap: 30px;
         &_btn{
             @include btn-hidden;
+        }
+        div{
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
     }
     &_header_btn, 

@@ -94,7 +94,7 @@
             margin-bottom: 30px;
         }
         &_password{
-           @include btn-password;
+           @include form-password;
         }
         p{
             position: relative;

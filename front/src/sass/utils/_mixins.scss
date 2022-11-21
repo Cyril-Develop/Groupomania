@@ -53,15 +53,12 @@
     box-shadow:  inset 2px 2px 5px rgba(255, 255, 255, 0.379), 
                  inset -5px -5px 10px #393a43cc ;
     background-color: royalblue;
-        // @media screen and (max-width: 700px){
-        //     padding: 5px;    
-        // }
     &:active{
         box-shadow:  inset 2px 2px 5px #393a43, inset -5px -5px 10px  rgba(255, 255, 255, 0.096);
     }
 };
 
-@mixin btn-password{
+@mixin form-password{
     position: absolute;
     top: 50%;
     transform: translateY(-50%);

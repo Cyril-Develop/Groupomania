@@ -4,7 +4,7 @@
     @include flex(column, space-between, center);
     gap: 20px;
     padding: 20px 0;
-    button{
+    &_btn{
         @include btn;
         &:focus-visible{
             border: none;

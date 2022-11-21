@@ -1,13 +1,13 @@
 import './navbar.scss';
 import Logo from '../../assets/logo.svg';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/authContext';
 import { useContext, useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import Person2Icon from '@mui/icons-material/Person2';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-
+import SearchUser from '../searchUser/SearchUser';
 	
 export default function Navbar() {
 
@@ -26,17 +26,12 @@ export default function Navbar() {
 		window.location.reload();
 	};
 
-    const navigate = useNavigate();
-
     const homePage = () => {
         setToggle(false);
     };
 
     const profilePage = () => {
         setToggle(!toggle);
-    };
-
-    const handleDelete = () => {
     };
 
 	return (
@@ -46,7 +41,7 @@ export default function Navbar() {
                     <h1>
                         <Link role={'link'} to={`/`}><img onClick={homePage} src={Logo} alt="Groupomania - réseau social"/></Link>  
                     </h1>
-                    <input aria-label='search bar' type="text" id='search' placeholder='Rechercher...'/>
+                    <SearchUser/>
                 </div>
                 <div className="navbar_user">
                     <button type='button' onClick={handleToggle}>
@@ -60,7 +55,7 @@ export default function Navbar() {
                             <Link role={'link'} onClick={handleLogout} className="menu_table_item"><ExitToAppIcon/> Se déconnecter</Link>    
                         </li>
                         <li>
-                            <Link onClick={handleDelete} className="menu_table_item"><DeleteForeverIcon/>Supprimer mon compte</Link>
+                            <Link className="menu_table_item"><DeleteForeverIcon/>Supprimer mon compte</Link>
                         </li>
                     </ul>
                     <span>{currentUser.lastname} {currentUser.firstname}</span>	

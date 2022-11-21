@@ -63,7 +63,7 @@ export default function Posts({ post }) {
 				</div>
 				
 				{(post.userId === currentUser.userId || currentUser.role === 'admin') &&
-				 	<button aria-label='Show menu' onClick={() => setModalMenu(!modalMenu)} style={{ marginLeft: "auto", cursor: 'pointer' }}>
+				 	<button className='post_header_btn' aria-label='Show menu' onClick={() => setModalMenu(!modalMenu)}>
 						<MoreHorizIcon/>
 					</button>
 				}	
@@ -78,10 +78,10 @@ export default function Posts({ post }) {
 			'Erreur de chargement' : 
 			isLoading ? 'Chargement' :
 			<div className="post_footer">
-				<button aria-label='Like this post' onClick={handleLike}>
+				<button className='post_footer_btn' aria-label='Like this post' onClick={handleLike}>
 					{data.includes(currentUser.userId) ? 
-						<FavoriteOutlinedIcon style={{ cursor: 'pointer', color:'crimson' }}  /> : 
-						<FavoriteBorderOutlinedIcon style={{ cursor: 'pointer' }} />} 
+						<FavoriteOutlinedIcon style={{color:'crimson'}}/> : 
+						<FavoriteBorderOutlinedIcon/>} 
 				</button> {data.length} Likes
 			</div>
 			}

@@ -71,6 +71,23 @@ exports.userInfos = (req, res) => {
 	});
 };
 
+//Récupérer tous les users
+exports.getAllUsers = (req, res) => {
+    dbConnection.query('SELECT * FROM users', (err, result) => {
+        if (err) return res.status(500).json(err);
+        if(result === 0) return res.status(404).json([]);
+        const users = result.map(user => {
+            return {
+                id: user.id,
+                lastname: user.lastname,
+                firstname: user.firstname,
+                imageProfile: user.imageProfile
+            }
+        });
+        res.status(200).json(users);
+    });
+};
+
 //Supprimer le compte d'un user
 exports.deleteAccount = (req, res) => {
 	//Delete all posts images from directory

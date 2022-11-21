@@ -15,8 +15,9 @@
         display: flex;
         align-items: center;
         gap: 10px;
-        button{
-           @include btn-hidden;
+        &_btn{
+            @include btn-hidden;
+            margin-left: auto;
         }
         &_info{
             display: flex;
@@ -59,8 +60,12 @@
         display: flex;
         align-items: center;
         gap: 5px;
-        button{
+        &_btn{
             @include btn-hidden;
         }
+    }
+    &_header_btn, 
+    &_btn{
+        @include btn-hidden;
     }
 };

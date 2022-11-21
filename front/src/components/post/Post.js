@@ -4,7 +4,7 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import CommentIcon from '@mui/icons-material/Comment';
 import { Link } from 'react-router-dom';
-import Comment from '../comment/Comment';
+import Comments from '../comments/Comments';
 import axios from 'axios';
 import MenuPost from '../menuPost/MenuPost';
 import { AuthContext } from '../../context/authContext';
@@ -52,6 +52,10 @@ export default function Posts({ post }) {
 		mutation.mutate();
 	};
 
+	const [showComments, setShowComments] = useState(false);
+
+	console.log(showComments);
+
 	return (
 		<article className='post'>
 			<div className="post_header">
@@ -88,13 +92,14 @@ export default function Posts({ post }) {
 					{data.length} Likes
 				</div>	
 				<div>
-					<button className='post_footer_btn' aria-label='Comments post'>
-						<CommentIcon/>
+					<button className='post_footer_btn' aria-label='Comments post' onClick={() => setShowComments(!showComments)}>
+						<CommentIcon/> 
 					</button>
-					<Comment/>
+					12 Commentaires
 				</div>
 			</div>
 			}
+			{showComments && <Comments post={post}/>} 
 		</article>
 	)
 };

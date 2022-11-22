@@ -20,7 +20,7 @@ export default function MenuPost({ setModalMenu, post }) {
     const queryClient = useQueryClient();
 
    const mutation = useMutation(() => {
-        return axios.delete(`http://localhost:8080/api/post/${post.id}`,  {
+        return axios.delete(`${process.env.REACT_APP_BASE_URL}/api/post/${post.id}`,  {
             headers: {
                 'authorization': `bearer ${token}`
             }

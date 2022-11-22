@@ -23,7 +23,7 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
     const queryClient = useQueryClient();
 
     const mutation = useMutation((formData) => {
-        return axios.put(`http://localhost:8080/api/post/${post.id}`, formData, {
+        return axios.put(`${process.env.REACT_APP_BASE_URL}/api/post/${post.id}`, formData, {
             headers: {
                 'authorization': `bearer ${token}`
             }
@@ -54,11 +54,25 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
                     <form>
                         <div>
                             <label htmlFor="title">Titre</label>
-                            <input type="text" id="title" name="title" onChange={e => setTitle(e.target.value)}/>
+                            <input 
+                                type="text" 
+                                id="title" 
+                                name="title"
+                                maxLength={50}
+                                onChange={e => setTitle(e.target.value)}
+                            />
                         </div>
                         <div>
                             <label htmlFor="description">Description</label>
-                            <textarea id="description" cols="50" rows="5" name="description" style={{resize : 'none'}} onChange={e => setContent(e.target.value)}></textarea>
+                            <textarea 
+                                id="description" 
+                                cols="50" 
+                                rows="5" 
+                                name="description"
+                                maxLength={200} 
+                                style={{resize : 'none'}} 
+                                onChange={e => setContent(e.target.value)}>
+                            </textarea>
                         </div>
                         <div>
                             <label className="change_image" htmlFor="image">

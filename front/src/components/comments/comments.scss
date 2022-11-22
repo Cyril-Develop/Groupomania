@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-    &_create{
+    &_form{
         display: flex;
         height: 40px;
         gap: 20px;
@@ -13,23 +13,25 @@
             flex-wrap: wrap;
             gap: 10px;
         }
-        img{
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            object-position: center;
-            @media screen and (max-width: 500px){
-               
-            }
-        }
-        form{
+        div{
             display: flex;
             height: 40px;
             gap: 20px;
             width: 100%;
             @media screen and (max-width: 500px){
                 gap: 10px;
+            }
+            label{
+                img{
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    object-position: center;
+                    @media screen and (max-width: 500px){
+                       
+                    }
+                }
             }
             input{
                 flex: 2;
@@ -45,38 +47,42 @@
             }
         }  
     }
-    &_content {
+    &_list{
         display: flex;
-        justify-content: space-around;
+        flex-direction: column;
         gap: 20px;
-        @media screen and (max-width: 500px){
-            gap: 10px;
-        }
-        img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            object-position: center;
-        }
-        &_info {
-            flex: 5;
+        &_item{
+            border-bottom: 1px solid #0000002c;
+            img{
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                object-fit: cover;
+                object-position: center;
+            }
             div{
                 display: flex;
-                justify-content: space-around;
-                .date{
+                a{
+                    margin-left: 5px;
+                }
+                .info{
                     display: flex;
-                    align-items: center;
+                    flex-direction: column;
+                    gap: 5px;
+                    margin-left: auto;
                     font-size: 12px;
                     color: #4D4D4D;
-                    margin-left: auto;
                     button{
                         @include btn-hidden;
+                        margin-left: auto;
                         :hover{
                             color: crimson;
                         }
                     }
                 }
+            }
+            p{
+                padding: 0 45px
             }
         }
     }

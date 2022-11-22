@@ -24,7 +24,7 @@ export default function Posts({ post }) {
 	const user = currentUser.userId;
 
 	const { isLoading, error, data } = useQuery(['likes', post.id], () =>
-		axios.get(`http://localhost:8080/api/post/${post.id}/like`, {
+		axios.get(`${process.env.REACT_APP_BASE_URL}/api/post/${post.id}/like`, {
 			headers: {
 				'authorization': `bearer ${token}`
 			}
@@ -37,7 +37,7 @@ export default function Posts({ post }) {
 	const queryClient = useQueryClient();
 		
 	const mutation = useMutation(() => {
-        return axios.post(`http://localhost:8080/api/post/${post.id}/like`, user, {
+        return axios.post(`${process.env.REACT_APP_BASE_URL}/api/post/${post.id}/like`, user, {
             headers: {
                 'authorization': `bearer ${token}`
             }
@@ -87,7 +87,7 @@ export default function Posts({ post }) {
 							<FavoriteOutlinedIcon style={{color:'crimson'}}/> : 
 							<FavoriteBorderOutlinedIcon/>} 
 					</button> 
-					{data.length} Likes
+					{data.length > 1 ? `${data.length} Likes` : `${data.length} Like`} 
 				</div>	
 				<div>
 					<button className='post_footer_btn' aria-label='Comments post' onClick={() => setShowComments(!showComments)}>

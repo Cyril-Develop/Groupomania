@@ -15,7 +15,7 @@ export default function SearchUser() {
 
     useEffect(() => {
         const fetchUsers = async () => {
-            const res = await axios.get(`http://localhost:8080/api/user`, {
+            const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/user`, {
                 headers: {
                     'authorization': `Bearer ${token}`
                 }
@@ -27,7 +27,7 @@ export default function SearchUser() {
 
     const resetSearch = () => {
         setQuery('');
-    }
+    };
     
     return (
         <div className='search'>
@@ -43,8 +43,8 @@ export default function SearchUser() {
                 ).map(user => (
                     <li className='search_list_item' key={user.id} >
                         <Link to={`/profile/${user.id}`} onClick={resetSearch}>
-                            <div><img src={user.imageProfile} alt="Utilisateur groupomania" /></div>
-                            <p>{user.firstname} {user.lastname}</p>
+                            <img src={user.imageProfile} alt="Utilisateur groupomania" />
+                            <p>{user.lastname} {user.firstname}</p>
                         </Link>                       
                     </li>                     
                 ))}

@@ -16,7 +16,7 @@ export default function Comments({ postId }) {
 	const token = currentUser.token;
 
 	const { data } = useQuery(['comments'], () =>
-		axios.get(`http://localhost:8080/api/post/${postId}/comment`, {
+		axios.get(`${process.env.REACT_APP_BASE_URL}/api/post/${postId}/comment`, {
 			headers: {
 				'authorization': `bearer ${token}`
 			}
@@ -30,7 +30,7 @@ export default function Comments({ postId }) {
 	const [content, setContent] = useState("");
 		
 	const mutation = useMutation((newComment) => {
-        return axios.post(`http://localhost:8080/api/post/${postId}/comment`, newComment, {
+        return axios.post(`${process.env.REACT_APP_BASE_URL}/api/post/${postId}/comment`, newComment, {
             headers: {
                 'authorization': `bearer ${token}`
             }
@@ -41,7 +41,8 @@ export default function Comments({ postId }) {
         },
     });
 
-	const handleComment = () => {
+	const handleComment = (e) => {
+		e.preventDefault();
 		if (content) {
 			mutation.mutate({content, postId});
 			setContent("");
@@ -49,7 +50,7 @@ export default function Comments({ postId }) {
 	};
 
 	const handleDelete = (commentId) => {
-		axios.delete(`http://localhost:8080/api/post/${commentId}/comment/`, {
+		axios.delete(`${process.env.REACT_APP_BASE_URL}/api/post/${commentId}/comment/`, {
 			headers: {
 				'authorization': `bearer ${token}`
 			}
@@ -61,36 +62,38 @@ export default function Comments({ postId }) {
 
 	return (
 		<div className='comments'>
-			<div className="comments_create">
-				<form>
+			<form className='comments_form'>
+				<div>
 					<label htmlFor="comment"><img src={currentUser.imageProfile} alt="" /></label>
 					<input 
 						type="text" 
 						id='comment' 
 						placeholder="Ajouter un commentaire..." 
+						maxLength={200}
 						value={content}
 						onChange={e => setContent(e.target.value)}
 					/>
-				</form>		
+				</div>
 				<button type='submit' onClick={handleComment}>Envoyer</button>
-			</div>
-			{data && data.map((comment) => (
-				<div className="comments_content" key={comment.commentId}>
-					<img src={comment.imageProfile} alt="" />
-					<div className="comments_content_info">
+			</form>		
+			<ul className="comments_list" >
+				{data && data.map((comment) => (
+					<li className='comments_list_item' key={comment.commentId}>
 						<div>
+							<img src={comment.imageProfile} alt="" />
 							<Link role={'link'} to={`/profile/${comment.userId}`}>
 								<span>{comment.firstname} {comment.lastname}</span>
 							</Link>
-							<div className='date'>
+							<div className='info'>
 								{dayjs(comment.createdAt).locale("fr").fromNow()}
-								<button onClick={() =>handleDelete(comment.commentId)}><DeleteForeverIcon/></button>
+								{(comment.userId === currentUser.userId || currentUser.role === 'admin') && 
+								<button onClick={() =>handleDelete(comment.commentId)}><DeleteForeverIcon/></button>}
 							</div>
 						</div>
 						<p>{comment.content}</p>
-					</div>			
-				</div>
-			))}
+					</li>			
+				))}
+			</ul>
 		</div>
 	)
 };

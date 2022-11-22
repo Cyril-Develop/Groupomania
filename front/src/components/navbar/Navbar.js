@@ -12,8 +12,8 @@ import SearchUser from '../searchUser/SearchUser';
 export default function Navbar() {
 
 	const {currentUser} = useContext(AuthContext);
-
-    const profilePicture = "http://localhost:8080/images/" + currentUser.imageProfile.split('/images/')[1];
+    
+    const profilePicture = `${process.env.REACT_APP_BASE_URL}/images/` + currentUser.imageProfile.split('/images/')[1];
 
     const [toggle, setToggle] = useState(false);
 
@@ -58,7 +58,7 @@ export default function Navbar() {
                             <Link className="menu_table_item"><DeleteForeverIcon/>Supprimer mon compte</Link>
                         </li>
                     </ul>
-                    <span>{currentUser.lastname} {currentUser.firstname}</span>	
+                    <span>{currentUser.firstname} {currentUser.lastname}</span>	
                 </div>
             </nav>
         </header>

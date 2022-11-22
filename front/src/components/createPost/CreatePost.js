@@ -23,7 +23,7 @@ export default function CreatePost({setModalCreate}) {
             formData.append('title', title);
             formData.append('content', content);
 
-        return axios.post("http://localhost:8080/api/post", formData, {
+        return axios.post(`${process.env.REACT_APP_BASE_URL}/api/post`, formData, {
             headers: {
                 'authorization': `bearer ${token}`
             }
@@ -58,11 +58,27 @@ export default function CreatePost({setModalCreate}) {
                 <form>
                     <div>
                         <label htmlFor="title">Titre</label>
-                        <input type="text" id="title" name="title" value={title} onChange={ e => setTitle(e.target.value)}/>
+                        <input 
+                            type="text" 
+                            id="title" 
+                            name="title" 
+                            maxLength={50}
+                            value={title} 
+                            onChange={ e => setTitle(e.target.value)}
+                        />
                     </div>
                     <div>
                         <label htmlFor="description">Description</label>
-                        <textarea id="description" cols="50" rows="5" name="description" value={content} style={{resize : 'none'}} onChange={e => setContent(e.target.value)}></textarea>
+                        <textarea 
+                            id="description" 
+                            cols="50" 
+                            rows="5" 
+                            name="description" 
+                            maxLength={200}
+                            value={content} 
+                            style={{resize : 'none'}} 
+                            onChange={e => setContent(e.target.value)}>
+                        </textarea>
                         {formError && <p className="error">{formError}</p>}
                     </div>
                     <div>

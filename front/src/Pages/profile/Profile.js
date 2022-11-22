@@ -3,12 +3,10 @@ import { AuthContext } from '../../context/authContext';
 import { useContext, useState, useEffect } from 'react';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import axios from 'axios';
-import Logo from '../../assets/logo-groupo.svg'
 import { useParams } from 'react-router-dom';
 import ProfilePost from '../../components/profilePost/ProfilePost';
 import { useQuery } from '@tanstack/react-query';
 import ScrollToTop from '../../components/scrollToTop/ScrollToTop';
-import Loader from '../../components/loader/Loader';
 
 export default function Profile() {
 
@@ -21,7 +19,7 @@ export default function Profile() {
 	///////////////////////////////////////////////////////////////////////////////
 	
 	const { isLoading, error, data } = useQuery(['user'], () =>
-		axios.get(`http://localhost:8080/api/user/${id}`, {
+		axios.get(`${process.env.REACT_APP_BASE_URL}/api/user/${id}`, {
 			headers: {
 				'authorization': `bearer ${token}`
 			}
@@ -30,7 +28,7 @@ export default function Profile() {
 			return res.data; 
 		})        
 	);
-	
+
 	///////////////////////////////////////////////////////////////////////////////
 	//Modification image de profil
 	const [image, setImage] = useState(null);
@@ -39,13 +37,15 @@ export default function Profile() {
 		if(profileOwner && image) {
 			const formData = new FormData();
 			formData.append('image', image);
-			axios.put(`http://localhost:8080/api/user/${currentUser.userId}`, formData, {
+			axios.put(`${process.env.REACT_APP_BASE_URL}/api/user/${currentUser.userId}`, formData, {
 				headers: {
 					'authorization': `bearer ${token}`
 				}
 			})
 			.then(res => {
-				axios.get(`http://localhost:8080/api/user/${currentUser.userId}`,{headers: {'authorization': `bearer ${token}`}})
+				axios.get(`${process.env.REACT_APP_BASE_URL}/api/user/${currentUser.userId}`,{
+					headers: {'authorization': `bearer ${token}`}
+				})
 				.then(res => {
 					const newCurrentUser = {...currentUser, imageProfile: res.data.imageProfile};
 					localStorage.setItem('user', JSON.stringify(newCurrentUser));
@@ -63,7 +63,8 @@ export default function Profile() {
 		<header className='profile'>
 			<div className='profile_card'>
 				<div className="profile_card_head">
-					<img src={profileOwner? currentUser.imageProfile : data.imageProfile} alt="avatar de profil"/>	
+					{data && <img src={profileOwner? currentUser.imageProfile : data.imageProfile} alt="avatar de profil"/>}
+						
 					{(profileOwner || currentUser.role === 'admin') &&		
 						<label aria-label='Change picture' htmlFor="picture">
                         	<AddPhotoAlternateIcon/>
@@ -78,7 +79,7 @@ export default function Profile() {
 				</div>
 				<div className="profile_card_infos">
                     <h2>
-						{profileOwner ? currentUser.lastname  : data.lastname} {profileOwner ? currentUser.firstname : data.firstname} 						
+						{profileOwner ? `${currentUser.firstname} ${currentUser.lastname}` : data && `${data.firstname} ${data.lastname}`} 						
 					</h2>
 				</div>		
 			</div>

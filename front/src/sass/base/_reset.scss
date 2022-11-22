@@ -5,9 +5,9 @@
 	font-family: 'Lato', sans-serif;
 }
 
-*::selection {
-	background: $color-tertiary;
-	color: white;
+#root{
+	margin: 0 auto;
+	max-width: 2600px;
 }
 
 a {

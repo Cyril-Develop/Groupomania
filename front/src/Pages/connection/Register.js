@@ -38,7 +38,7 @@ export default function Register() {
         setSuccessfulRegister(true)
 
         try{
-          await axios.post("http://localhost:8080/api/user/signup", formValues)
+          await axios.post(`${process.env.REACT_APP_BASE_URL}/api/user/signup`, formValues)
           setFormValues(initialValues);
         } catch (error) {
             console.log(error);

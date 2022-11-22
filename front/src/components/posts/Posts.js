@@ -21,7 +21,7 @@ export default function Posts() {
     const token = currentUser.token;
 
     const { isLoading, error, data } = useQuery(['posts'], () =>
-        axios.get("http://localhost:8080/api/post", {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/post`, {
             headers: {
                 'authorization': `bearer ${token}`
             }

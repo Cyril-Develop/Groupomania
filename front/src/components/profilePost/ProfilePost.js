@@ -7,7 +7,7 @@ import Post from '../../components/post/Post';
 export default function ProfilePost({id, token}) {   
 
     const { isLoading, error, data } = useQuery(['posts'], () =>
-		axios.get(`http://localhost:8080/api/post/${id}`, {
+		axios.get(`${process.env.REACT_APP_BASE_URL}/api/post/${id}`, {
 			headers: {
 				'authorization': `bearer ${token}`
 			}

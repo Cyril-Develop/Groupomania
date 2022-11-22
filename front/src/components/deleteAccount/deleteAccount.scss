@@ -1,0 +1,58 @@
+@import '../../sass/index.scss';
+
+.delete_modal{
+    z-index: 500;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    @include flex();
+    background-color: rgba(0, 0, 0, 0.735);
+    &_content{
+        position: absolute;
+        @include flex(column, center, center);
+        top: 80px;
+        padding: 15px;
+        border-radius: 10px;
+        font-size: clamp(1rem, 3.5vw, 1.1rem); 
+        letter-spacing: 1px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.291);
+        background-color: #ecf0f3;
+        opacity: 0;
+        animation : show 0.2s ease-in-out forwards;
+        .delete_info{
+            text-align: center;
+            
+            p{
+                margin-bottom: 10px;
+            }
+            div{
+                display: flex;
+                button{
+                    @include btn-connection;
+                    display: flex;
+                    font-size: clamp(1rem, 3.5vw, 1.1rem); 
+                }
+                button:nth-child(1){
+                    &:focus,
+                    &:hover{
+                        color: #1C42B5;
+                    }
+                }
+                button:nth-child(2){
+                    &:focus,
+                    &:hover{
+                        color: crimson;
+                    }
+                }
+            }
+        }
+    }
+};
+
+
+
+
+
+

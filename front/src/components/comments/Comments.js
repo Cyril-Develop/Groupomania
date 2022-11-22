@@ -64,11 +64,12 @@ export default function Comments({ postId }) {
 		<div className='comments'>
 			<form className='comments_form'>
 				<div>
-					<label htmlFor="comment"><img src={currentUser.imageProfile} alt="" /></label>
+					< img src={currentUser.imageProfile} alt="" />
 					<input 
 						type="text" 
 						id='comment' 
 						placeholder="Ajouter un commentaire..." 
+						aria-label='Write comment'
 						maxLength={200}
 						value={content}
 						onChange={e => setContent(e.target.value)}
@@ -84,13 +85,13 @@ export default function Comments({ postId }) {
 							<Link role={'link'} to={`/profile/${comment.userId}`}>
 								<span>{comment.firstname} {comment.lastname}</span>
 							</Link>
-							<div className='info'>
-								{dayjs(comment.createdAt).locale("fr").fromNow()}
-								{(comment.userId === currentUser.userId || currentUser.role === 'admin') && 
-								<button onClick={() =>handleDelete(comment.commentId)}><DeleteForeverIcon/></button>}
-							</div>
 						</div>
 						<p>{comment.content}</p>
+						<div className='info'>
+							<span>{dayjs(comment.createdAt).locale("fr").fromNow()}</span> 
+							{(comment.userId === currentUser.userId || currentUser.role === 'admin') && 
+							<button aria-label='Delete comment' onClick={() =>handleDelete(comment.commentId)}><DeleteForeverIcon/></button>}
+						</div>	
 					</li>			
 				))}
 			</ul>

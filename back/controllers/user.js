@@ -99,14 +99,14 @@ exports.deleteAccount = (req, res) => {
             })
         })
     //Delete user and all his posts from database
-    dbConnection.query('SELECT imagePost FROM users WHERE id = ?', req.params.id, (err, result) => {
-           if (result[0].imagePost === `http://localhost:8080/images/profilePictures/defaultPicture.jpg`) {
+    dbConnection.query('SELECT imageProfile FROM users WHERE id = ?', req.params.id, (err, result) => {
+           if (result[0].imageProfile === `http://localhost:8080/images/profilePictures/defaultPicture.jpg`) {
                 dbConnection.query('DELETE FROM users WHERE id = ?', req.params.id, (err, result) => {
                     if (err) res.status(500).json(err);
                     res.status(200).json({message: 'User deleted !'});
                 });
            } else {
-                const profilPicture = result[0].imagePost.split('/images/')[1];
+                const profilPicture = result[0].imageProfile.split('/images/')[1];
                 fs.unlink(`images/${profilPicture}`, () => {
                     dbConnection.query('DELETE FROM users WHERE id = ?', req.params.id, (err, result) => {
                         if (err) res.status(500).json(err);

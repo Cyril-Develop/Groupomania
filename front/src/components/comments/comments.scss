@@ -1,9 +1,10 @@
 @import '../../sass/index.scss';
 
 .comments {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    // gap: 15px;
     &_form{
         display: flex;
         height: 40px;
@@ -21,16 +22,14 @@
             @media screen and (max-width: 500px){
                 gap: 10px;
             }
-            label{
-                img{
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                    object-position: center;
-                    @media screen and (max-width: 500px){
-                       
-                    }
+            img{
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                object-fit: cover;
+                object-position: center;
+                @media screen and (max-width: 500px){
+                    
                 }
             }
             input{
@@ -51,38 +50,47 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
+        li:nth-child(1){
+            margin-top: 20px;
+        }
         &_item{
-            border-bottom: 1px solid #0000002c;
-            img{
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                object-fit: cover;
-                object-position: center;
-            }
             div{
                 display: flex;
-                a{
-                    margin-left: 5px;
+                img{
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    object-position: center;
                 }
-                .info{
-                    display: flex;
-                    flex-direction: column;
-                    gap: 5px;
-                    margin-left: auto;
-                    font-size: 12px;
-                    color: #4D4D4D;
-                    button{
-                        @include btn-hidden;
-                        margin-left: auto;
-                        :hover{
-                            color: crimson;
-                        }
-                    }
+                a{
+                    height: 100%;
+                    margin-left: 10px;
                 }
             }
             p{
-                padding: 0 45px
+                margin: 5px auto;
+                border-radius: 10px;
+                padding: 10px;
+                background-color: #0000000c;
+            }
+            .info{
+                display: flex;
+                align-items: center;
+                gap: 40px;
+                padding-left: 50px;
+                font-size: 12px;
+                color: #4D4D4D;
+                span{
+                    align-self: flex-start;
+                }
+                button{
+                    @include btn-hidden;
+                    margin-left: auto;
+                    :hover{
+                        color: crimson;
+                    }
+                }
             }
         }
     }

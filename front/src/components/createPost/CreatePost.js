@@ -3,6 +3,7 @@ import { useState, useContext } from "react";
 import { AuthContext } from "../../context/authContext";
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import CloseIcon from '@mui/icons-material/Close';
+import PhotoIcon from '@mui/icons-material/Photo';
 import axios from "axios";
 
 export default function CreatePost({setModalCreate}) {
@@ -83,7 +84,7 @@ export default function CreatePost({setModalCreate}) {
                     </div>
                     <div>
                         <label className="change_image" htmlFor="image">
-                            Ajouter une image
+                            <PhotoIcon/> image
                         </label>
                         <input accept="image/png, image/jpeg, image/jpg, image/gif" type="file" id="image" style={{display:'none'}} name="image" onChange={e => setImage(e.target.files[0])}/>
                         <button onClick={handlePost} type="submit">Publier</button>

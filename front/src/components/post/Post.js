@@ -60,7 +60,7 @@ export default function Posts({ post }) {
 				<img src={post.imageProfile} alt="" className="post_profilePic" />
 				<div className="post_header_info">
 					<Link role={'link'} to={`/profile/${post.userId}`}>
-						<span>{post.firstname} {post.lastname}</span>
+						<h2>{post.firstname} {post.lastname}</h2>
 					</Link>
 					<span className='date'>{dayjs(post.createdAt).locale("fr").fromNow()}</span>
 				</div>
@@ -73,7 +73,7 @@ export default function Posts({ post }) {
 				{modalMenu && <div className="post_header_menu"><MenuPost post={post} setModalMenu={setModalMenu}/></div>}
 			</div>
 			<div className="post_content">
-				<h2>{post.title}</h2>
+				<h3>{post.title}</h3>
 				{post.imagePost && <img src={post.imagePost} alt="Illustration publication Groupomania" />} 
 				<p>{post.content}</p>
 			</div>
@@ -93,7 +93,7 @@ export default function Posts({ post }) {
 					<button className='post_footer_btn' aria-label='Comments post' onClick={() => setShowComments(!showComments)}>
 						<CommentIcon/> 
 					</button>
-					Commentaires
+					Commenter
 				</div>
 			</div>
 			}

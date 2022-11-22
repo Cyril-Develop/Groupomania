@@ -35,6 +35,7 @@ export default function SearchUser() {
                 type="text" 
                 placeholder="Rechercher un utilisateur" 
                 value={query}
+                aria-label='Rechercher un utilisateur'
                 onChange={(e) => setQuery(e.target.value)} 
             />   
             <ul className='search_list'>

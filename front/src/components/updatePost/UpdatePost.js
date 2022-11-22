@@ -1,5 +1,6 @@
 import './updatePost.scss';
 import CloseIcon from '@mui/icons-material/Close';
+import PhotoIcon from '@mui/icons-material/Photo';
 import { useState, useContext } from 'react';
 import { AuthContext } from "../../context/authContext";
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -76,7 +77,7 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
                         </div>
                         <div>
                             <label className="change_image" htmlFor="image">
-                                Remplacer l'image
+                                <PhotoIcon/> image
                             </label>
                             <input accept="image/png, image/jpeg, image/jpg, image/gif" type="file" id="image" style={{display:'none'}} name="image" onChange={e => setImage(e.target.files[0])} />
                             <button  type="submit" onClick={editPost}>Modifier</button>

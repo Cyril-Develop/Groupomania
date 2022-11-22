@@ -33,7 +33,7 @@ export default function Posts() {
 
     return (
         <main className="posts">
-            <button className="posts_btn" role={'Create publication'} type='button' onClick={() => setModalCreate(true)}>
+            <button className="posts_btn" type='button' onClick={() => setModalCreate(true)}>
                 Nouvelle publication <AddIcon />
             </button>
             {modalCreate && <CreatePost setModalCreate={setModalCreate}/>}

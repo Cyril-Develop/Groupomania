@@ -17,6 +17,8 @@ export default function Profile() {
 	let profileOwner = false;
 	parseFloat(id) === currentUser.userId ? profileOwner = true : profileOwner = false;
 	///////////////////////////////////////////////////////////////////////////////
+
+	console.log(id);
 	
 	const { isLoading, error, data } = useQuery(['user'], () =>
 		axios.get(`${process.env.REACT_APP_BASE_URL}/api/user/${id}`, {
@@ -57,14 +59,14 @@ export default function Profile() {
 			})	
 		}
 	}, [image]);
-	
 
+	
+	
 	return (
 		<header className='profile'>
 			<div className='profile_card'>
 				<div className="profile_card_head">
-					{data && <img src={profileOwner? currentUser.imageProfile : data.imageProfile} alt="avatar de profil"/>}
-						
+					{data && <img src={profileOwner? currentUser.imageProfile : data.imageProfile} alt="avatar de profil"/>}	
 					{(profileOwner || currentUser.role === 'admin') &&		
 						<label aria-label='Change picture' htmlFor="picture">
                         	<AddPhotoAlternateIcon/>

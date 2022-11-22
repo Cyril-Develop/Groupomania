@@ -15,7 +15,7 @@ export default function Comments({ postId }) {
 	const {currentUser} = useContext(AuthContext);
 	const token = currentUser.token;
 
-	const { data } = useQuery(['comments'], () =>
+	const {error, isLoading, data } = useQuery(['comments', postId], () =>
 		axios.get(`${process.env.REACT_APP_BASE_URL}/api/post/${postId}/comment`, {
 			headers: {
 				'authorization': `bearer ${token}`
@@ -77,7 +77,7 @@ export default function Comments({ postId }) {
 				<button type='submit' onClick={handleComment}>Envoyer</button>
 			</form>		
 			<ul className="comments_list" >
-				{data && data.map((comment) => (
+				{error ? 'erreur' : isLoading ? 'chargement' : data.map((comment) => (
 					<li className='comments_list_item' key={comment.commentId}>
 						<div>
 							<img src={comment.imageProfile} alt="" />

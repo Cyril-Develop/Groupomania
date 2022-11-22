@@ -19,7 +19,7 @@ exports.createPost = (req, res) => {
 exports.getAllPost = (req, res) => {
     dbConnection.query('SELECT p.*, u.lastname, firstname, imageProfile FROM post AS p JOIN users AS u ON (u.id = p.userId) ORDER BY p.createdAt DESC', (err, result) => {
         if (err) return res.status(500).json(err);
-        if(result == 0) return res.status(404).json({error: 'No posts to display !'});
+        if(result == 0) return res.status(404).json([]);
         res.status(200).json(result);
     });
 };

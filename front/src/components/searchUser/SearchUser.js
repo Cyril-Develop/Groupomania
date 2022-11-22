@@ -23,7 +23,7 @@ export default function SearchUser() {
             setSearchResult(res.data);
         };
         fetchUsers();
-    }, []);
+    }, [token]);
 
     const resetSearch = () => {
         setQuery('');
@@ -44,7 +44,7 @@ export default function SearchUser() {
                     <li className='search_list_item' key={user.id} >
                         <Link to={`/profile/${user.id}`} onClick={resetSearch}>
                             <img src={user.imageProfile} alt="Utilisateur groupomania" />
-                            <p>{user.lastname} {user.firstname}</p>
+                            <p>{user.firstname} {user.lastname}</p>
                         </Link>                       
                     </li>                     
                 ))}

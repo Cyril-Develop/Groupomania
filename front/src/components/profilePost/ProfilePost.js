@@ -6,7 +6,7 @@ import Post from '../../components/post/Post';
 
 export default function ProfilePost({id, token}) {   
 
-    const { isLoading, error, data } = useQuery(['posts'], () =>
+    const { isLoading, error, data } = useQuery(['posts', id], () =>
 		axios.get(`${process.env.REACT_APP_BASE_URL}/api/post/${id}`, {
 			headers: {
 				'authorization': `bearer ${token}`
@@ -22,7 +22,8 @@ export default function ProfilePost({id, token}) {
 
   return (
     <main className='profilePost'>
-        { error ? 
+        { 
+		error ? 
         <img src={Logo} alt="logo groupomania" /> : 
         isLoading ? 
         'Chargement...' : 

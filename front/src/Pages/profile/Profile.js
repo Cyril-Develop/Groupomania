@@ -50,6 +50,7 @@ export default function Profile() {
 					const newCurrentUser = {...currentUser, imageProfile: res.data.imageProfile};
 					localStorage.setItem('user', JSON.stringify(newCurrentUser));
 					window.location.reload();
+					
 				})		
 			})
 			.catch(err => { 

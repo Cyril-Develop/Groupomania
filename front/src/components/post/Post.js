@@ -90,14 +90,14 @@ export default function Posts({ post }) {
 					{data.length > 1 ? `${data.length} Likes` : `${data.length} Like`} 
 				</div>	
 				<div>
-					<button className='post_footer_btn' aria-label='Comments post' onClick={() => setShowComments(!showComments)}>
+					<button className='post_footer_btn' aria-label='View comments' onClick={() => setShowComments(!showComments)}>
 						<CommentIcon/> 
 					</button>
 					Commenter
 				</div>
 			</div>
 			}
-			{showComments && <Comments postId={post.id}/>} 
+			{showComments && <Comments postId={post.id} />} 
 		</article>
 	)
 };

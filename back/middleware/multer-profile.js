@@ -17,5 +17,5 @@ const storage = multer.diskStorage({
         callback(null, name + Date.now() + '.' + extension)
     }
 });
-
-module.exports = multer({storage}).single("image");
+//500000 Bytes (500 Ko)
+module.exports = multer({storage, limits: { fileSize: 500000 }}).single("image");

@@ -13,7 +13,8 @@ export default function Navbar() {
 
 	const {currentUser} = useContext(AuthContext);
     
-    const profilePicture = `${process.env.REACT_APP_BASE_URL}/images/` + currentUser.imageProfile.split('/images/')[1];
+    //const profilePicture = `${process.env.REACT_APP_BASE_URL}/images/` + currentUser.imageProfile.split('/images/')[1];
+    const profilePicture = currentUser.imageProfile;
 
     const [menuToggle, setMenuToggle] = useState(false);
 

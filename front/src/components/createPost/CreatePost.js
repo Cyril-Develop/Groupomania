@@ -33,13 +33,14 @@ export default function CreatePost({setModalCreate}) {
         onSuccess: () => {
           queryClient.invalidateQueries( ['posts'] )
         },
-    })
-
+    });
+    
     const handlePost = e => {
         e.preventDefault();
-        if(title === "" || content === ""){
-            setFormError('Veuillez remplir tous les champs');
-        } else {
+        if(title === "" || content === "" || image.size > 1000000){
+            setFormError('Veuillez remplir tous les champs, les images ne doivent pas dépasser 1Mo');
+        } 
+        else {
             mutation.mutate();
             setFormError('');
             setTitle("");
@@ -58,7 +59,7 @@ export default function CreatePost({setModalCreate}) {
                 </button>
                 <form>
                     <div>
-                        <label htmlFor="title">Titre</label>
+                        <label htmlFor="title">Titre <span>{title.length}/50</span> </label>   
                         <input 
                             type="text" 
                             id="title" 
@@ -69,7 +70,7 @@ export default function CreatePost({setModalCreate}) {
                         />
                     </div>
                     <div>
-                        <label htmlFor="description">Description</label>
+                        <label htmlFor="description">Description <span>{content.length}/200</span> </label> 
                         <textarea 
                             id="description" 
                             cols="50" 

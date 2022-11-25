@@ -18,8 +18,9 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
     const token = currentUser.token;
 
     const [image, setImage] = useState(post.imagePost);
-    const [content, setContent] = useState(post.content);
-    const [title, setTitle] = useState(post.title);
+    const [content, setContent] = useState('');
+    const [title, setTitle] = useState('');
+    const [formError, setFormError] = useState('');
 
     const queryClient = useQueryClient();
 
@@ -37,12 +38,16 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
 
     const editPost = (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('image', image !== post.imagePost ? image : post.imagePost);
-        formData.append('title', title);
-        formData.append('content', content);
-        mutation.mutate(formData);
-        setModalMenu(false);
+        if(title === "" || content === "" || image.size > 1000000){
+            setFormError('Veuillez remplir tous les champs, les images ne doivent pas dépasser 1Mo');
+        }  else {
+            const formData = new FormData();
+            formData.append('image', image !== post.imagePost ? image : post.imagePost);
+            formData.append('title', title);
+            formData.append('content', content);
+            mutation.mutate(formData);
+            setModalMenu(false);
+        }
     };
 
     return (
@@ -54,7 +59,7 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
                     </button>
                     <form>
                         <div>
-                            <label htmlFor="title">Titre</label>
+                            <label htmlFor="title">Titre <span>{title.length}/50</span> </label>
                             <input 
                                 type="text" 
                                 id="title" 
@@ -64,16 +69,17 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
                             />
                         </div>
                         <div>
-                            <label htmlFor="description">Description</label>
+                            <label htmlFor="description">Description <span>{content.length}/200</span> </label>
                             <textarea 
                                 id="description" 
                                 cols="50" 
                                 rows="5" 
                                 name="description"
-                                maxLength={200} 
+                                maxLength={200}  
                                 style={{resize : 'none'}} 
                                 onChange={e => setContent(e.target.value)}>
                             </textarea>
+                            {formError && <p className="error">{formError}</p>}
                         </div>
                         <div>
                             <label className="change_image" htmlFor="image">

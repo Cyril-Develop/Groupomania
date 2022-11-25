@@ -23,4 +23,5 @@ const storage = multer.diskStorage({
 });
 
 //Export storage function and define how many file can be send
-module.exports = multer({storage}).single("image");
+//1000000 Bytes (1000 Ko)
+module.exports = multer({storage, limits: { fileSize: 1000000 }}).single("image");

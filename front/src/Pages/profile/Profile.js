@@ -32,6 +32,7 @@ export default function Profile() {
 	///////////////////////////////////////////////////////////////////////////////
 	//Modification image de profil
 	const [image, setImage] = useState(null);
+    const [errorFile, setErrorFile] = useState();
 
 	useEffect(() => {
 		if(profileOwner && image) {
@@ -49,12 +50,12 @@ export default function Profile() {
 				.then(res => {
 					const newCurrentUser = {...currentUser, imageProfile: res.data.imageProfile};
 					localStorage.setItem('user', JSON.stringify(newCurrentUser));
-					window.location.reload();
-					
+					window.location.reload();	
 				})		
 			})
 			.catch(err => { 
 				console.log(err);
+                setErrorFile('Seul les images ne dépassant pas 500Ko sont autorisées');
 			})	
 		}
 	}, [image , currentUser, token, profileOwner]);
@@ -63,7 +64,7 @@ export default function Profile() {
 		<header className='profile'>
 			<div className='profile_card'>
 				<div className="profile_card_head">
-					{data && <img src={profileOwner? currentUser.imageProfile : data.imageProfile} alt="avatar de profil"/>}	
+					{data && <img src={data.imageProfile} alt="avatar de profil"/>}	
 					{(profileOwner || currentUser.role === 'admin') &&		
 						<label htmlFor="picture">
                         	<AddPhotoAlternateIcon aria-label={'Change profile picture'}/>
@@ -80,6 +81,7 @@ export default function Profile() {
                     <h2>
 						{profileOwner ? `${currentUser.firstname} ${currentUser.lastname}` : data && `${data.firstname} ${data.lastname}`} 						
 					</h2>
+                    {errorFile && <p className="error" >{errorFile}</p>}
 				</div>		
 			</div>
 

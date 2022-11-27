@@ -52,12 +52,6 @@ exports.login = (req, res) => {
 	}
 )};
 
-exports.logout = (req, res) => {
-    req.auth = null;
-    res.redirect("/");
-};
-
-//Récupérer toutes les infos d'un user
 exports.userInfos = (req, res) => {
 	dbConnection.query('SELECT * FROM users WHERE id = ?', req.params.id, (err, result) => {  
         if (err) return res.status(500).json(err);
@@ -71,7 +65,6 @@ exports.userInfos = (req, res) => {
 	});
 };
 
-//Récupérer tous les users
 exports.getAllUsers = (req, res) => {
     dbConnection.query('SELECT * FROM users', (err, result) => {
         if (err) return res.status(500).json(err);
@@ -88,9 +81,7 @@ exports.getAllUsers = (req, res) => {
     });
 };
 
-//Supprimer le compte d'un user
 exports.deleteAccount = (req, res) => {
-	//Delete all posts images from directory
     dbConnection.query('SELECT imagePost FROM post WHERE userId = ?', req.params.id, (err, result) => {
         result.forEach(image => {
             const filename = image.imagePost.split('/images/')[1];
@@ -98,7 +89,6 @@ exports.deleteAccount = (req, res) => {
                 if (err) return res.status(500).json(err);
             })
         })
-    //Delete user and all his posts from database
     dbConnection.query('SELECT imageProfile FROM users WHERE id = ?', req.params.id, (err, result) => {
            if (result[0].imageProfile === `http://localhost:8080/images/profilePictures/defaultPicture.jpg`) {
                 dbConnection.query('DELETE FROM users WHERE id = ?', req.params.id, (err, result) => {

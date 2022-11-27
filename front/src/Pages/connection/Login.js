@@ -46,7 +46,7 @@ export default function Login() {
 		} else {
 			console.log("User not logged in");
 		}
-	}, [successfulLogin]);
+	}, [successfulLogin , navigate]);
 
 	return (
 		<main className="connection">

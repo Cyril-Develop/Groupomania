@@ -53,6 +53,7 @@ export default function Register() {
 
     const validate = (values) => {
         const error = {}
+        // eslint-disable-next-line
         const emailRegex = /([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|"([]!#-[^-~ \t]|(\\[\t -~]))+")@([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|\[[\t -Z^-~]*])/;
         const nameRegex = /^([A-Za-z|\s]{3,15})?([-]{0,1})?([A-Za-z|\s]{3,15})$/;
         const passwordRegex = /^(?=(.*[a-z]){3,})(?=(.*[A-Z]){2,})(?=(.*[0-9]){2,})(?=(.*[!@#$%^&*()\-__+.]){1,}).{8,15}$/;
@@ -76,7 +77,6 @@ export default function Register() {
         } else if(!passwordRegex.test(values.password)){
             error.password = 'Entre 8 et 15 caractères. 2 chiffres, 2 majuscules, 3 minuscules et 1 caractère spécial obligatoires';
         }
-
         return error;
     };
 

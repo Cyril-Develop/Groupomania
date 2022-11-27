@@ -38,7 +38,7 @@ export default function CreatePost({setModalCreate}) {
     const handlePost = e => {
         e.preventDefault();
         if(title === "" || content === "" || image.size > 1000000){
-            setFormError('Veuillez remplir tous les champs, les images ne doivent pas dépasser 1Mo');
+            setFormError('Veuillez remplir tous les champs, attention les images ne doivent pas dépasser 1Mo');
         } 
         else {
             mutation.mutate();

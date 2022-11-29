@@ -1,19 +1,18 @@
 import './navbar.scss';
-import Logo from '../../assets/logo.svg';
-import { Link } from 'react-router-dom';
-import { AuthContext } from '../../context/authContext';
-import { useContext, useState } from 'react';
 import Person2Icon from '@mui/icons-material/Person2';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import SearchUser from '../searchUser/SearchUser';
 import DeleteAccount from '../deleteAccount/DeleteAccount';
+import Logo from '../../assets/logo.svg';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/authContext';
+import { useContext, useState } from 'react';
 	
 export default function Navbar() {
 
 	const {currentUser} = useContext(AuthContext);
     
-    //const profilePicture = `${process.env.REACT_APP_BASE_URL}/images/` + currentUser.imageProfile.split('/images/')[1];
     const profilePicture = currentUser.imageProfile;
 
     const [menuToggle, setMenuToggle] = useState(false);

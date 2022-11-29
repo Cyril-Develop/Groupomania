@@ -1,6 +1,6 @@
 import './scrollToTop.scss'
 import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 export default function ScrollToTop() {
 

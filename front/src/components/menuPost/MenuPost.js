@@ -2,17 +2,15 @@ import './menuPost.scss'
 import ContentCutIcon from '@mui/icons-material/ContentCut';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import UpdatePost from '../updatePost/UpdatePost';
+import axios from "axios";
 import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from "../../context/authContext";
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from "axios";
 
 export default function MenuPost({ setModalMenu, post }) {
 
     const [modalUpdate, setModalUpdate] = useState(false);
-
-   //Suppression d'un post
 
     const { currentUser } = useContext(AuthContext);
     const token = currentUser.token;

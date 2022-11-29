@@ -1,7 +1,7 @@
 import './comments.scss'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { AuthContext } from '../../context/authContext';
 import axios from 'axios';
+import { AuthContext } from '../../context/authContext';
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -10,7 +10,7 @@ require("dayjs/locale/fr");
 const relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
 
-export default function Comments({ postId, getNbComments }) {
+export default function Comments({ postId }) {
 
 	const {currentUser} = useContext(AuthContext);
 	const token = currentUser.token;
@@ -26,7 +26,6 @@ export default function Comments({ postId, getNbComments }) {
 		})   
 	);
 		
-
 	const queryClient = useQueryClient();
 	const [content, setContent] = useState("");
 		
@@ -91,7 +90,11 @@ export default function Comments({ postId, getNbComments }) {
 						<div className='info'>
 							<span>{dayjs(comment.createdAt).locale("fr").fromNow()}</span> 
 							{(comment.userId === currentUser.userId || currentUser.role === 'admin') && 
-							<button aria-label='Delete comment' onClick={() => handleDelete(comment.commentId)}><DeleteForeverIcon/></button>}
+							<button 
+								aria-label='Delete comment' 
+								onClick={() => handleDelete(comment.commentId)}>
+									<DeleteForeverIcon/>
+							</button>}
 						</div>	
 					</li>			
 				))}

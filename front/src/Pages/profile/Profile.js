@@ -1,12 +1,12 @@
 import './profile.scss';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import ScrollToTop from '../../components/scrollToTop/ScrollToTop';
+import ProfilePost from '../../components/profilePost/ProfilePost';
+import axios from 'axios';
 import { AuthContext } from '../../context/authContext';
 import { useContext, useState, useEffect } from 'react';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import ProfilePost from '../../components/profilePost/ProfilePost';
 import { useQuery } from '@tanstack/react-query';
-import ScrollToTop from '../../components/scrollToTop/ScrollToTop';
 
 export default function Profile() {
 

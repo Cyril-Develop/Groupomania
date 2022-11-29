@@ -1,6 +1,6 @@
 import './notFound.scss';
-import { Link } from 'react-router-dom';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import { Link } from 'react-router-dom';
 
 export default function NotFound() {
 

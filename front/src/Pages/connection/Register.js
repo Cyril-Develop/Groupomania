@@ -1,10 +1,10 @@
 import "./connection.scss";
-import Logo from "../../assets/logo-groupo.svg";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import Logo from "../../assets/logo-groupo.svg";
 import axios from "axios";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function Register() {
     
@@ -25,6 +25,8 @@ export default function Register() {
     const [formValues, setFormValues] = useState(initialValues);
     const [formError, setFormError] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
+    const [emailUsed, setEmailUsed] = useState(false);
+    const [successfulRegister, setSuccessfulRegister] = useState(false);
 
     const handleChange = e => {
         const { name, value } = e.target;
@@ -33,20 +35,24 @@ export default function Register() {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        setFormError(validate(formValues));
         setIsSubmit(true);
         setSuccessfulRegister(true)
-
+        setFormError(validate(formValues));
+        
         try{
-          await axios.post(`${process.env.REACT_APP_BASE_URL}/api/user/signup`, formValues)
-          setFormValues(initialValues);
+            await axios.post(`${process.env.REACT_APP_BASE_URL}/api/user/signup`, formValues)
+            setFormValues(initialValues);
+            setEmailUsed(false);
         } catch (error) {
             console.log(error);
+            if(error.response.data.error === "Email already used !"){
+                setEmailUsed(true);
+            }
         }
     };
 
     useEffect(() => {
-        if (Object.keys(formError).length === 0 && isSubmit) {
+        if (Object.keys(formError).length === 0 && isSubmit && !emailUsed) {
             console.log("User registered");
         }              
     });
@@ -71,7 +77,7 @@ export default function Register() {
             error.email = `L' email est obligatoire`;
         } else if(!emailRegex.test(values.email)) {
             error.email = 'Veuillez renseigner une adresse mail valide';
-        }
+        } 
         if(!values.password){
             error.password = 'Le mot de passe est obligatoire';
         } else if(!passwordRegex.test(values.password)){
@@ -79,8 +85,6 @@ export default function Register() {
         }
         return error;
     };
-
-    const [successfulRegister, setSuccessfulRegister] = useState(false);
 
     useEffect(() => {
         if (successfulRegister) {
@@ -93,7 +97,7 @@ export default function Register() {
 
     return (
         <main className="connection">
-            {Object.keys(formError).length === 0 && successfulRegister && isSubmit && <div className='success'>Compte créé</div>}
+            {Object.keys(formError).length === 0 && successfulRegister && isSubmit && !emailUsed && <div className='success'>Compte créé</div>}
             <div className="card reverse" >
                 <div className="card_right card_register">
                     <h1><img src={Logo} alt="logo groupomania" /></h1> 
@@ -134,6 +138,7 @@ export default function Register() {
                             />
                             <label htmlFor="email" className={formValues.email && 'animLabel'}>Email</label>
                             {formError.email && <p>{formError.email}</p>}
+                            {emailUsed && <p>Cette adresse email est déjà utilisée</p>}
                         </div>
                         <div className="form_control">
                             <button className='form_control_password' aria-label="Show password" onClick={e => togglePassword(e)}>

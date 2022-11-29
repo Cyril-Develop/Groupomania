@@ -1,8 +1,8 @@
 import './profilePost.scss'
-import axios from 'axios'
 import Logo from '../../assets/logo-groupo.svg'
-import { useQuery } from '@tanstack/react-query';
 import Post from '../../components/post/Post';
+import axios from 'axios'
+import { useQuery } from '@tanstack/react-query';
 
 export default function ProfilePost({id, token}) {   
 

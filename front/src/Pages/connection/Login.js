@@ -1,10 +1,10 @@
 import './connection.scss'
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Logo from '../../assets/logo-groupo.svg'
 import { useState, useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/authContext';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 export default function Login() {
 

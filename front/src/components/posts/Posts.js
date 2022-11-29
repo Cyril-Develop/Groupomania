@@ -1,13 +1,13 @@
 import "./posts.scss";
-import Post from "../post/Post";
 import AddIcon from "@mui/icons-material/Add";
-import axios from "axios";
 import Logo from '../../assets/logo-groupo.svg'
+import Post from "../post/Post";
+import CreatePost from "../createPost/CreatePost";
+import Loader from "../loader/Loader";
+import axios from "axios";
 import { useState, useContext } from "react";
 import { AuthContext } from "../../context/authContext";
 import { useQuery } from '@tanstack/react-query';
-import CreatePost from "../createPost/CreatePost";
-import Loader from "../loader/Loader";
 
 export default function Posts() {
     ////////////////////////////////////////////////////////

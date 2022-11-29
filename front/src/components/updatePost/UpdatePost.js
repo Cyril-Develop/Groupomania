@@ -1,10 +1,10 @@
 import './updatePost.scss';
 import CloseIcon from '@mui/icons-material/Close';
 import PhotoIcon from '@mui/icons-material/Photo';
+import axios from "axios";
 import { useState, useContext } from 'react';
 import { AuthContext } from "../../context/authContext";
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from "axios";
 
 export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
 

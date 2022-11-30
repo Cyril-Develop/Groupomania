@@ -10,15 +10,11 @@ import { AuthContext } from "../../context/authContext";
 import { useQuery } from '@tanstack/react-query';
 
 export default function Posts() {
-    ////////////////////////////////////////////////////////
-    //Création toggle pour afficher le formulaire d'ajout
 
-    const [modalCreate, setModalCreate] = useState(false);
-
-    ////////////////////////////////////////////////////////
-    //Récupération et affichage de tous les posts
     const {currentUser} = useContext(AuthContext);
     const token = currentUser.token;
+
+    const [modalCreate, setModalCreate] = useState(false);
 
     const { isLoading, error, data } = useQuery(['posts'], () =>
         axios.get(`${process.env.REACT_APP_BASE_URL}/api/post`, {

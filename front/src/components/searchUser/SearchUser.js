@@ -12,7 +12,6 @@ export default function SearchUser() {
     const [query, setQuery] = useState('');
     const [searchResult, setSearchResult] = useState([]);
 
-
     useEffect(() => {
         const fetchUsers = async () => {
             const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/user`, {
@@ -36,6 +35,7 @@ export default function SearchUser() {
                 placeholder="Rechercher un utilisateur" 
                 value={query}
                 aria-label='Rechercher un utilisateur'
+                title="Rechercher un utilisateur"
                 onChange={(e) => setQuery(e.target.value)} 
             />   
             <ul className='search_list'>

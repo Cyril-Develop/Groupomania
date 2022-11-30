@@ -64,7 +64,7 @@ export default function Comments({ postId }) {
 		<div className='comments'>
 			<form className='comments_form'>
 				<div>
-					< img src={currentUser.imageProfile} alt="" />
+					< img src={currentUser.imageProfile} alt="Profil connecté" />
 					<input 
 						type="text" 
 						id='comment' 
@@ -81,7 +81,7 @@ export default function Comments({ postId }) {
 				{error ? 'erreur' : isLoading ? 'chargement' : data.map((comment) => (
 					<li className='comments_list_item' key={comment.commentId}>
 						<div>
-							<img src={comment.imageProfile} alt="" />
+							<img src={comment.imageProfile} alt="Créateur du commentaire" />
 							<Link role={'link'} to={`/profile/${comment.userId}`}>
 								<span>{comment.firstname} {comment.lastname}</span>
 							</Link>

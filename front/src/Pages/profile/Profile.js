@@ -16,7 +16,6 @@ export default function Profile() {
 	const {id} = useParams();
 	let profileOwner = false;
 	parseFloat(id) === currentUser.userId ? profileOwner = true : profileOwner = false;
-	///////////////////////////////////////////////////////////////////////////////
 	
 	const { data } = useQuery(['user'], () =>
 		axios.get(`${process.env.REACT_APP_BASE_URL}/api/user/${id}`, {
@@ -29,8 +28,6 @@ export default function Profile() {
 		})        
 	);
 
-	///////////////////////////////////////////////////////////////////////////////
-	//Modification image de profil
 	const [image, setImage] = useState(null);
     const [errorFile, setErrorFile] = useState();
 
@@ -66,7 +63,7 @@ export default function Profile() {
 				<div className="profile_card_head">
 					{data && <img src={data.imageProfile} alt="avatar de profil"/>}	
 					{(profileOwner || currentUser.role === 'admin') &&		
-						<label htmlFor="picture">
+						<label htmlFor="picture" title="Modifier la photo">
                         	<AddPhotoAlternateIcon aria-label={'Change profile picture'}/>
                     	</label>	
 					}	

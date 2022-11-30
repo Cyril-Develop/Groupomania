@@ -5,6 +5,14 @@
 	align-items: $align;
 };
 
+@mixin position($position: fixed, $top: 0, $right: 0, $bottom: 0, $left: 0) {
+    position: $position;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+};
+
 @mixin btn-connection {
 	padding: 5px 10px;
 	border-radius: 10px;
@@ -12,7 +20,7 @@
 	border: none;
     outline: none;
 	box-shadow: -2px -2px 5px #fff, 2px 2px 5px #BABECC;
-    background-color: #ecf0f3;
+    background-color: $color-bg;
     color: black;
     display: block;
 	margin: 0 auto;
@@ -21,7 +29,7 @@
 		box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #fff;
 	}
     &:focus{
-        color: #1C42B5;
+        color: $color-focus;
     }
 };
 
@@ -52,7 +60,7 @@
     cursor: pointer;
     box-shadow:  inset 2px 2px 5px rgba(255, 255, 255, 0.379), 
                  inset -5px -5px 10px #393a43cc ;
-    background-color: royalblue;
+    background-color: $color-focus;
     &:active{
         box-shadow:  inset 2px 2px 5px #393a43, inset -5px -5px 10px  rgba(255, 255, 255, 0.096);
     }
@@ -70,7 +78,7 @@
     cursor: pointer;
     &:active,
     &:focus{
-        color: #1C42B5;
+        color: $color-focus;
     }
 }
 
@@ -83,7 +91,7 @@
     border-radius: 10px;
     box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
     &:focus{
-        border-bottom: 2px solid #1C42B5;
+        border-bottom: 2px solid $color-focus;
         transition: all 0.2s ease-in-out;
         box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
     }

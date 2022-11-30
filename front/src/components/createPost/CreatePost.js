@@ -37,29 +37,33 @@ export default function CreatePost({setModalCreate}) {
     
     const handlePost = e => {
         e.preventDefault();
-        if(title === "" || content === "" || image.size > 1000000){
-            setFormError('Veuillez remplir tous les champs, attention les images ne doivent pas dépasser 1Mo');
-        } 
-        else {
+        if(title === "" || content === ""){
+            setFormError('Veuillez remplir tous les champs');
+        }  else if (image && image.size > 1000000) {
+            setFormError('les images ne doivent pas dépasser 1Mo');
+        } else {
             mutation.mutate();
             setFormError('');
             setTitle("");
             setContent("");
             setImage(null);
             setModalCreate(false);
-        }
+        }   
     };
 
   return (
     <>
         <div className='modal'>
             <div className="modal_content">
-                <button aria-label='Close modal' type="button" rel="nofollow" onClick={() => setModalCreate(false)} className="close-modal">
+                <button 
+                    aria-label='Close modal' 
+                    type="button" rel="nofollow" 
+                    onClick={() => setModalCreate(false)} className="close-modal">
                     <CloseIcon/>
                 </button>
                 <form>
                     <div>
-                        <label htmlFor="title">Titre <span>{title.length}/50</span> </label>   
+                        <label htmlFor="title">Titre <span>{title.length}/50</span></label>   
                         <input 
                             type="text" 
                             id="title" 
@@ -87,7 +91,13 @@ export default function CreatePost({setModalCreate}) {
                         <label className="change_image" htmlFor="image">
                             <PhotoIcon/> image
                         </label>
-                        <input accept="image/png, image/jpeg, image/jpg, image/gif" type="file" id="image" style={{display:'none'}} name="image" onChange={e => setImage(e.target.files[0])}/>
+                        <input 
+                            accept="image/png, image/jpeg, image/jpg, image/gif" 
+                            type="file" id="image" 
+                            style={{display:'none'}} 
+                            name="image" 
+                            onChange={e => setImage(e.target.files[0])}
+                        />
                         <button onClick={handlePost} type="submit">Publier</button>
                     </div>
                     <div>

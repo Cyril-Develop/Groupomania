@@ -12,7 +12,7 @@
         position: relative;
         margin: 80px auto 0;
         border-radius: 10px;
-        background-color: #ecf0f3;
+        background-color: $color-bg;
         padding: 20px;
         box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px rgb(214, 214, 214);
         &_head{
@@ -41,7 +41,7 @@
                 border-radius: 50%;
                 font-size: 1.1rem;
                 border: none;
-                background-color: royalblue;
+                background-color: $color-focus;
                 color: white;
                 box-shadow: -2px -2px 5px rgba(255, 255, 255, 0.451), 2px 2px 5px rgba(34, 35, 36, 0.688);
                 cursor: pointer;
@@ -59,7 +59,7 @@
                 color: rgba(50, 48, 48, 0.933);
             }
             .error{
-                color: #931901;
+                color: $color-error;
                 text-align: center;
                 margin-top: 10px;
             }

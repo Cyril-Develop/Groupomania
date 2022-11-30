@@ -9,7 +9,7 @@
     box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px rgb(214, 214, 214);
     border-radius: 10px;
     padding: 15px;
-    background-color: #ecf0f3;
+    background-color: $color-bg;
     &_header{
         position: relative;
         display: flex;
@@ -45,7 +45,7 @@
             right: 0;
             border-radius: 5px;
             overflow: hidden;
-            background-color: #ecf0f3;
+            background-color: $color-bg;
             box-shadow: 0 0 10px rgba(0,0,0,0.5);  
         }
     }

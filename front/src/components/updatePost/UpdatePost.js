@@ -12,7 +12,6 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
         setModalMenu(false);
         setModalUpdate(true);
     };
-    ///////////////////////////////////////////////////////////
 
     const { currentUser } = useContext(AuthContext);
     const token = currentUser.token;
@@ -38,16 +37,18 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
 
     const editPost = (e) => {
         e.preventDefault();
-        if(title === "" || content === "" || image.size > 1000000){
-            setFormError('Veuillez remplir tous les champs, les images ne doivent pas dépasser 1Mo');
-        }  else {
+        if(title === "" || content === ""){
+            setFormError('Veuillez remplir tous les champs');
+        }  else if (image.size > 1000000) {
+            setFormError('les images ne doivent pas dépasser 1Mo');
+        } else {
             const formData = new FormData();
             formData.append('image', image !== post.imagePost ? image : post.imagePost);
             formData.append('title', title);
             formData.append('content', content);
             mutation.mutate(formData);
             setModalMenu(false);
-        }
+        } 
     };
 
     return (
@@ -85,11 +86,22 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
                             <label className="change_image" htmlFor="image">
                                 <PhotoIcon/> image
                             </label>
-                            <input accept="image/png, image/jpeg, image/jpg, image/gif" type="file" id="image" style={{display:'none'}} name="image" onChange={e => setImage(e.target.files[0])} />
+                            <input 
+                                accept="image/png, image/jpeg, image/jpg, image/gif" 
+                                type="file" 
+                                id="image" 
+                                style={{display:'none'}} 
+                                name="image" 
+                                onChange={e => setImage(e.target.files[0])} 
+                            />
                             <button  type="submit" onClick={editPost}>Modifier</button>
                         </div>
                         <div>
-                            {!image ? '' : image !== post.imagePost ? <img src={URL.createObjectURL(image)} alt="illustration de publication" className="image_preview"/> : <img src={image} alt="illustration de publication" className="image_preview"/>}
+                            {
+                                !image ? '' : 
+                                image !== post.imagePost ? 
+                                <img src={URL.createObjectURL(image)} alt="illustration de publication" className="image_preview"/> : 
+                                <img src={image} alt="illustration de publication" className="image_preview"/>}
                         </div>
                     </form>
                 </div>

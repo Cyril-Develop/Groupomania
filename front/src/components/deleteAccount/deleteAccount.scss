@@ -2,23 +2,18 @@
 
 .delete_modal{
     z-index: 500;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    @include flex();
+    @include position;
+    @include flex;
     background-color: rgba(0, 0, 0, 0.735);
     &_content{
-        position: absolute;
+        @include position(absolute, 80px, auto, auto, auto);
         @include flex(column, center, center);
-        top: 80px;
         padding: 15px;
         border-radius: 10px;
         font-size: clamp(1rem, 3.5vw, 1.1rem); 
         letter-spacing: 1px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.291);
-        background-color: #ecf0f3;
+        background-color: $color-bg;
         opacity: 0;
         animation : show 0.2s ease-in-out forwards;
         @media screen and (max-width: 500px){
@@ -40,7 +35,7 @@
                 button:nth-child(1){
                     &:focus,
                     &:hover{
-                        color: #1C42B5;
+                        color: $color-focus;
                     }
                 }
                 button:nth-child(2){

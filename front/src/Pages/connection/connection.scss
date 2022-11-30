@@ -47,14 +47,14 @@
                         font-size: clamp(13px, 2.5vw, 1.1rem);    
                         a{
                             position: relative;
-                            color: #1C42B5;
+                            color: $color-focus;
                             outline: none;
                             &::after{
                                 content: '';
                                 position: absolute;
                                 width: 0%;
                                 height: 2px;
-                                background-color: #1C42B5;
+                                background-color: $color-focus;
                                 left: 0;
                                 bottom: -5px;
                                 transition: all 0.2s ease-in-out;
@@ -99,7 +99,7 @@
         p{
             position: relative;
             top: 20px;
-            color: #931901;
+            color: $color-error;
             text-align: center;
             font-size: clamp(0.9rem, 3.5vw, 1.1rem); 
             @media screen and (max-width: 700px){
@@ -118,7 +118,7 @@
             transition: all 0.2s ease-in-out;
         }
         .animLabel{
-            color: #1C42B5;
+            color: $color-focus;
             transform: translateY(-25px);
             font-size: clamp(1rem, 3.5vw, 1.2rem); 
             transition: all 0.2s ease-in-out;

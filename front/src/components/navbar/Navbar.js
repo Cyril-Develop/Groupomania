@@ -47,23 +47,31 @@ export default function Navbar() {
             <nav className='navbar'>
                 <div className='navbar_left'>
                     <h1>
-                        <Link role={'link'} to={`/`}><img onClick={homePage} src={Logo} alt="Groupomania - réseau social"/></Link>  
+                        <Link role={'link'} to={`/`}>
+                            <img onClick={homePage} title="Accueil" src={Logo} alt="Groupomania - réseau social"/>
+                        </Link>  
                     </h1>
                     <SearchUser/>
                 </div>
                 <div className="navbar_user">
-                    <button type='button' onClick={handleToggle}>
+                    <button type='button' onClick={handleToggle} title="Menu">
                         <img src={profilePicture} alt="avatar de l'utilisateur" />
                     </button>
                     <ul className={menuToggle ? 'menu_table visible' : 'menu_table'}>
                         <li >
-                            <Link role={'link'} onClick={profilePage} className="menu_table_item" to={`/profile/${currentUser.userId}`}><Person2Icon/>Profil</Link>
+                            <Link role={'link'} onClick={profilePage} className="menu_table_item" to={`/profile/${currentUser.userId}`}>
+                                <Person2Icon/>Profil
+                            </Link>
                         </li>
                         <li>
-                            <Link role={'link'} onClick={handleLogout} className="menu_table_item"><ExitToAppIcon/> Se déconnecter</Link>    
+                            <Link role={'link'} onClick={handleLogout} className="menu_table_item">
+                                <ExitToAppIcon/> Se déconnecter
+                            </Link>    
                         </li>
                         <li>
-                            <Link onClick={handleDelete} className="menu_table_item"><DeleteForeverIcon/>Supprimer mon compte</Link>
+                            <Link onClick={handleDelete} className="menu_table_item">
+                                <DeleteForeverIcon/>Supprimer mon compte
+                            </Link>
                         </li>
                     </ul>
                     <span>{currentUser.firstname} {currentUser.lastname}</span>	

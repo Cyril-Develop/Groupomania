@@ -57,7 +57,7 @@ export default function Posts({ post }) {
 	return (
 		<article className='post'>
 			<div className="post_header">
-				<img src={post.imageProfile} alt="" className="post_profilePic" />
+				<img src={post.imageProfile} alt="Avatar de l'utilisateur - groupomania" className="post_profilePic" />
 				<div className="post_header_info">
 					<Link role={'link'} to={`/profile/${post.userId}`}>
 						<h2>{post.firstname} {post.lastname}</h2>
@@ -66,7 +66,7 @@ export default function Posts({ post }) {
 				</div>
 				
 				{(post.userId === currentUser.userId || currentUser.role === 'admin') &&
-				 	<button className='post_header_btn' aria-label='Show menu' onClick={() => setModalMenu(!modalMenu)}>
+				 	<button title='Menu' className='post_header_btn' aria-label='Show menu' onClick={() => setModalMenu(!modalMenu)}>
 						<MoreHorizIcon/>
 					</button>
 				}	

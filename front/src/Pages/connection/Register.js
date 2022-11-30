@@ -45,9 +45,7 @@ export default function Register() {
             setEmailUsed(false);
         } catch (error) {
             console.log(error);
-            if(error.response.data.error === "Email already used !"){
-                setEmailUsed(true);
-            }
+            error.response.data.error === "Email already used !" ? setEmailUsed(true) : setEmailUsed(false);
         }
     };
 

@@ -11,7 +11,7 @@
         gap: 1rem;
         width: 90%;
         max-width: 800px;
-        color: #ecf0f3;
+        color: $color-bg;
         h1{
             font-size: clamp(2rem, 10vw, 5rem);
             border-top: solid 3px #ccc;
@@ -50,9 +50,9 @@
         }
         .return_icon{
             font-size: 5rem;
-            color: #ecf0f3;
+            color: $color-bg;
             &:hover{
-                color: royalblue;
+                color: $color-focus;
             }
         }
     }

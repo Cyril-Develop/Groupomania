@@ -22,9 +22,16 @@
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/Cyril-Develop/Groupomania?style=for-the-badge)
 
+## Documentation API :
+
+```
+https://documenter.getpostman.com/view/23155868/2s8YszNVNi
+```
+
 ## Installation :
 
 Installer les dépendances dans chacuns des deux dossiers avec la commande `npm install`
+
 
 ### Frontend : 
 

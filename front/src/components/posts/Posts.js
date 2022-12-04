@@ -5,7 +5,7 @@ import Post from "../post/Post";
 import CreatePost from "../createPost/CreatePost";
 import Loader from "../loader/Loader";
 import axios from "axios";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../context/authContext";
 import { useQuery } from '@tanstack/react-query';
 
@@ -27,6 +27,19 @@ export default function Posts() {
         })        
     );
 
+    const [currentUserRole, setCurrentUserRole] = useState();
+
+    useEffect(() => {
+		axios.get(`${process.env.REACT_APP_BASE_URL}/api/user/${currentUser.userId}`, {
+			headers: {
+				'authorization': `bearer ${token}`
+			}
+		})
+		.then(res => {
+			setCurrentUserRole(res.data.role);
+		})
+	}, [token, currentUser.userId]);
+
     return (
         <main className="posts">
             <button className="posts_btn" type='button' onClick={() => setModalCreate(true)}>
@@ -37,7 +50,7 @@ export default function Posts() {
                 : isLoading 
                 ? <Loader/> 
                 : data.map((post) => (
-                <Post post={post} key={post.id} />
+                <Post post={post} key={post.id} currentUserRole={currentUserRole}/>
             ))}
         </main>
     )

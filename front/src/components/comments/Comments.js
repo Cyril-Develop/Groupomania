@@ -10,7 +10,7 @@ require("dayjs/locale/fr");
 const relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
 
-export default function Comments({ postId }) {
+export default function Comments({ postId, currentUserRole }) {
 
 	const {currentUser} = useContext(AuthContext);
 	const token = currentUser.token;
@@ -89,7 +89,7 @@ export default function Comments({ postId }) {
 						<p>{comment.content}</p>
 						<div className='info'>
 							<span>{dayjs(comment.createdAt).locale("fr").fromNow()}</span> 
-							{(comment.userId === currentUser.userId || currentUser.role === 'admin') && 
+							{(comment.userId === currentUser.userId || currentUserRole === 'admin') && 
 							<button 
 								aria-label='Delete comment' 
 								onClick={() => handleDelete(comment.commentId)}>

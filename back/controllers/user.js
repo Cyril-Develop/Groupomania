@@ -42,7 +42,7 @@ exports.login = (req, res) => {
                             firstname: result[0].firstname,
                             imageProfile: result[0].imageProfile,
 							userId : result[0].id,
-                            role : result[0].role,
+                            //role : result[0].role,
 							token : jwt.sign({userId: result[0].id}, `${process.env.PASSWORD_JWT}`, {expiresIn: "24h"})
 						});
 					})
@@ -59,6 +59,7 @@ exports.userInfos = (req, res) => {
         const dataUser = {
             lastname: result[0].lastname,
             firstname: result[0].firstname,
+            role: result[0].role,
             imageProfile: result[0].imageProfile
         }
 		res.status(200).json(dataUser);

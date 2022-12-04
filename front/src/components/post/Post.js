@@ -15,7 +15,7 @@ require("dayjs/locale/fr");
 const relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
 
-export default function Posts({ post }) {
+export default function Posts({ post, currentUserRole }) {
 
 	const [modalMenu, setModalMenu] = useState(false);
 
@@ -65,7 +65,7 @@ export default function Posts({ post }) {
 					<span className='date'>{dayjs(post.createdAt).locale("fr").fromNow()}</span>
 				</div>
 				
-				{(post.userId === currentUser.userId || currentUser.role === 'admin') &&
+				{(post.userId === currentUser.userId || currentUserRole === 'admin') &&
 				 	<button title='Menu' className='post_header_btn' aria-label='Show menu' onClick={() => setModalMenu(!modalMenu)}>
 						<MoreHorizIcon/>
 					</button>
@@ -97,7 +97,7 @@ export default function Posts({ post }) {
 				</div>
 			</div>
 			}
-			{showComments && <Comments postId={post.id} />} 
+			{showComments && <Comments postId={post.id} currentUserRole={currentUserRole}/>} 
 		</article>
 	)
 };

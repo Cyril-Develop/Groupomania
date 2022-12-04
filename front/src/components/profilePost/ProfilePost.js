@@ -4,7 +4,7 @@ import Post from '../../components/post/Post';
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query';
 
-export default function ProfilePost({id, token}) {   
+export default function ProfilePost({id, token, currentUserRole}) {   
 
     const { isLoading, error, data } = useQuery(['posts', id], () =>
 		axios.get(`${process.env.REACT_APP_BASE_URL}/api/post/${id}`, {
@@ -28,7 +28,7 @@ export default function ProfilePost({id, token}) {
         isLoading ? 
         'Chargement...' : 
         data.map((p) => (
-            <Post key={p.id} post={p} />
+            <Post key={p.id} post={p} currentUserRole={currentUserRole}/>
         ))
         }
     </main>

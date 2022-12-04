@@ -12,12 +12,25 @@ export default function Profile() {
 
 	const {currentUser} = useContext(AuthContext);
 	const token = currentUser.token;
+	const [currentUserRole, setCurrentUserRole] = useState();
 
 	const {id} = useParams();
 	let profileOwner = false;
 	parseFloat(id) === currentUser.userId ? profileOwner = true : profileOwner = false;
+
+	useEffect(() => {
+		axios.get(`${process.env.REACT_APP_BASE_URL}/api/user/${currentUser.userId}`, {
+			headers: {
+				'authorization': `bearer ${token}`
+			}
+		})
+		.then(res => {
+			setCurrentUserRole(res.data.role);
+		})
+	}, [token, currentUser.userId]);
+			
 	
-	const { data } = useQuery(['user'], () =>
+	const { data } = useQuery(['user', id], () =>
 		axios.get(`${process.env.REACT_APP_BASE_URL}/api/user/${id}`, {
 			headers: {
 				'authorization': `bearer ${token}`
@@ -62,7 +75,7 @@ export default function Profile() {
 			<div className='profile_card'>
 				<div className="profile_card_head">
 					{data && <img src={data.imageProfile} alt="avatar de profil"/>}	
-					{(profileOwner || currentUser.role === 'admin') &&		
+					{(profileOwner || currentUserRole === 'admin') &&		
 						<label htmlFor="picture" title="Modifier la photo">
                         	<AddPhotoAlternateIcon aria-label={'Change profile picture'}/>
                     	</label>	
@@ -82,7 +95,7 @@ export default function Profile() {
 				</div>		
 			</div>
 
-			<ProfilePost id={id} token={token} />
+			<ProfilePost id={id} token={token} currentUserRole={currentUserRole}/>
         
 			<ScrollToTop/>
 		</header>	

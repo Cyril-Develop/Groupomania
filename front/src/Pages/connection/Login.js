@@ -33,7 +33,6 @@ export default function Login() {
 		e.preventDefault();
 		try {
 			await login(formValues);
-			navigate("/");
 		} catch (err) {
 			console.log(err);
 		}

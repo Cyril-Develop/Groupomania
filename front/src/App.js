@@ -9,6 +9,7 @@ import Navbar from './components/navbar/Navbar';
 import NotFound from './Pages/notFound/NotFound';
 import Profile from './Pages/profile/Profile';
 
+
 function App() {
 	const {currentUser} = useContext(AuthContext);
 

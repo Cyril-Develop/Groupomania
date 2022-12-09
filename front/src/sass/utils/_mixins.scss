@@ -68,13 +68,12 @@
 
 @mixin form-password{
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 15px;
     background-color: transparent;
     box-shadow: none;
     color: black;
     outline: none;
-    right: 10px;
+    right: 15px;
     cursor: pointer;
     &:active,
     &:focus{

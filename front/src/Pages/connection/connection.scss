@@ -96,6 +96,9 @@
         &_password{
            @include form-password;
         }
+        button{
+            padding: 0;
+        }
         p{
             position: relative;
             top: 20px;

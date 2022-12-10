@@ -37,9 +37,7 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
 
     const editPost = (e) => {
         e.preventDefault();
-        if(title === "" || content === ""){
-            setFormError('Veuillez remplir tous les champs');
-        }  else if (image.size > 1000000) {
+        if (image.size > 1000000) {
             setFormError('les images ne doivent pas dépasser 1Mo');
         } else {
             const formData = new FormData();

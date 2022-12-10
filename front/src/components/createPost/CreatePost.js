@@ -37,8 +37,8 @@ export default function CreatePost({setModalCreate}) {
     
     const handlePost = e => {
         e.preventDefault();
-        if(title === "" || content === ""){
-            setFormError('Veuillez remplir tous les champs');
+        if(title === ""){
+            setFormError('Merci de renseigner un titre');
         }  else if (image && image.size > 1000000) {
             setFormError('les images ne doivent pas dépasser 1Mo');
         } else {

@@ -52,7 +52,7 @@ exports.deletePost = (req, res) => {
                 const image = req.file ? `${req.protocol}://${req.get('host')}/images/articleImages/${req.file.filename}` : result[0].imagePost;
                 const title = req.body.title ? req.body.title : result[0].title;
                 const content = req.body.content ? req.body.content : result[0].content;
-            if (result[0].imagePost !== "") {
+            if (result[0].imagePost !== image) {
                 const filename = result[0].imagePost.split('/images/')[1];
                 fs.unlink(`images/${filename}`, () => {
                     dbConnection.query('UPDATE post SET imagePost = ?, title = ?, content = ?  WHERE id = ?', [image, title, content, req.params.id], (err, result) => {

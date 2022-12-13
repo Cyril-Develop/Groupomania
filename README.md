@@ -40,7 +40,7 @@ créer un fichier `.env`
 ```
 REACT_APP_BASE_URL = 'http://localhost:8080'
 ```
-Démarrer ensuite le serveur avec la commande `npm run start`
+Démarrer ensuite le serveur avec la commande `npm start`
 
 ### Backend :
 

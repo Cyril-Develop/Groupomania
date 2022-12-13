@@ -53,8 +53,8 @@ DB_NAME = '<Nom base de donnée>'
 DB_USER = '<Nom d'utilisateur base de donnée>'
 DB_PASSWORD = '<Mot de passe base de donnée>'
 
-PASSWORD_JWT = '<Clé secrète token>'
-PASSWORD_CRYPTOJS = '<Clé générée avec crypto-js>'
+PASSWORD_JWT = '0de67732-b0ff-4101-9ce0-57e9be97cbb6'
+PASSWORD_CRYPTOJS = '9fnXMWP89bDqDW2Z633*-~Jm982nLdzS^tk3^&f|Z2H6]a#g]7^Q4~gL&XtG8<#qQz8'
 ```
 Démarrer ensuite le serveur avec la commande `node server` ou `nodemon server` si ce paquet est installé sur votre machine
 

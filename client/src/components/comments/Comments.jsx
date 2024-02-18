@@ -14,27 +14,29 @@ export default function Comments({ postId, currentUserRole }) {
 	const { currentUser } = useContext(AuthContext);
 	const token = currentUser.token;
 
-	const { error, isLoading, data } = useQuery(['comments', postId], () =>
-		axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/post/${postId}/comment`, {
-			headers: {
-				'authorization': `bearer ${token}`
-			}
-		})
-			.then(res => {
-				return res.data;
+	const { error, isLoading, data } = useQuery({
+		queryKey: ['comments', postId],
+		queryFn: async () => {
+			const res = await axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/post/${postId}/comment`, {
+				headers: {
+					'authorization': `bearer ${token}`
+				}
 			})
-	);
+			return res.data;
+		}
+	})
 
 	const queryClient = useQueryClient();
 	const [content, setContent] = useState("");
 
-	const mutation = useMutation((newComment) => {
-		return axios.post(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/post/${postId}/comment`, newComment, {
-			headers: {
-				'authorization': `bearer ${token}`
-			}
-		})
-	}, {
+	const { mutate } = useMutation({
+		mutationFn: (newComment) => {
+			return axios.post(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/post/${postId}/comment`, newComment, {
+				headers: {
+					'authorization': `bearer ${token}`
+				}
+			})
+		},
 		onSuccess: () => {
 			queryClient.invalidateQueries(['comments'])
 		},
@@ -43,7 +45,7 @@ export default function Comments({ postId, currentUserRole }) {
 	const handleComment = (e) => {
 		e.preventDefault();
 		if (content) {
-			mutation.mutate({ content, postId });
+			mutate({ content });
 			setContent("");
 		}
 	};

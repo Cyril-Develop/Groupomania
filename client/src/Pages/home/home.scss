@@ -2,6 +2,7 @@
 
 .home{
     min-height: calc(100vh - 80px);
-    @include background;
+    max-width: 1800px;
+    margin: 0 auto;
 }
 

@@ -39,7 +39,7 @@ function App() {
 				<PrivateRoute>
 					<Layout />
 				</PrivateRoute>),
-			children: [{ path: '/groupomania/', element: <Home /> }, { path: '/profile/:id/', element: <Profile /> }]
+			children: [{ path: '/groupomania/', element: <Home /> }, { path: '/groupomania/profile/:id/', element: <Profile /> }]
 		},
 		{ path: '/groupomania/login', element: <Login /> },
 		{ path: '/groupomania/register', element: <Register /> },

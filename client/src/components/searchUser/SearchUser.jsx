@@ -32,7 +32,7 @@ export default function SearchUser() {
         <div className='search'>
             <input
                 type="text"
-                placeholder="Rechercher un utilisateur"
+                placeholder="Rechercher..."
                 value={query}
                 aria-label='Rechercher un utilisateur'
                 title="Rechercher un utilisateur"
@@ -43,7 +43,7 @@ export default function SearchUser() {
                     user.firstname.toLowerCase().includes(query.toLowerCase()))
                 ).map(user => (
                     <li className='search_list_item' key={user.id} >
-                        <Link to={`/profile/${user.id}`} onClick={resetSearch}>
+                        <Link to={`/groupomania/profile/${user.id}`} onClick={resetSearch}>
                             <img src={user.imageProfile} alt="Utilisateur groupomania" />
                             <p>{user.firstname} {user.lastname}</p>
                         </Link>

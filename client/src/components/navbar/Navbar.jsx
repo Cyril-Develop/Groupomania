@@ -47,7 +47,7 @@ export default function Navbar() {
             <nav className='navbar'>
                 <div className='navbar_left'>
                     <h1>
-                        <Link role={'link'} to={`/`}>
+                        <Link role={'link'} to={`/groupomania/`}>
                             <img onClick={homePage} title="Accueil" src={Logo} alt="Groupomania - réseau social" />
                         </Link>
                     </h1>
@@ -59,7 +59,7 @@ export default function Navbar() {
                     </button>
                     <ul className={menuToggle ? 'menu_table visible' : 'menu_table'}>
                         <li >
-                            <Link role={'link'} onClick={profilePage} className="menu_table_item" to={`/profile/${currentUser.userId}`}>
+                            <Link role={'link'} onClick={profilePage} className="menu_table_item" to={`/groupomania/profile/${currentUser.userId}`}>
                                 <Person2Icon />Profil
                             </Link>
                         </li>

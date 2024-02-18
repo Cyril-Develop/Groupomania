@@ -120,6 +120,3 @@ exports.deleteComment = (req, res) => {
         res.status(200).json({message: 'Comment deleted !'});
     });
 };
-
-
-

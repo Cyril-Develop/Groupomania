@@ -5,6 +5,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import dayjs from "dayjs";
+import 'dayjs/locale/fr';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -22,33 +23,35 @@ export default function Posts({ post, currentUserRole }) {
 	const token = currentUser.token;
 	const user = currentUser.userId;
 
-	const { isLoading, error, data } = useQuery(['likes', post.id], () =>
-		axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/post/${post.id}/like`, {
-			headers: {
-				'authorization': `bearer ${token}`
-			}
-		})
-			.then(res => {
-				return res.data;
+	const { isLoading, error, data } = useQuery({
+		queryKey: ['likes', post.id],
+		queryFn: async () => {
+			const res = await axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/post/${post.id}/like`, {
+				headers: {
+					'authorization': `bearer ${token}`
+				}
 			})
-	);
+			return res.data;
+		}
+	})
 
 	const queryClient = useQueryClient();
 
-	const mutation = useMutation(() => {
-		return axios.post(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/post/${post.id}/like`, user, {
-			headers: {
-				'authorization': `bearer ${token}`
-			}
-		})
-	}, {
+	const { mutate } = useMutation({
+		mutationFn: () => {
+			return axios.post(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/post/${post.id}/like`, user, {
+				headers: {
+					'authorization': `bearer ${token}`
+				}
+			})
+		},
 		onSuccess: () => {
 			queryClient.invalidateQueries(['likes'])
 		},
 	});
 
 	const handleLike = () => {
-		mutation.mutate();
+		mutate();
 	};
 
 	const [showComments, setShowComments] = useState(false);
@@ -58,7 +61,7 @@ export default function Posts({ post, currentUserRole }) {
 			<div className="post_header">
 				<img src={post.imageProfile} alt="Avatar de l'utilisateur - groupomania" className="post_profilePic" />
 				<div className="post_header_info">
-					<Link role={'link'} to={`/profile/${post.userId}`}>
+					<Link role={'link'} to={`/groupomania/profile/${post.userId}`}>
 						<h2>{post.firstname} {post.lastname}</h2>
 					</Link>
 					<span className='date'>{dayjs(post.createdAt).locale("fr").fromNow()}</span>

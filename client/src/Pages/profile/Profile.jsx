@@ -29,17 +29,17 @@ export default function Profile() {
 			})
 	}, [token, currentUser.userId]);
 
-
-	const { data } = useQuery(['user', id], () =>
-		axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/user/${id}`, {
-			headers: {
-				'authorization': `bearer ${token}`
-			}
-		})
-			.then(res => {
-				return res.data;
+	const { data } = useQuery({
+		queryKey: ['user', id],
+		queryFn: async () => {
+			const res = await axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/user/${id}`, {
+				headers: {
+					'authorization': `bearer ${token}`
+				}
 			})
-	);
+			return res.data;
+		}
+	})
 
 	const [image, setImage] = useState(null);
 	const [errorFile, setErrorFile] = useState();

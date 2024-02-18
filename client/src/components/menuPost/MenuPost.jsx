@@ -17,20 +17,21 @@ export default function MenuPost({ setModalMenu, post }) {
 
     const queryClient = useQueryClient();
 
-    const mutation = useMutation(() => {
-        return axios.delete(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/post/${post.id}`, {
-            headers: {
-                'authorization': `bearer ${token}`
-            }
-        })
-    }, {
+    const { mutate } = useMutation({
+        mutationFn: () => {
+            return axios.delete(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/post/${post.id}`, {
+                headers: {
+                    'authorization': `bearer ${token}`
+                }
+            })
+        },
         onSuccess: () => {
             queryClient.invalidateQueries(['posts'])
         },
     });
 
     const deletePost = () => {
-        mutation.mutate();
+        mutate();
         setModalMenu(false);
     };
 

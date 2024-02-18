@@ -6,13 +6,13 @@
 }
 
 html{
-	background-color: #000000;
+	@include background;
 }
 
-#root{
-	margin: 0 auto;
-	max-width: 2600px;
-}
+// #root{
+// 	margin: 0 auto;
+// 	max-width: 2600px;
+// }
 
 a {
 	text-decoration: none;

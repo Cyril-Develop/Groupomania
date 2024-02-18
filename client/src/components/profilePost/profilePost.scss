@@ -4,4 +4,6 @@
     @include flex(column, center, center);
     width: 100%;
     gap: 20px;    
+    max-width: 1800px;
+    margin: 0 auto;
 }

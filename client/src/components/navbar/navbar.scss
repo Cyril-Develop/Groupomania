@@ -1,15 +1,19 @@
 @import '../../sass/index.scss';
 
-.navbar{
+header{
+    background-color: $color-bg;
     position: relative;
     z-index: 900;
+}
+
+.navbar{
     position: sticky;
     top: 0;
     @include flex(row, space-between, center);
     height: 80px;
     padding: 0 60px;
-    border-bottom: 2px solid #0000002c;
-    background-color: $color-bg;
+    max-width: 1800px;
+    margin: 0 auto;
     @media screen and (max-width: 700px){
         justify-content: space-around;
         padding: 10px 0;

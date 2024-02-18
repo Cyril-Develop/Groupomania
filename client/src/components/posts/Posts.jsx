@@ -16,16 +16,17 @@ export default function Posts() {
 
     const [modalCreate, setModalCreate] = useState(false);
 
-    const { isLoading, error, data } = useQuery(['posts'], () =>
-        axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/post`, {
-            headers: {
-                'authorization': `bearer ${token}`
-            }
-        })
-            .then(res => {
-                return res.data;
+    const { isLoading, error, data } = useQuery({
+        queryKey: ['posts'],
+        queryFn: async () => {
+            const res = await axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/post`, {
+                headers: {
+                    'authorization': `bearer ${token}`
+                }
             })
-    );
+            return res.data;
+        }
+    })
 
     const [currentUserRole, setCurrentUserRole] = useState();
 

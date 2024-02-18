@@ -19,20 +19,21 @@ export default function CreatePost({ setModalCreate }) {
     const queryClient = useQueryClient();
 
     const formData = new FormData();
-    const mutation = useMutation(() => {
-        formData.append('image', image);
-        formData.append('title', title);
-        formData.append('content', content);
+    const { mutate } = useMutation({
+        mutationFn: () => {
+            formData.append('image', image);
+            formData.append('title', title);
+            formData.append('content', content);
 
-        return axios.post(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/post`, formData, {
-            headers: {
-                'authorization': `bearer ${token}`
-            }
-        })
-    }, {
+            return axios.post(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/post`, formData, {
+                headers: {
+                    'authorization': `bearer ${token}`
+                }
+            })
+        },
         onSuccess: () => {
             queryClient.invalidateQueries(['posts'])
-        },
+        }
     });
 
     const handlePost = e => {
@@ -42,7 +43,7 @@ export default function CreatePost({ setModalCreate }) {
         } else if (image && image.size > 1000000) {
             setFormError('les images ne doivent pas dépasser 1Mo');
         } else {
-            mutation.mutate();
+            mutate();
             setFormError('');
             setTitle("");
             setContent("");

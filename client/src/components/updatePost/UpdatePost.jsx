@@ -23,18 +23,32 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
 
     const queryClient = useQueryClient();
 
-    const mutation = useMutation((formData) => {
-        return axios.put(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/post/${post.id}`, formData, {
-            headers: {
-                'authorization': `bearer ${token}`
-            }
-        })
-    }
-        , {
-            onSuccess: () => {
-                queryClient.invalidateQueries(['posts'])
-            },
-        });
+    // const mutation = useMutation((formData) => {
+    //     return axios.put(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/post/${post.id}`, formData, {
+    //         headers: {
+    //             'authorization': `bearer ${token}`
+    //         }
+    //     })
+    // }
+    //     , {
+    //         onSuccess: () => {
+    //             queryClient.invalidateQueries(['posts'])
+    //         },
+    //     });
+
+    const { mutate } = useMutation({
+        mutationFn: (formData) => {
+            return axios.put(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/post/${post.id}`, formData, {
+                headers: {
+                    'authorization': `bearer ${token}`
+                }
+            })
+
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries(['posts'])
+        },
+    });
 
     const editPost = (e) => {
         e.preventDefault();
@@ -45,7 +59,8 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
             formData.append('image', image !== post.imagePost ? image : post.imagePost);
             formData.append('title', title);
             formData.append('content', content);
-            mutation.mutate(formData);
+           // mutation.mutate(formData);
+            mutate(formData);
             setModalMenu(false);
         }
     };

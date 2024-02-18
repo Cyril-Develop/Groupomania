@@ -1,8 +1,8 @@
-import './searchUser.scss'
 import axios from "axios";
-import { Link } from 'react-router-dom';
 import { useContext, useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 import { AuthContext } from "../../context/authContext";
+import './searchUser.scss';
 
 export default function SearchUser() {
 
@@ -27,27 +27,27 @@ export default function SearchUser() {
     const resetSearch = () => {
         setQuery('');
     };
-    
+
     return (
         <div className='search'>
-            <input 
-                type="text" 
-                placeholder="Rechercher un utilisateur" 
+            <input
+                type="text"
+                placeholder="Rechercher un utilisateur"
                 value={query}
                 aria-label='Rechercher un utilisateur'
                 title="Rechercher un utilisateur"
-                onChange={(e) => setQuery(e.target.value)} 
-            />   
+                onChange={(e) => setQuery(e.target.value)}
+            />
             <ul className='search_list'>
-                {query && searchResult.filter(user => (user.lastname.toLowerCase().includes(query.toLowerCase()) || 
-                user.firstname.toLowerCase().includes(query.toLowerCase()))
+                {query && searchResult.filter(user => (user.lastname.toLowerCase().includes(query.toLowerCase()) ||
+                    user.firstname.toLowerCase().includes(query.toLowerCase()))
                 ).map(user => (
                     <li className='search_list_item' key={user.id} >
                         <Link to={`/profile/${user.id}`} onClick={resetSearch}>
                             <img src={user.imageProfile} alt="Utilisateur groupomania" />
                             <p>{user.firstname} {user.lastname}</p>
-                        </Link>                       
-                    </li>                     
+                        </Link>
+                    </li>
                 ))}
             </ul>
         </div>

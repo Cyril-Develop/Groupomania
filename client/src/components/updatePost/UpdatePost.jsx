@@ -1,10 +1,10 @@
-import './updatePost.scss';
 import CloseIcon from '@mui/icons-material/Close';
 import PhotoIcon from '@mui/icons-material/Photo';
-import axios from "axios";
-import { useState, useContext } from 'react';
-import { AuthContext } from "../../context/authContext";
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import axios from "axios";
+import { useContext, useState } from 'react';
+import { AuthContext } from "../../context/authContext";
+import './updatePost.scss';
 
 export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
 
@@ -28,12 +28,13 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
             headers: {
                 'authorization': `bearer ${token}`
             }
-        })}
-    ,{
-        onSuccess: () => {
-        queryClient.invalidateQueries( ['posts'] )
-        },
-    });
+        })
+    }
+        , {
+            onSuccess: () => {
+                queryClient.invalidateQueries(['posts'])
+            },
+        });
 
     const editPost = (e) => {
         e.preventDefault();
@@ -46,7 +47,7 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
             formData.append('content', content);
             mutation.mutate(formData);
             setModalMenu(false);
-        } 
+        }
     };
 
     return (
@@ -54,14 +55,14 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
             <div className='modal' >
                 <div className="modal_content">
                     <button aria-label='Close modal' type="button" rel="nofollow" onClick={closeModal} className="close-modal">
-                        <CloseIcon/>
+                        <CloseIcon />
                     </button>
                     <form>
                         <div>
                             <label htmlFor="title">Titre <span>{title.length}/50</span> </label>
-                            <input 
-                                type="text" 
-                                id="title" 
+                            <input
+                                type="text"
+                                id="title"
                                 name="title"
                                 maxLength={50}
                                 onChange={e => setTitle(e.target.value)}
@@ -69,37 +70,37 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
                         </div>
                         <div>
                             <label htmlFor="description">Description <span>{content.length}/200</span> </label>
-                            <textarea 
-                                id="description" 
-                                cols="50" 
-                                rows="5" 
+                            <textarea
+                                id="description"
+                                cols="50"
+                                rows="5"
                                 name="description"
-                                maxLength={200}  
-                                style={{resize : 'none'}} 
+                                maxLength={200}
+                                style={{ resize: 'none' }}
                                 onChange={e => setContent(e.target.value)}>
                             </textarea>
                             {formError && <p className="error">{formError}</p>}
                         </div>
                         <div>
                             <label className="change_image" htmlFor="image">
-                                <PhotoIcon/> image
+                                <PhotoIcon /> image
                             </label>
-                            <input 
-                                accept="image/png, image/jpeg, image/jpg, image/gif" 
-                                type="file" 
-                                id="image" 
-                                style={{display:'none'}} 
-                                name="image" 
-                                onChange={e => setImage(e.target.files[0])} 
+                            <input
+                                accept="image/png, image/jpeg, image/jpg, image/gif"
+                                type="file"
+                                id="image"
+                                style={{ display: 'none' }}
+                                name="image"
+                                onChange={e => setImage(e.target.files[0])}
                             />
-                            <button  type="submit" onClick={editPost}>Modifier</button>
+                            <button type="submit" onClick={editPost}>Modifier</button>
                         </div>
                         <div>
                             {
-                                !image ? '' : 
-                                image !== post.imagePost ? 
-                                <img src={URL.createObjectURL(image)} alt="illustration de publication" className="image_preview"/> : 
-                                <img src={image} alt="illustration de publication" className="image_preview"/>}
+                                !image ? '' :
+                                    image !== post.imagePost ?
+                                        <img src={URL.createObjectURL(image)} alt="illustration de publication" className="image_preview" /> :
+                                        <img src={image} alt="illustration de publication" className="image_preview" />}
                         </div>
                     </form>
                 </div>

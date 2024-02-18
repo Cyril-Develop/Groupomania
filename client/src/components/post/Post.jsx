@@ -1,25 +1,24 @@
-import './post.scss'
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import CommentIcon from '@mui/icons-material/Comment';
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
-import CommentIcon from '@mui/icons-material/Comment';
-import Comments from '../comments/Comments';
-import MenuPost from '../menuPost/MenuPost';
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import dayjs from "dayjs";
+import relativeTime from 'dayjs/plugin/relativeTime';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/authContext';
-import { useContext, useState } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import dayjs from "dayjs";
-// require("dayjs/locale/fr");
-// const relativeTime = require('dayjs/plugin/relativeTime');
-// dayjs.extend(relativeTime);
+import Comments from '../comments/Comments';
+import MenuPost from '../menuPost/MenuPost';
+import './post.scss';
+dayjs.extend(relativeTime);
 
 export default function Posts({ post, currentUserRole }) {
 
 	const [modalMenu, setModalMenu] = useState(false);
 
-	const {currentUser} = useContext(AuthContext);
+	const { currentUser } = useContext(AuthContext);
 	const token = currentUser.token;
 	const user = currentUser.userId;
 
@@ -29,24 +28,24 @@ export default function Posts({ post, currentUserRole }) {
 				'authorization': `bearer ${token}`
 			}
 		})
-		.then(res => {
-			return res.data; 
-		})        
+			.then(res => {
+				return res.data;
+			})
 	);
 
 	const queryClient = useQueryClient();
-		
+
 	const mutation = useMutation(() => {
-        return axios.post(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/post/${post.id}/like`, user, {
-            headers: {
-                'authorization': `bearer ${token}`
-            }
-        })
-    },{
-        onSuccess: () => {
-          queryClient.invalidateQueries( ['likes'] )
-        },
-    });
+		return axios.post(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/post/${post.id}/like`, user, {
+			headers: {
+				'authorization': `bearer ${token}`
+			}
+		})
+	}, {
+		onSuccess: () => {
+			queryClient.invalidateQueries(['likes'])
+		},
+	});
 
 	const handleLike = () => {
 		mutation.mutate();
@@ -64,40 +63,40 @@ export default function Posts({ post, currentUserRole }) {
 					</Link>
 					<span className='date'>{dayjs(post.createdAt).locale("fr").fromNow()}</span>
 				</div>
-				
+
 				{(post.userId === currentUser.userId || currentUserRole === 'admin') &&
-				 	<button title='Menu' className='post_header_btn' aria-label='Show menu' onClick={() => setModalMenu(!modalMenu)}>
-						<MoreHorizIcon/>
+					<button title='Menu' className='post_header_btn' aria-label='Show menu' onClick={() => setModalMenu(!modalMenu)}>
+						<MoreHorizIcon />
 					</button>
-				}	
-				{modalMenu && <div className="post_header_menu"><MenuPost post={post} setModalMenu={setModalMenu}/></div>}
+				}
+				{modalMenu && <div className="post_header_menu"><MenuPost post={post} setModalMenu={setModalMenu} /></div>}
 			</div>
 			<div className="post_content">
 				<h3>{post.title}</h3>
-				{post.imagePost && <img src={post.imagePost} alt="Illustration publication Groupomania" />} 
+				{post.imagePost && <img src={post.imagePost} alt="Illustration publication Groupomania" />}
 				<p>{post.content}</p>
 			</div>
-			{error ? 
-			'Erreur de chargement' : 
-			isLoading ? 'Chargement' :
-			<div className="post_footer">
-				<div>
-					<button className='post_footer_btn' aria-label='Like this post' onClick={handleLike}>
-						{data.includes(currentUser.userId) ? 
-							<FavoriteOutlinedIcon style={{color:'crimson'}}/> : 
-							<FavoriteBorderOutlinedIcon/>} 
-					</button> 
-					{data.length > 1 ? `${data.length} Likes` : `${data.length} Like`} 
-				</div>	
-				<div>
-					<button className='post_footer_btn' aria-label='View comments' onClick={() => setShowComments(!showComments)}>
-						<CommentIcon/> 
-					</button>
-					Commenter
-				</div>
-			</div>
+			{error ?
+				'Erreur de chargement' :
+				isLoading ? 'Chargement' :
+					<div className="post_footer">
+						<div>
+							<button className='post_footer_btn' aria-label='Like this post' onClick={handleLike}>
+								{data.includes(currentUser.userId) ?
+									<FavoriteOutlinedIcon style={{ color: 'crimson' }} /> :
+									<FavoriteBorderOutlinedIcon />}
+							</button>
+							{data.length > 1 ? `${data.length} Likes` : `${data.length} Like`}
+						</div>
+						<div>
+							<button className='post_footer_btn' aria-label='View comments' onClick={() => setShowComments(!showComments)}>
+								<CommentIcon />
+							</button>
+							Commenter
+						</div>
+					</div>
 			}
-			{showComments && <Comments postId={post.id} currentUserRole={currentUserRole}/>} 
+			{showComments && <Comments postId={post.id} currentUserRole={currentUserRole} />}
 		</article>
 	)
 };

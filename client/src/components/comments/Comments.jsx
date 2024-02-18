@@ -1,50 +1,49 @@
-import './comments.scss'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import { AuthContext } from '../../context/authContext';
+import dayjs from "dayjs";
+import relativeTime from 'dayjs/plugin/relativeTime';
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import dayjs from "dayjs";
-//require("dayjs/locale/fr");
-//const relativeTime = require('dayjs/plugin/relativeTime');
-//dayjs.extend(relativeTime);
+import { AuthContext } from '../../context/authContext';
+import './comments.scss';
+dayjs.extend(relativeTime);
 
 export default function Comments({ postId, currentUserRole }) {
 
-	const {currentUser} = useContext(AuthContext);
+	const { currentUser } = useContext(AuthContext);
 	const token = currentUser.token;
 
-	const {error, isLoading, data } = useQuery(['comments', postId], () =>
+	const { error, isLoading, data } = useQuery(['comments', postId], () =>
 		axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/post/${postId}/comment`, {
 			headers: {
 				'authorization': `bearer ${token}`
 			}
 		})
-		.then(res => {
-			return res.data;	 
-		})   
+			.then(res => {
+				return res.data;
+			})
 	);
-		
+
 	const queryClient = useQueryClient();
 	const [content, setContent] = useState("");
-		
+
 	const mutation = useMutation((newComment) => {
-        return axios.post(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/post/${postId}/comment`, newComment, {
-            headers: {
-                'authorization': `bearer ${token}`
-            }
-        })
-    },{
-        onSuccess: () => {
-          queryClient.invalidateQueries( ['comments'] )
-        },
-    });
+		return axios.post(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/post/${postId}/comment`, newComment, {
+			headers: {
+				'authorization': `bearer ${token}`
+			}
+		})
+	}, {
+		onSuccess: () => {
+			queryClient.invalidateQueries(['comments'])
+		},
+	});
 
 	const handleComment = (e) => {
 		e.preventDefault();
 		if (content) {
-			mutation.mutate({content, postId});
+			mutation.mutate({ content, postId });
 			setContent("");
 		}
 	};
@@ -55,9 +54,9 @@ export default function Comments({ postId, currentUserRole }) {
 				'authorization': `bearer ${token}`
 			}
 		})
-		.then(() => {
-			queryClient.invalidateQueries( ['comments'] )
-		})
+			.then(() => {
+				queryClient.invalidateQueries(['comments'])
+			})
 	};
 
 	return (
@@ -65,10 +64,10 @@ export default function Comments({ postId, currentUserRole }) {
 			<form className='comments_form'>
 				<div>
 					< img src={currentUser.imageProfile} alt="Profil connecté" />
-					<input 
-						type="text" 
-						id='comment' 
-						placeholder="Ajouter un commentaire..." 
+					<input
+						type="text"
+						id='comment'
+						placeholder="Ajouter un commentaire..."
 						aria-label='Write comment'
 						maxLength={200}
 						value={content}
@@ -76,7 +75,7 @@ export default function Comments({ postId, currentUserRole }) {
 					/>
 				</div>
 				<button type='submit' onClick={handleComment}>Envoyer</button>
-			</form>		
+			</form>
 			<ul className="comments_list" >
 				{error ? 'erreur' : isLoading ? 'chargement' : data.map((comment) => (
 					<li className='comments_list_item' key={comment.commentId}>
@@ -88,15 +87,15 @@ export default function Comments({ postId, currentUserRole }) {
 						</div>
 						<p>{comment.content}</p>
 						<div className='info'>
-							<span>{dayjs(comment.createdAt).locale("fr").fromNow()}</span> 
-							{(comment.userId === currentUser.userId || currentUserRole === 'admin') && 
-							<button 
-								aria-label='Delete comment' 
-								onClick={() => handleDelete(comment.commentId)}>
-									<DeleteForeverIcon/>
-							</button>}
-						</div>	
-					</li>			
+							<span>{dayjs(comment.createdAt).locale("fr").fromNow()}</span>
+							{(comment.userId === currentUser.userId || currentUserRole === 'admin') &&
+								<button
+									aria-label='Delete comment'
+									onClick={() => handleDelete(comment.commentId)}>
+									<DeleteForeverIcon />
+								</button>}
+						</div>
+					</li>
 				))}
 			</ul>
 		</div>

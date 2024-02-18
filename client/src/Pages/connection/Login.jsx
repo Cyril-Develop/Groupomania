@@ -1,10 +1,10 @@
-import './connection.scss'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import Logo from '../../assets/logo-groupo.svg'
-import { useState, useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Logo from '../../assets/logo-groupo.svg';
 import { AuthContext } from '../../context/authContext';
+import './connection.scss';
 
 export default function Login() {
 
@@ -45,14 +45,14 @@ export default function Login() {
 		} else {
 			console.log("User not logged in");
 		}
-	}, [successfulLogin , navigate]);
+	}, [successfulLogin, navigate]);
 
 	return (
 		<main className="connection">
 			<div className='card'>
 				<div className="card_right card_login">
 					<h1><img src={Logo} alt="logo groupomania" /></h1>
-					<p>Pas de compte ? <Link to='/register'>inscription</Link></p>
+					<p>Pas de compte ? <Link to='/groupomania/register'>inscription</Link></p>
 				</div>
 				<div className="card_left">
 					<h2>Connexion</h2>

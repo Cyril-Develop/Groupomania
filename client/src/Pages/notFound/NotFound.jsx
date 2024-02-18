@@ -1,6 +1,6 @@
-import './notFound.scss';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import { Link } from 'react-router-dom';
+import './notFound.scss';
 
 export default function NotFound() {
 
@@ -12,10 +12,8 @@ export default function NotFound() {
                     <p>404</p>
                     <span>La page que vous recherchez n'existe pas</span>
                 </div>
-                <p>Impossible d'afficher la page que vous recherchez...</p>
-                <p>Vous pouvez retourner à l'accueil</p>
-                <Link aria-label='Home page' to="/">
-                    <KeyboardReturnIcon className='return_icon'/>
+                <Link aria-label='Home page' to="/groupomania/">
+                    <KeyboardReturnIcon className='return_icon' />
                 </Link>
             </div>
         </div>

@@ -1,13 +1,13 @@
-import "./connection.scss";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import Logo from "../../assets/logo-groupo.svg";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Logo from "../../assets/logo-groupo.svg";
+import "./connection.scss";
 
 export default function Register() {
-    
+
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePassword = e => {
@@ -38,8 +38,8 @@ export default function Register() {
         setIsSubmit(true);
         setSuccessfulRegister(true)
         setFormError(validate(formValues));
-        
-        try{
+
+        try {
             await axios.post(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/user/signup`, formValues)
             setFormValues(initialValues);
             setEmailUsed(false);
@@ -52,7 +52,7 @@ export default function Register() {
     useEffect(() => {
         if (Object.keys(formError).length === 0 && isSubmit && !emailUsed) {
             console.log("User registered");
-        }              
+        }
     });
 
     const validate = (values) => {
@@ -61,24 +61,24 @@ export default function Register() {
         const emailRegex = /([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|"([]!#-[^-~ \t]|(\\[\t -~]))+")@([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|\[[\t -Z^-~]*])/;
         const nameRegex = /^([A-Za-z|\s]{3,15})?([-]{0,1})?([A-Za-z|\s]{3,15})$/;
         const passwordRegex = /^(?=(.*[a-z]){3,})(?=(.*[A-Z]){2,})(?=(.*[0-9]){2,})(?=(.*[!@#$%^&*()\-__+.]){1,}).{8,15}$/;
-        if(!values.lastname){
+        if (!values.lastname) {
             error.lastname = 'Le nom est obligatoire';
-        } else if(!nameRegex.test(values.lastname)){
+        } else if (!nameRegex.test(values.lastname)) {
             error.lastname = 'Entre 3 et 15 caractères. Chiffres et caractères spéciaux différents de - non autorisés';
         }
-        if(!values.firstname){
+        if (!values.firstname) {
             error.firstname = 'Le prénom est obligatoire';
-        } else if(!nameRegex.test(values.firstname)){
+        } else if (!nameRegex.test(values.firstname)) {
             error.firstname = 'Entre 3 et 15 caractères. Chiffres et caractères spéciaux différents de - non autorisés';
         }
-        if(!values.email){
+        if (!values.email) {
             error.email = `L' email est obligatoire`;
-        } else if(!emailRegex.test(values.email)) {
+        } else if (!emailRegex.test(values.email)) {
             error.email = 'Veuillez renseigner une adresse mail valide';
-        } 
-        if(!values.password){
+        }
+        if (!values.password) {
             error.password = 'Le mot de passe est obligatoire';
-        } else if(!passwordRegex.test(values.password)){
+        } else if (!passwordRegex.test(values.password)) {
             error.password = 'Entre 8 et 15 caractères. 2 chiffres, 2 majuscules, 3 minuscules et 1 caractère spécial obligatoires';
         }
         return error;
@@ -87,9 +87,9 @@ export default function Register() {
     useEffect(() => {
         if (successfulRegister) {
             const timer = setTimeout(() => {
-            setSuccessfulRegister(false);
-        }, 2000);   
-        return () => clearTimeout(timer);
+                setSuccessfulRegister(false);
+            }, 2000);
+            return () => clearTimeout(timer);
         }
     }, [successfulRegister]);
 
@@ -98,8 +98,8 @@ export default function Register() {
             {Object.keys(formError).length === 0 && successfulRegister && isSubmit && !emailUsed && <div className='success'>Compte créé</div>}
             <div className="card reverse" >
                 <div className="card_right card_register">
-                    <h1><img src={Logo} alt="logo groupomania" /></h1> 
-                    <p>Déjà inscrit ? <Link to="/login">se connecter</Link></p>
+                    <h1><img src={Logo} alt="logo groupomania" /></h1>
+                    <p>Déjà inscrit ? <Link to="/groupomania/login">se connecter</Link></p>
                 </div>
                 <div className="card_left">
                     <h2>Inscription</h2>
@@ -140,8 +140,8 @@ export default function Register() {
                         </div>
                         <div className="form_control">
                             <button className='form_control_password' aria-label="Show password" onClick={e => togglePassword(e)}>
-                                {showPassword ? <VisibilityOffIcon/> : <VisibilityIcon />}
-							</button>
+                                {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                            </button>
                             <input
                                 type={showPassword ? "text" : "password"}
                                 name="password"

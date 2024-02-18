@@ -1,17 +1,17 @@
-import './deleteAccount.scss'
 import BlockIcon from '@mui/icons-material/Block';
 import DoneIcon from '@mui/icons-material/Done';
 import axios from 'axios';
-import { AuthContext } from '../../context/authContext';
 import { useContext } from 'react';
+import { AuthContext } from '../../context/authContext';
+import './deleteAccount.scss';
 
-export default function DeleteAccount({ setModalDelete}) {
+export default function DeleteAccount({ setModalDelete }) {
 
     const closeModal = () => {
         setModalDelete(false);
     };
 
-    const {currentUser} = useContext(AuthContext);
+    const { currentUser } = useContext(AuthContext);
     const token = currentUser.token;
 
     const deleteAccount = () => {
@@ -20,13 +20,13 @@ export default function DeleteAccount({ setModalDelete}) {
                 'Authorization': `Bearer ${token}`
             }
         })
-        .then(res => {
-            localStorage.removeItem('user');
-            window.location.reload();
-        })
-        .catch(err => {
-            console.log(err);
-        })
+            .then(res => {
+                localStorage.removeItem('user');
+                window.location.reload();
+            })
+            .catch(err => {
+                console.log(err);
+            })
     };
 
     return (
@@ -36,11 +36,11 @@ export default function DeleteAccount({ setModalDelete}) {
                     <p>Êtes-vous certain de vouloir supprimer votre compte ?</p>
                     <p>Aucune information ne sera enregistrée.</p>
                     <div>
-                        <button onClick={closeModal}><BlockIcon/>Annuler</button>
-                        <button onClick={deleteAccount}><DoneIcon/> Supprimer</button>
-                    </div>    
-                </div>             
-            </div> 
+                        <button onClick={closeModal}><BlockIcon />Annuler</button>
+                        <button onClick={deleteAccount}><DoneIcon /> Supprimer</button>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 };

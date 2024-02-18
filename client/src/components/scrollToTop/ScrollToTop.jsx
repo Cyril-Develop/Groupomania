@@ -1,6 +1,6 @@
-import './scrollToTop.scss'
 import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
 import { useEffect } from 'react';
+import './scrollToTop.scss';
 
 export default function ScrollToTop() {
 
@@ -22,12 +22,12 @@ export default function ScrollToTop() {
     };
 
     return (
-        <button 
-            aria-label='Top page' 
-            type="button" 
-            rel="nofollow" 
+        <button
+            aria-label='Top page'
+            type="button"
+            rel="nofollow"
             title='Haut de page'
-            onClick={scrollToTop} 
+            onClick={scrollToTop}
             className='scrollToTop'>
             <KeyboardDoubleArrowUpIcon />
         </button>

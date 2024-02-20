@@ -1,74 +1,88 @@
 @import '../../sass/index.scss';
 
-header{
-    background-color: $color-bg;
+header {
+    background-color: $color-secondary;
     position: relative;
     z-index: 900;
 }
 
-.navbar{
+.navbar {
     position: sticky;
     top: 0;
-    @include flex(row, space-between, center);
-    height: 80px;
+    @include flex($direction: row, $justify: space-between, $align: center, $gap: 0);
+    height: 100px;
     padding: 0 60px;
     max-width: 1800px;
     margin: 0 auto;
-    @media screen and (max-width: 700px){
+
+    @media screen and (max-width: 910px) {
         justify-content: space-around;
-        padding: 10px 0;
+        padding: 10px;
         width: 100%;
     }
-    &_left{
-        display: flex;
-        align-items: center;
-        gap: 60px;
-        @media screen and (max-width: 700px){
-            gap: 5px;
+
+    &_left {
+        @include flex($direction: row, $justify: unset, $align: center, $gap: 6rem);
+        width: 100%;
+        padding-right: 2rem;
+
+        @media screen and (max-width: 910px) {
+            gap: 2rem;
         }
-        h1{
-            width: 45px;
-            height: 45px;  
-            a{
-                display: block;
-                width: 100%;
-                height: 100%;
+
+        a {
+
+            h1 {
+                @include flex($direction: row, $justify: unset, $align: center, $gap: 1rem);
+                color: $color-primary;
+
+                img {
+                    width: 40px;
+                    height: 40px;
+                }
+
+                span {
+                    font-family: "Russo One", sans-serif;
+                    letter-spacing: .5rem;
+                    font-size: clamp(1.6rem, 2vw, 2.5rem);
+
+                    @media screen and (max-width: 910px) {
+                        display: none;
+                    }
+                }
             }
-            img{
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                border-radius: 50%;
-            }        
+
         }
     }
-    &_user{
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        @media screen and (max-width: 700px){
+
+    &_user {
+        @include flex($direction: row, $justify: unset, $align: center, $gap: 20px);
+
+        @media screen and (max-width: 700px) {
             gap: 10px;
         }
-        button{
-            cursor: pointer;
+
+        &_btn {
             padding: 5px;
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            border: none;
             object-fit: cover;
             object-position: center;
             background-color: transparent;
             box-shadow: -3px -3px 7px #ffffff,
-                        3px 3px 5px rgba(94, 104, 121, .288);
-            &:active{
+                3px 3px 5px rgba(94, 104, 121, .288);
+
+            &:active {
                 box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #fff;
             }
-            &:focus-visible{
+
+            &:focus-visible {
                 border: none;
                 outline: 1px solid rgb(0, 0, 0);
             }
-            img{
+
+            img {
                 width: 100%;
                 height: 100%;
                 border-radius: 50%;
@@ -76,51 +90,63 @@ header{
                 object-position: center;
             }
         }
-        .menu_table{
-            @include position(absolute, 78px, 10px, auto, auto);
+
+        .menu_table {
+            @include position(absolute, 100px, 10px, auto, auto);
             border-radius: 5px;
             overflow: hidden;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
             opacity: 0;
             visibility: hidden;
             background-color: transparent;
-            transition: all 0.2s ease-in-out;
-            @media screen and (max-width: 700px){
+            transition: all .1s ease-in-out;
+
+            @media screen and (max-width: 700px) {
                 width: 100%;
-                top: 70px;
                 left: 0;
                 overflow: visible;
-                box-shadow:none;
-                border-bottom: 2px solid #0000002c;
+                box-shadow: none;
+                border-bottom: 1px solid $color-grey;
             }
-            &_item{
-                display: flex;
-                align-items: center;
-                gap: 5px;
+
+            svg {
+                font-size: clamp(1.8rem, 2vw, 2rem);
+            }
+
+            &_item {
+                @include flex($direction: row, $justify: unset, $align: center, $gap: 1rem);
                 width: 100%;
+                font-size: clamp(1.6rem, 1.8vw, 1.8rem);
                 outline: none;
                 padding: 10px;
-                background-color: $color-bg;
+                background-color: $color-secondary;
+
                 &:hover,
-                &:focus{
-                    background-color: #c5cace;
+                &:focus {
+                    background-color: $color-grey;
                 }
             }
-            li:nth-child(3) a:hover,
-            li:nth-child(3) a:focus{
+
+            li:nth-child(3) button:hover,
+            li:nth-child(3) button:focus {
                 background-color: crimson;
-                color: white;
-            }     
+                color: $color-secondary;
+            }
         }
-        .visible{
+
+        .visible {
             opacity: 1;
             visibility: visible;
         }
-        span{
+
+        p {
             white-space: nowrap;
-            @media screen and (max-width: 450px){
+            font-weight: 500;
+            font-size: clamp(1.6rem, 1.6vw, 1.8rem);
+
+            @media screen and (max-width: 450px) {
                 display: none;
             }
         }
     }
-};
+}

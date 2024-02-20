@@ -93,7 +93,7 @@ export default function CreatePost({ setModalCreate }) {
                                 <PhotoIcon /> image
                             </label>
                             <input
-                                accept="image/png, image/jpeg, image/jpg, image/gif"
+                                accept="image/*"
                                 type="file" id="image"
                                 style={{ display: 'none' }}
                                 name="image"

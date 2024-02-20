@@ -4,7 +4,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from "axios";
 import { useContext, useState } from 'react';
 import { AuthContext } from "../../context/authContext";
-import './updatePost.scss';
 
 export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
 
@@ -22,19 +21,6 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
     const [formError, setFormError] = useState('');
 
     const queryClient = useQueryClient();
-
-    // const mutation = useMutation((formData) => {
-    //     return axios.put(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/post/${post.id}`, formData, {
-    //         headers: {
-    //             'authorization': `bearer ${token}`
-    //         }
-    //     })
-    // }
-    //     , {
-    //         onSuccess: () => {
-    //             queryClient.invalidateQueries(['posts'])
-    //         },
-    //     });
 
     const { mutate } = useMutation({
         mutationFn: (formData) => {
@@ -59,7 +45,6 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
             formData.append('image', image !== post.imagePost ? image : post.imagePost);
             formData.append('title', title);
             formData.append('content', content);
-           // mutation.mutate(formData);
             mutate(formData);
             setModalMenu(false);
         }
@@ -101,7 +86,7 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
                                 <PhotoIcon /> image
                             </label>
                             <input
-                                accept="image/png, image/jpeg, image/jpg, image/gif"
+                                accept="image/*"
                                 type="file"
                                 id="image"
                                 style={{ display: 'none' }}

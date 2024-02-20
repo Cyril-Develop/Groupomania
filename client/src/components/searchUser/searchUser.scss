@@ -1,45 +1,46 @@
 @import '../../sass/index.scss';
 
 .search {
+    width: 100%;
+    max-width: 300px;
     input {
         position: relative;
         outline: none;
         border: none;
-        font-size: clamp(1.1rem, 3.5vw, 1.2rem);
+        font-size: clamp(1.6rem, 1.6vw, 1.8rem);
         height: 45px;
+        width: 100%;
         border-bottom: 2px solid transparent;
         padding: 10px;
         border-radius: 10px;
         box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
         &:focus {
             box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
-            border-bottom: 2px solid $color-focus;
-            transition: all 0.2s ease-in-out;
+            border-bottom: 2px solid $color-primary;
+            transition: all .1s ease-in-out;
         }
     }
     &_list {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
+        @include flex($direction:column, $justify:unset, $align:unset, $gap: 1rem);
         position: absolute;
         top: 78px;
         height: 45px;
+        font-weight: 500;
         &_item {
             height: 100%;
-            background-color: $color-bg;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            background-color: $color-secondary;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
             border-radius: 10px;
             &:hover,
             &:focus{
-                background-color: #d4d8dd;
+                color: $color-primary;
             }
             a {
-                display: flex;
-                align-items: center;
+                @include flex($direction:row, $justify:unset, $align:center, $gap: 0);
                 height: 100%;
                 width: 100%;
+                padding: 10px;
                 img {
-                    padding: 5px;
                     width: 35px;
                     height: 35px;
                     border-radius: 50%;
@@ -48,7 +49,7 @@
                 }
             }
             p{
-                padding-right: 5px;
+                font-size: clamp(1.6rem, 1.6vw, 1.6rem);
             }
         }
     }

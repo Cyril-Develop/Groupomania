@@ -2,9 +2,9 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Logo from '../../assets/logo-groupo.svg';
 import { AuthContext } from '../../context/authContext';
 import './connection.scss';
+import LoginImg from '../../assets/bg-login-card.png'
 
 export default function Login() {
 
@@ -41,7 +41,7 @@ export default function Login() {
 	useEffect(() => {
 		if (successfulLogin) {
 			console.log('User logged in');
-			navigate("/");
+			navigate("/groupomania/");
 		} else {
 			console.log("User not logged in");
 		}
@@ -49,9 +49,10 @@ export default function Login() {
 
 	return (
 		<main className="connection">
+			<h1>Groupomania</h1>
 			<div className='card'>
 				<div className="card_right card_login">
-					<h1><img src={Logo} alt="logo groupomania" /></h1>
+					<img src={LoginImg} alt="" />
 					<p>Pas de compte ? <Link to='/groupomania/register'>inscription</Link></p>
 				</div>
 				<div className="card_left">
@@ -78,7 +79,7 @@ export default function Login() {
 							<label htmlFor="password" className={formValues.password && 'animLabel'}>Mot de passe</label>
 							{formError && <p>Email ou mot de passe incorrect</p>}
 						</div>
-						<button className='btn_submit' onClick={handleLogin} type='submit'>Valider</button>
+						<button className='btn_submit' onClick={handleLogin} type='submit'>Se connecter</button>
 					</form>
 				</div>
 			</div>

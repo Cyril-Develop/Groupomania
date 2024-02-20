@@ -1,9 +1,8 @@
 @import '../../sass/index.scss';
 
 .profilePost{
-    @include flex(column, center, center);
-    width: 100%;
-    gap: 20px;    
+    @include flex($direction: column, $justify: center, $align: center, $gap: 2rem);
+    width: 100%; 
     max-width: 1800px;
     margin: 0 auto;
 }

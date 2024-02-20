@@ -1,9 +1,9 @@
 @import '../../sass/index.scss';
 
 .not_found{
-    @include flex;
-    @include background;
-    height: 100vh;
+    @include flex($direction: row, $justify:unset, $align: unset, $gap: 0);
+    background-color: $color-primary;
+    min-height: 100vh;
     &_content{
         display: flex;
         flex-direction: column;
@@ -11,7 +11,7 @@
         gap: 1rem;
         width: 90%;
         max-width: 800px;
-        color: $color-bg;
+        color: $color-secondary;
         h1{
             font-size: clamp(2rem, 10vw, 5rem);
             border-top: solid 3px #ccc;
@@ -24,10 +24,10 @@
             p{
                 text-align: center;
                 font-size: 350px;
-                font-size: clamp(10vw, 40vw, 350px);
+                font-size: clamp(10vw, 50vw, 350px);
                 margin: 20px 0;
                 text-shadow: 2px 2px 2px #353434,
-                -2px -2px 2px rgba(129, 129, 129, 0.711);
+                -2px -2px 2px rgba(242, 236, 236, 0.283);
             }
             span{
                 position: absolute;
@@ -38,16 +38,16 @@
                 font-size: clamp(0.9rem, 4vw, 3rem);
                 padding: 10px;
                 white-space: nowrap;
-                color: black;
+                color: $color-dark;
                 backdrop-filter: blur(5px);
-                background-color: rgba(255, 255, 255, 0.497);
+                background-color: rgba(255, 255, 255, 0.756);
             }
         }
         .return_icon{
             font-size: 5rem;
-            color: $color-bg;
+            color: $color-secondary;
             &:hover{
-                color: $color-focus;
+                color: $color-dark;
             }
         }
     }

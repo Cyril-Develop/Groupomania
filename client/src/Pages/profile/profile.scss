@@ -1,64 +1,74 @@
 @import '../../sass/index.scss';
 
-.profile{
+.profile {
+    position: relative;
+    z-index: 0;
     min-height: calc(100vh - 80px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+    @include flex($direction: column, $justify: unset, $align: center, $gap: 2rem);
     padding: 20px 0;
-    @include background;
-    &_card{
+    background-color: $color-primary;
+
+    &_card {
         position: relative;
-        margin: 80px auto 0;
+        margin-top: 100px;
         border-radius: 10px;
-        background-color: $color-bg;
+        width: 20rem;
+        background-color: $color-secondary;
         padding: 20px;
-        box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px rgb(214, 214, 214);
-        &_head{
+        box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px rgb(214, 214, 214);
+
+        &_head {
             position: absolute;
             padding: 5px;
-            top: -75px;
+            top: -100px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
-            height: 100px;
+            width: 20rem;
+            height: 20rem;
             border-radius: 50%;
-            box-shadow: -3px -3px 7px #ffffff78,
-                            3px 3px 5px rgba(94, 104, 121, 0.566);
-            img{
+            box-shadow: -3px -3px 7px #ffffff35,
+                3px 3px 5px rgba(94, 104, 121, 0.566);
+
+            img {
                 width: 100%;
                 height: 100%;
                 border-radius: 50%;
                 object-fit: cover;
             }
-            label{
-                @include flex();
+
+            label {
+                @include flex($direction: row, $justify: center, $align: center, $gap: 0);
                 position: absolute;
-                right: 0px;
-                bottom: 0;
-                padding: 5px;
+                right: 1rem;
+                bottom: 1rem;
+                padding: 1rem;
                 border-radius: 50%;
-                font-size: 1.1rem;
                 border: none;
-                background-color: $color-focus;
-                color: white;
-                box-shadow: -2px -2px 5px rgba(255, 255, 255, 0.451), 2px 2px 5px rgba(34, 35, 36, 0.688);
+                background-color: $color-primary;
+                color: $color-secondary;
                 cursor: pointer;
-                transition: all 0.2s ease-in-out;
-                &:active{
-                    box-shadow: inset 1px 1px 2px rgb(34, 35, 36), inset -1px -1px 2px rgba(255, 255, 255, 0.664);
+                transition: all .1s ease-in-out;
+
+                &:hover {
+                    background-color: $color-dark;
+                }
+
+                svg {
+                    font-size: clamp(2rem, 2.5vw, 3rem);
                 }
             }
         }
-        &_infos{
-            margin-top: 10px;
-            h2{
+
+        &_infos {
+            margin-top: 100px;
+
+            h2 {
                 text-align: center;
-                font-size: 1.2rem;
+                font-size: clamp(2.5rem, 2.5vw, 3rem);
                 color: rgba(50, 48, 48, 0.933);
             }
-            .error{
+
+            .error {
                 color: $color-error;
                 text-align: center;
                 margin-top: 10px;
@@ -66,4 +76,3 @@
         }
     }
 }
-

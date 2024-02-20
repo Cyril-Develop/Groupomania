@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import Logo from '../../assets/logo-groupo.svg';
 import Post from '../post/Post';
 import './profilePost.scss';
 
@@ -22,7 +21,7 @@ export default function ProfilePost({ id, token, currentUserRole }) {
         <main className='profilePost'>
             {
                 error ?
-                    <img src={Logo} alt="logo groupomania" /> :
+                    <h2>Groupomania</h2> :
                     isLoading ?
                         'Chargement...' :
                         data.map((p) => (

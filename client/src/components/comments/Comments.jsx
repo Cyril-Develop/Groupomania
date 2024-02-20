@@ -83,8 +83,8 @@ export default function Comments({ postId, currentUserRole }) {
 					<li className='comments_list_item' key={comment.commentId}>
 						<div>
 							<img src={comment.imageProfile} alt="Créateur du commentaire" />
-							<Link role={'link'} to={`/profile/${comment.userId}`}>
-								<span>{comment.firstname} {comment.lastname}</span>
+							<Link role={'link'} to={`/groupomania/profile/${comment.userId}`}>
+								<h3>{comment.firstname} {comment.lastname}</h3>
 							</Link>
 						</div>
 						<p>{comment.content}</p>

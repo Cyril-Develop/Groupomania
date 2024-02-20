@@ -3,7 +3,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../../assets/logo-groupo.svg";
+import RegisterImg from '../../assets/bg-register-card.png';
 import "./connection.scss";
 
 export default function Register() {
@@ -64,12 +64,12 @@ export default function Register() {
         if (!values.lastname) {
             error.lastname = 'Le nom est obligatoire';
         } else if (!nameRegex.test(values.lastname)) {
-            error.lastname = 'Entre 3 et 15 caractères. Chiffres et caractères spéciaux différents de - non autorisés';
+            error.lastname = '3-15 caractères. Chiffres et caractères spéciaux différents de - non autorisés';
         }
         if (!values.firstname) {
             error.firstname = 'Le prénom est obligatoire';
         } else if (!nameRegex.test(values.firstname)) {
-            error.firstname = 'Entre 3 et 15 caractères. Chiffres et caractères spéciaux différents de - non autorisés';
+            error.firstname = '3-15 caractères. Chiffres et caractères spéciaux différents de - non autorisés';
         }
         if (!values.email) {
             error.email = `L' email est obligatoire`;
@@ -79,7 +79,7 @@ export default function Register() {
         if (!values.password) {
             error.password = 'Le mot de passe est obligatoire';
         } else if (!passwordRegex.test(values.password)) {
-            error.password = 'Entre 8 et 15 caractères. 2 chiffres, 2 majuscules, 3 minuscules et 1 caractère spécial obligatoires';
+            error.password = '8-15 caractères. 2 chiffres, 2 majuscules, 3 minuscules et 1 caractère spécial obligatoires';
         }
         return error;
     };
@@ -95,10 +95,11 @@ export default function Register() {
 
     return (
         <main className="connection">
-            {Object.keys(formError).length === 0 && successfulRegister && isSubmit && !emailUsed && <div className='success'>Compte créé</div>}
+            <h1>Groupomania</h1>
             <div className="card reverse" >
                 <div className="card_right card_register">
-                    <h1><img src={Logo} alt="logo groupomania" /></h1>
+                    {Object.keys(formError).length === 0 && successfulRegister && isSubmit && !emailUsed && <div className='success'>Compte créé</div>}
+                    <img src={RegisterImg} alt="" />
                     <p>Déjà inscrit ? <Link to="/groupomania/login">se connecter</Link></p>
                 </div>
                 <div className="card_left">
@@ -152,7 +153,7 @@ export default function Register() {
                             <label htmlFor="password" className={formValues.password && 'animLabel'}>Mot de passe</label>
                             {formError.password && <p>{formError.password}</p>}
                         </div>
-                        <button className='btn_submit' onClick={handleSubmit} type="submit">Valider</button>
+                        <button className='btn_submit' onClick={handleSubmit} type="submit">S'inscrire</button>
                     </form>
                 </div>
             </div>

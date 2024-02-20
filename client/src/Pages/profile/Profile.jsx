@@ -83,6 +83,7 @@ export default function Profile() {
 					<input
 						type="file"
 						id="picture"
+						accept="image/*"
 						style={{ display: "none" }}
 						onChange={e => setImage(e.target.files[0])}
 					/>

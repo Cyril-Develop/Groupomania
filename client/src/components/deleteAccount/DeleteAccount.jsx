@@ -33,9 +33,11 @@ export default function DeleteAccount({ setModalDelete }) {
         <div className='delete_modal'>
             <div className="delete_modal_content">
                 <div className="delete_info">
-                    <p>Êtes-vous certain de vouloir supprimer votre compte ?</p>
-                    <p>Aucune information ne sera enregistrée.</p>
-                    <div>
+                    <div className="delete_info_text">
+                        <p>Êtes-vous certain de vouloir supprimer votre compte ?</p>
+                        <p>Aucune information ne sera enregistrée.</p>
+                    </div>
+                    <div className="delete_info_btn">
                         <button onClick={closeModal}><BlockIcon />Annuler</button>
                         <button onClick={deleteAccount}><DoneIcon /> Supprimer</button>
                     </div>

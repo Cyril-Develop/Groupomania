@@ -3,17 +3,16 @@
 .delete_modal{
     z-index: 500;
     @include position;
-    @include flex;
+    @include flex($direction:row, $justify:center, $align:center, $gap: 0);
     background-color: rgba(0, 0, 0, 0.735);
     &_content{
-        @include position(absolute, 80px, auto, auto, auto);
-        @include flex(column, center, center);
+        @include position(absolute, 100px, auto, auto, auto);
+        @include flex($direction:column, $justify:center, $align:center, $gap: 0);
         padding: 15px;
         border-radius: 10px;
-        font-size: clamp(1rem, 3.5vw, 1.1rem); 
-        letter-spacing: 1px;
+        font-size: clamp(1.5rem, 1.8vw, 2rem); 
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.291);
-        background-color: $color-bg;
+        background-color: $color-secondary;
         opacity: 0;
         animation : show 0.2s ease-in-out forwards;
         @media screen and (max-width: 500px){
@@ -21,27 +20,38 @@
             border-radius: 0; 
         }
         .delete_info{
-            text-align: center;      
-            p{
-                margin-bottom: 10px;
+            text-align: center;
+            @include flex($direction:column, $justify:unset, $align:unset, $gap: 2rem);  
+
+            @media screen and (max-width: 500px){
+                gap: 1rem;
             }
-            div{
+            &_text{   
                 display: flex;
-                button{
-                    @include btn-connection;
-                    display: flex;
-                    font-size: clamp(1rem, 3.5vw, 1.1rem); 
+                flex-direction: column;
+                p{
+                    line-height: 2.5rem;
+
+                    @media screen and (max-width: 500px){
+                        line-height: 2rem;
+                    }
                 }
-                button:nth-child(1){
-                    &:focus,
-                    &:hover{
-                        color: $color-focus;
+            }
+            &_btn{
+                @include flex($direction:row, $justify:center, $align:unset, $gap: 2rem);
+                button{
+                    @include btn($color: $color-secondary, $bg: $color-primary, $hover-color: $color-secondary, $hover-bg: $color-dark);
+                    @include flex($direction:row, $justify:unset, $align:center, $gap: 1rem);
+                    font-size: clamp(1.6rem, 1.8vw, 2rem); 
+
+                    svg{
+                        font-size: inherit;
                     }
                 }
                 button:nth-child(2){
                     &:focus,
                     &:hover{
-                        color: crimson;
+                        background-color: crimson;
                     }
                 }
             }

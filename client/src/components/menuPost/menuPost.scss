@@ -1,20 +1,25 @@
+@import '../../sass/index.scss';
+
 .post_menu{
     &_item{
-        padding: 10px; 
-        display: flex;
-        align-items: center;
+        @include flex($direction: row, $justify: flex-start, $align: center, $gap: 10px);
         outline: none;
-        gap: 5px;
+        padding: 10px; 
+        font-size: clamp(1.6rem, 1.8vw, 1.8rem);
         &:hover,
         &:focus{
-            background-color: #c5cace;
+            background-color: $color-grey;
+        }
+
+        svg{
+            font-size: clamp(1.8rem, 2vw, 2rem);
         }
     }
     li:nth-child(2) a{
         &:hover,
         &:focus{
             background-color: crimson;
-            color: white;
+            color: $color-secondary;
         }
     }
 };

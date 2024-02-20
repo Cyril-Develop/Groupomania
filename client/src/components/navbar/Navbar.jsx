@@ -3,7 +3,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import Person2Icon from '@mui/icons-material/Person2';
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../../assets/logo.svg';
+import Logo from '../../assets/logo.png';
 import { AuthContext } from '../../context/authContext';
 import DeleteAccount from '../deleteAccount/DeleteAccount';
 import SearchUser from '../searchUser/SearchUser';
@@ -46,15 +46,13 @@ export default function Navbar() {
         <header>
             <nav className='navbar'>
                 <div className='navbar_left'>
-                    <h1>
-                        <Link role={'link'} to={`/groupomania/`}>
-                            <img onClick={homePage} title="Accueil" src={Logo} alt="Groupomania - réseau social" />
-                        </Link>
-                    </h1>
+                    <Link role={'link'} to={`/groupomania/`} title="Accueil">
+                        <h1><img onClick={homePage} src={Logo} alt="Groupomania - réseau social" /><span>Groupomania</span></h1>
+                    </Link>
                     <SearchUser />
                 </div>
                 <div className="navbar_user">
-                    <button type='button' onClick={handleToggle} title="Menu">
+                    <button className="navbar_user_btn" type='button' onClick={handleToggle} title="Menu">
                         <img src={profilePicture} alt="avatar de l'utilisateur" />
                     </button>
                     <ul className={menuToggle ? 'menu_table visible' : 'menu_table'}>
@@ -69,12 +67,12 @@ export default function Navbar() {
                             </Link>
                         </li>
                         <li>
-                            <Link onClick={handleDelete} className="menu_table_item">
+                            <button onClick={handleDelete} className="menu_table_item">
                                 <DeleteForeverIcon />Supprimer mon compte
-                            </Link>
+                            </button>
                         </li>
                     </ul>
-                    <span>{currentUser.firstname} {currentUser.lastname}</span>
+                    <p>{currentUser.firstname} {currentUser.lastname}</p>
                 </div>
             </nav>
             {modalDelete && <DeleteAccount setModalDelete={setModalDelete} />}

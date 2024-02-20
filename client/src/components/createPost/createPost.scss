@@ -3,7 +3,7 @@
 .modal{
     z-index: 500;
     @include position;
-    @include flex;
+    @include flex($direction:row, $justify:center, $align:center, $gap: 0);
     background-color: rgba(0, 0, 0, 0.735);
     &_content{
         max-width: 580px;
@@ -12,27 +12,26 @@
         border-radius: 10px;
         .close-modal{
             @include position(absolute, 10px, 10px, auto, auto);
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            @include flex($direction:row, $justify:unset, $align:center, $gap: 5px);
             padding: 5px;
             font-size: 20px;
             border: none;
             border-radius: 10px;
             color: white;
-            background-color: crimson;
+            background-color: $color-primary;
+            &:hover{
+                background-color: crimson;
+            }
             &:focus-visible{
                 border: none;
                 outline: 1px solid rgb(0, 0, 0);
             }
         }
         form{
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+            @include flex($direction:column, $justify:unset, $align:unset, $gap: 2rem);
             padding: 30px 20px 20px;
             border-radius: 10px;
-            background-color: #ecf0f3;
+            background-color: $color-secondary;
             @media screen and (max-width: 700px){
                 padding: 20px 10px 10px;
             }
@@ -43,10 +42,10 @@
                 object-fit: cover;
             }
             div{
-                display: flex;
-                flex-direction: column;
+                @include flex($direction:column, $justify:unset, $align:unset, $gap: 1rem);
                 &:nth-child(3){
-                    @include flex(row, space-around, center);
+                    @include flex($direction:row, $justify:space-around, $align:center, $gap: 0);
+
                     button{
                         &:focus-visible{
                             border: none;
@@ -55,12 +54,12 @@
                     }
                 }
                 label{
-                    font-size: clamp(1.1rem, 3.5vw, 1.2rem); 
-                    margin-bottom: 10px;
+                    @include flex($direction:row, $justify:unset, $align:center, $gap: 1rem);
+                    font-size: clamp(1.8rem, 2vw, 2rem); 
+                    
                     span{
-                        font-size: 14px;
+                        font-size: clamp(1.6rem, 1.8vw, 1.8rem); 
                         color: #4D4D4D;
-                        margin-left: 5px;
                     }
                 }
                 input, textarea{
@@ -75,7 +74,11 @@
         }
         .change_image, 
         button{
-            @include btn;
+            @include btn($color: $color-secondary, $bg: $color-primary, $hover-bg: $color-dark, $hover-color: $color-secondary);
+        }
+        .change_image{
+            cursor: pointer;
+            @include flex($direction:row, $justify:center, $align:center, $gap: 1rem);
         }
     }
 }

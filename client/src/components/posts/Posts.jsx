@@ -2,7 +2,6 @@ import AddIcon from "@mui/icons-material/Add";
 import { useQuery } from '@tanstack/react-query';
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import Logo from '../../assets/logo-groupo.svg';
 import { AuthContext } from "../../context/authContext";
 import CreatePost from "../createPost/CreatePost";
 import Loader from "../loader/Loader";
@@ -47,7 +46,7 @@ export default function Posts() {
                 Nouvelle publication <AddIcon />
             </button>
             {modalCreate && <CreatePost setModalCreate={setModalCreate} />}
-            {error ? <img src={Logo} alt="logo groupomania" style={{ width: "90%", maxWidth: "500px" }} />
+            {error ? <h2>Groupomania</h2> 
                 : isLoading
                     ? <Loader />
                     : data.map((post) => (

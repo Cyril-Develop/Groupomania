@@ -1,160 +1,177 @@
 @import '../../sass/index.scss';
 
-.connection{
-    height: 100vh;
-    @include flex;
-    @include background;
-    .reverse{
-        flex-direction: row-reverse;
+.connection {
+    min-height: 100vh;
+    @include flex($direction: column, $justify:center, $align: center, $gap: 2rem);
+    background-color: $color-primary;
+
+    h1 {
+        @include title;
     }
-    .card{
-        display: flex;
+
+    .card {
+        @include flex($direction: row, $justify:unset, $align: unset, $gap: 2rem);
         max-width: 800px;
-        min-height: 400px;
         width: 90%;
         border-radius: 10px;
-        background-color:white;
+        background-color: $color-secondary;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        padding: 20px;
         overflow: hidden;
-        @media screen and (max-width: 700px){
-            @include flex($direction: column, $justify: center, $align: center)
-        }
-            &_register{
-                background-image: linear-gradient(#4e5166ac 5%, rgba(255, 255, 255, 0.145)), url('../../assets/bg-register-card.jpg');
-            }
-            &_login{
-                background-image: linear-gradient(#4e5166ac 5%, rgba(255, 255, 255, 0.145)), url('../../assets/bg-login-card.jpg');
-            }
-            &_right{
-                @include flex(column, space-between, center);
-                flex: 1;
-                background-size: cover;
-                background-position: center;
-                padding: 20px;
-                letter-spacing: 1px;
-                @media screen and (max-width: 700px){
-                    width: 100%;
-                    flex: none;
-                    gap: 10px;
-                    background-image: linear-gradient(#4e5166ac 10%, rgb(255, 255, 255));
-                }
-                    h1{
-                        text-align: center;
-                    }
-                    img{
-                        width: 100%;   
-                    }
-                    p{
-                        font-size: clamp(13px, 2.5vw, 1.1rem);    
-                        a{
-                            position: relative;
-                            color: $color-focus;
-                            outline: none;
-                            &::after{
-                                content: '';
-                                position: absolute;
-                                width: 0%;
-                                height: 2px;
-                                background-color: $color-focus;
-                                left: 0;
-                                bottom: -5px;
-                                transition: all 0.2s ease-in-out;
-                            }
-                            &:hover::after, 
-                            &:focus::after{
-                                width: 100%;
-                            }
-                        } 
-                    }
-            }
-            &_left{
-                flex: 1;
-                padding: 20px;
-                background-color: $color-bg;
-                @media screen and (max-width: 700px){
-                    width: 100%;
-                }
-                    h2{
-                        text-align: center;
-                        margin-bottom: 30px;
-                        font-size: clamp(1.3rem, 3.5vw, 1.3rem); 
-                        @media screen and (max-width: 700px){
-                            margin-bottom: 20px;
-                        }
-                    }              
-    }
-};
 
-.form{
-    &_control{
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        margin-bottom: 50px;   
-        @media screen and (max-width: 700px){
-            margin-bottom: 30px;
+        @media screen and (max-width: 700px) {
+            @include flex($direction: column, $justify: center, $align: center, $gap: 1rem);
         }
-        &_password{
-           @include form-password;
-        }
-        button{
-            padding: 0;
-        }
-        p{
+
+        &_right {
+            @include flex($direction: column, $justify:unset, $align: center, $gap: 0);
+            width: 50%;
             position: relative;
-            top: 20px;
-            color: $color-error;
-            text-align: center;
-            font-size: clamp(0.9rem, 3.5vw, 1.1rem); 
-            @media screen and (max-width: 700px){
-                top: 15px;
+
+            @media screen and (max-width: 700px) {
+                width: 100%;
+                gap: 1rem;
+            }
+
+            img {
+                margin-top: auto;
+                width: 100%;
+                max-width: 540px;
+            }
+
+            p {
+                margin-top: auto;
+                font-size: clamp(1.6rem, 1.8vw, 2rem);
+
+                a {
+                    position: relative;
+                    font-weight: 600;
+                    color: $color-primary;
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        width: 0%;
+                        height: 2px;
+                        background-color: $color-dark;
+                        left: 0;
+                        bottom: -5px;
+                        transition: all .1s ease-in-out;
+                    }
+
+                    &:hover::after,
+                    &:focus::after {
+                        width: 100%;
+                    }
+                }
             }
         }
-        input{
-            @include form-input;
-        }
-        label{
-            font-size: clamp(1.1rem, 3.5vw, 1.2rem); 
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            pointer-events: none;
-            transition: all 0.2s ease-in-out;
-        }
-        .animLabel{
-            color: $color-focus;
-            transform: translateY(-25px);
-            font-size: clamp(1rem, 3.5vw, 1.2rem); 
-            transition: all 0.2s ease-in-out;
+
+        &_left {
+            width: 50%;
+            background-color: $color-secondary;
+
+            @media screen and (max-width: 700px) {
+                width: 100%;
+                padding: 0;
+            }
+
+            h2 {
+                text-align: center;
+                color: $color-dark;
+                margin-bottom: 30px;
+                font-size: clamp(3rem, 4vw, 5rem);
+
+                @media screen and (max-width: 700px) {
+                    margin-bottom: 20px;
+                }
+            }
         }
     }
-    .btn_submit{
-        @include btn-connection;     
-    }}  
-};
 
-.success{
+    .form {
+        @include flex($direction: column, $justify: unset, $align: unset, $gap: 4rem);
+        &_control {
+            @include flex($direction: column, $justify: unset, $align: unset, $gap: unset);
+            position: relative;
+
+            &_password {
+                @include form-password;
+            }
+
+            button {     
+                svg{
+                    font-size: clamp(1.8rem, 2vw, 2.5rem);
+                }
+            }
+
+            p {
+                position: relative;
+                top: 5px;
+                color: $color-error;
+                font-size: clamp(1.4rem, 1.6vw, 1.6rem);
+
+                @media screen and (max-width: 700px) {
+                    top: 5px;
+                }
+            }
+
+            input {
+                @include form-input;
+            }
+
+            label {
+                font-size: clamp(1.8rem, 1.8vw, 1.8rem);
+                position: absolute;
+                top: 15px;
+                left: 15px;
+                pointer-events: none;
+                transition: all .1s ease-in-out;
+            }
+
+            .animLabel {
+                color: $color-primary;
+                transform: translate(-15px, -40px);
+                transition: transform .1s ease-in-out;
+            }
+        }
+
+        .btn_submit {
+            @include btn($color: $color-secondary, $bg: $color-primary);
+        }
+    }
+
+    .reverse {
+        flex-direction: row-reverse;
+        @media screen and (max-width: 700px) {
+            flex-direction: column;
+        }
+    }
+}
+
+.success {
     position: absolute;
-    @include flex;
-    top: 50px;
-    width: 200px;
-    height: 80px;
+    @include flex($direction: row, $justify: center, $align: center, $gap: 0);
+    top: 1rem;
+    padding: 20px;
     border-radius: 10px;
-    font-size: 1.3rem;
-    color: white;
+    font-size: clamp(1.6rem, 1.8vw, 1.8rem);
+    color: $color-secondary;
     letter-spacing: 1px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.291);
-    background-color: #2B5F2B;
+    box-shadow: 0 2px 8px rgba(8, 8, 8, 0.119);
+    background-color: $color-success;
     opacity: 0;
-    animation : show 0.5s ease-in-out forwards;
-};
+    animation: show 0.5s ease-in-out forwards;
+}
 
-@keyframes show{
-    0%{
+@keyframes show {
+    0% {
         opacity: 0;
         transform: translateY(-100px);
     }
-    100%{
+
+    100% {
         opacity: 1;
         transform: translateY(0);
     }
-};
+}

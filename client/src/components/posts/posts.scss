@@ -1,14 +1,18 @@
 @import '../../sass/index.scss';
 
 .posts{
-    @include flex(column, space-between, center);
-    gap: 20px;
+    @include flex($direction:column, $justify:space-between, $align:center, $gap:2rem);
     padding: 20px 0;
     &_btn{
-        @include btn;
+        @include flex($direction: row, $justify: unset, $align: center, $gap: 1rem);
+        @include btn($color: $color-secondary, $bg: $color-dark, $hover-color: $color-dark, $hover-bg: $color-secondary);
+        font-size: clamp(1.8rem, 2vw, 2rem);
+        svg{
+            font-size: clamp(1.8rem, 2vw, 2rem);
+        }
         &:focus-visible{
             border: none;
-            outline: 1px solid rgb(255, 255, 255);
+            outline: 1px solid $color-secondary;
         }
     }
 };

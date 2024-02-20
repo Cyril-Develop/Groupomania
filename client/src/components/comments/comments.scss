@@ -2,18 +2,16 @@
 
 .comments {
     &_form{
-        display: flex;
+        @include flex($direction: row, $justify: unset, $align: unset, $gap: 2rem);
         height: 40px;
-        gap: 20px;
         @media screen and (max-width: 500px){
             height: auto;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 1rem;
         }
         div{
-            display: flex;
+            @include flex($direction: row, $justify: unset, $align: unset, $gap: 2rem);
             height: 40px;
-            gap: 20px;
             width: 100%;
             @media screen and (max-width: 500px){
                 gap: 10px;
@@ -28,11 +26,10 @@
             input{
                 flex: 2;
                 @include form-input;
-                @media screen and (max-width: 500px){
-                }
             }
         }
         button{
+            @include btn($color: $color-secondary, $bg: $color-dark, $hover-bg: $color-primary, $hover-color: $color-secondary);
             @media screen and (max-width: 500px){
                 display: block;
                 width: 100%;
@@ -40,15 +37,17 @@
         }  
     }
     &_list{
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
+        @include flex($direction: column, $justify: unset, $align: unset, $gap: 2rem);
         li:nth-child(1){
             margin-top: 20px;
         }
         &_item{
+            @include flex($direction: column, $justify: unset, $align: unset, $gap: 1rem);
             div{
-                display: flex;
+                @include flex($direction: row, $justify: unset, $align: flex-end, $gap: 2rem);
+                h3{
+                    font-size: clamp(1.6rem, 1.6vw, 1.6rem);
+                }
                 img{
                     width: 40px;
                     height: 40px;
@@ -57,29 +56,30 @@
                     object-position: center;
                 }
                 a{
-                    height: 100%;
-                    margin-left: 10px;
+                    height: fit-content;
+                    &:hover{
+                        color: $color-primary;
+                    }
                 }
             }
             p{
-                margin: 5px auto;
+                width: 100%;
                 border-radius: 10px;
                 padding: 10px;
+                font-size: clamp(1.6rem, 1.8vw, 1.8rem);
                 background-color: #0000000c;
             }
             .info{
-                display: flex;
-                align-items: center;
-                gap: 40px;
-                padding-left: 50px;
-                font-size: 12px;
+                @include flex($direction: row, $justify: space-between, $align: center, $gap: 4rem);
                 color: #4D4D4D;
+                svg{
+                    font-size: clamp(1.8rem, 2vw, 2.2rem);
+                }
                 span{
                     align-self: flex-start;
+                    font-size: clamp(1.4rem, 1.4vw, 1.4rem);
                 }
                 button{
-                    @include btn-hidden;
-                    margin-left: auto;
                     :hover{
                         color: crimson;
                     }

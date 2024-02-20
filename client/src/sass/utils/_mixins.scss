@@ -1,9 +1,10 @@
-@mixin flex($direction: row, $justify: center, $align: center) {
-	display: flex;
+@mixin flex($direction, $justify, $align, $gap) {
+    display: flex;
     flex-direction: $direction;
-	justify-content: $justify;
-	align-items: $align;
-};
+    justify-content: $justify;
+    align-items: $align;
+    gap: $gap;
+}
 
 @mixin position($position: fixed, $top: 0, $right: 0, $bottom: 0, $left: 0) {
     position: $position;
@@ -11,91 +12,81 @@
     right: $right;
     bottom: $bottom;
     left: $left;
-};
+}
 
-@mixin btn-connection {
-	padding: 5px 10px;
-	border-radius: 10px;
-	font-size: 1.1rem;
-	border: none;
-    outline: none;
-	box-shadow: -2px -2px 5px #fff, 2px 2px 5px #BABECC;
-    background-color: $color-bg;
-    color: black;
-    display: block;
-	margin: 0 auto;
-	transition: box-shadow 0.2s ease-in-out;
-	&:active{
-		box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #fff;
-	}
-    &:focus{
-        color: $color-focus;
+@mixin btn($color: $color-primary, $bg: $color-secondary, $hover-bg: $color-dark, $hover-color: $color-secondary) {
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: clamp(1.8rem, 1.8vw, 1.8rem);
+    background-color: $bg;
+    color: $color;
+    transition: transform .1s ease-in-out;
+
+    &:active {
+        transform: scale(0.95);
     }
-};
 
-@mixin btn-hidden{
+    &:hover {
+        color: $hover-color;
+        background-color: $hover-bg;
+    }
+}
+
+@mixin btn-hidden {
     background-color: transparent;
     box-shadow: none;
-    border: none;
     color: black;
     padding: 0;
-    &:active{
+
+    &:active {
         box-shadow: none;
     }
-    &:focus-visible{
+
+    &:focus-visible {
         outline: 1px solid rgb(0, 0, 0);
     }
-};
+}
 
-@mixin btn {
-	display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 10px;
-    font-size: clamp(1rem, 3.5vw, 1.2rem); 
-    border: none;
-    border-radius: 10px;
-    color: white;
-    margin-bottom: 0;
-    cursor: pointer;
-    box-shadow:  inset 2px 2px 5px rgba(255, 255, 255, 0.379), 
-                 inset -5px -5px 10px #393a43cc ;
-    background-color: $color-focus;
-    &:active{
-        box-shadow:  inset 2px 2px 5px #393a43, inset -5px -5px 10px  rgba(255, 255, 255, 0.096);
-    }
-};
-
-@mixin form-password{
+@mixin form-password {
     position: absolute;
     top: 15px;
     background-color: transparent;
     box-shadow: none;
-    color: black;
+    color: $color-primary;
     outline: none;
     right: 15px;
     cursor: pointer;
-    &:active,
-    &:focus{
-        color: $color-focus;
+
+    &:hover,
+    &:focus {
+        color: $color-dark;
     }
 }
 
 @mixin form-input {
     outline: none;
     border: none;
-    font-size: clamp(1rem, 3.5vw, 1.2rem);
+    font-size: clamp(1.5rem, 1.8vw, 1.8rem);
     border-bottom: 2px solid transparent;
     padding: 15px;
+    width: 100%;
     border-radius: 10px;
-    box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
-    &:focus{
-        border-bottom: 2px solid $color-focus;
-        transition: all 0.2s ease-in-out;
-        box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+    box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
+    transition: all 0.2s ease-in-out;
+
+    &:focus {
+        border-bottom: 2px solid $color-primary;
+        box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
     }
-};
+}
+
+@mixin title {
+    text-align: center;
+    color: $color-secondary;
+    font-size: clamp(3.5rem, 6vw, 10rem);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
 
 @mixin background {
-    background-image: radial-gradient(circle at 82% 60%, rgba(59, 59, 59,0.06) 0%, rgba(59, 59, 59,0.06) 69%,transparent 69%, transparent 100%),radial-gradient(circle at 36% 0%, rgba(185, 185, 185,0.06) 0%, rgba(185, 185, 185,0.06) 59%,transparent 59%, transparent 100%),radial-gradient(circle at 58% 82%, rgba(183, 183, 183,0.06) 0%, rgba(183, 183, 183,0.06) 17%,transparent 17%, transparent 100%),radial-gradient(circle at 71% 32%, rgba(19, 19, 19,0.06) 0%, rgba(19, 19, 19,0.06) 40%,transparent 40%, transparent 100%),radial-gradient(circle at 77% 5%, rgba(31, 31, 31,0.06) 0%, rgba(31, 31, 31,0.06) 52%,transparent 52%, transparent 100%),radial-gradient(circle at 96% 80%, rgba(11, 11, 11,0.06) 0%, rgba(11, 11, 11,0.06) 73%,transparent 73%, transparent 100%),radial-gradient(circle at 91% 59%, rgba(252, 252, 252,0.06) 0%, rgba(252, 252, 252,0.06) 44%,transparent 44%, transparent 100%),radial-gradient(circle at 52% 82%, rgba(223, 223, 223,0.06) 0%, rgba(223, 223, 223,0.06) 87%,transparent 87%, transparent 100%),radial-gradient(circle at 84% 89%, rgba(160, 160, 160,0.06) 0%, rgba(160, 160, 160,0.06) 57%,transparent 57%, transparent 100%),linear-gradient(145deg, rgb(255,215,215),rgb(78,81,102));
-};
+    background-image: radial-gradient(circle at 82% 60%, rgba(59, 59, 59, 0.06) 0%, rgba(59, 59, 59, 0.06) 69%, transparent 69%, transparent 100%), radial-gradient(circle at 36% 0%, rgba(185, 185, 185, 0.06) 0%, rgba(185, 185, 185, 0.06) 59%, transparent 59%, transparent 100%), radial-gradient(circle at 58% 82%, rgba(183, 183, 183, 0.06) 0%, rgba(183, 183, 183, 0.06) 17%, transparent 17%, transparent 100%), radial-gradient(circle at 71% 32%, rgba(19, 19, 19, 0.06) 0%, rgba(19, 19, 19, 0.06) 40%, transparent 40%, transparent 100%), radial-gradient(circle at 77% 5%, rgba(31, 31, 31, 0.06) 0%, rgba(31, 31, 31, 0.06) 52%, transparent 52%, transparent 100%), radial-gradient(circle at 96% 80%, rgba(11, 11, 11, 0.06) 0%, rgba(11, 11, 11, 0.06) 73%, transparent 73%, transparent 100%), radial-gradient(circle at 91% 59%, rgba(252, 252, 252, 0.06) 0%, rgba(252, 252, 252, 0.06) 44%, transparent 44%, transparent 100%), radial-gradient(circle at 52% 82%, rgba(223, 223, 223, 0.06) 0%, rgba(223, 223, 223, 0.06) 87%, transparent 87%, transparent 100%), radial-gradient(circle at 84% 89%, rgba(160, 160, 160, 0.06) 0%, rgba(160, 160, 160, 0.06) 57%, transparent 57%, transparent 100%), linear-gradient(145deg, rgb(255, 215, 215), rgb(78, 81, 102));
+}

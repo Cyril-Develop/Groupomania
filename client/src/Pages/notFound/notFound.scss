@@ -1,35 +1,37 @@
 @import '../../sass/index.scss';
 
-.not_found{
-    @include flex($direction: row, $justify:unset, $align: unset, $gap: 0);
+.not_found {
+    @include flex($direction: row, $justify: center, $align: center, $gap: 0);
     background-color: $color-primary;
     min-height: 100vh;
-    &_content{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
+
+    &_content {
+        @include flex($direction: column, $justify: unset, $align: center, $gap: 1rem);
         width: 90%;
         max-width: 800px;
         color: $color-secondary;
-        h1{
+
+        h1 {
             font-size: clamp(2rem, 10vw, 5rem);
             border-top: solid 3px #ccc;
             border-bottom: solid 3px #ccc;
             text-shadow: 2px 2px 2px #353434,
                 -2px -2px 2px rgba(129, 129, 129, 0.711);
         }
-        div{
+
+        div {
             position: relative;
-            p{
+
+            p {
                 text-align: center;
                 font-size: 350px;
                 font-size: clamp(10vw, 50vw, 350px);
                 margin: 20px 0;
                 text-shadow: 2px 2px 2px #353434,
-                -2px -2px 2px rgba(242, 236, 236, 0.283);
+                    -2px -2px 2px rgba(242, 236, 236, 0.283);
             }
-            span{
+
+            span {
                 position: absolute;
                 top: 25%;
                 left: 50%;
@@ -43,12 +45,14 @@
                 background-color: rgba(255, 255, 255, 0.756);
             }
         }
-        .return_icon{
-            font-size: 5rem;
+
+        .return_icon {
+            font-size: clamp(5rem, 8vw, 10rem);
             color: $color-secondary;
-            &:hover{
+
+            &:hover {
                 color: $color-dark;
             }
         }
     }
-};
+}

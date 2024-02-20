@@ -46,7 +46,7 @@ export default function Posts() {
                 Nouvelle publication <AddIcon />
             </button>
             {modalCreate && <CreatePost setModalCreate={setModalCreate} />}
-            {error ? <h2>Groupomania</h2> 
+            {error ? <p className="posts_error">Aucune publication</p> 
                 : isLoading
                     ? <Loader />
                     : data.map((post) => (

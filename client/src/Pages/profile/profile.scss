@@ -17,6 +17,11 @@
         padding: 20px;
         box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px rgb(214, 214, 214);
 
+        @media screen and (max-width: 500px) {
+            width: fit-content;
+            padding: 1rem;
+        }
+
         &_head {
             position: absolute;
             padding: 5px;
@@ -28,6 +33,11 @@
             border-radius: 50%;
             box-shadow: -3px -3px 7px #ffffff35,
                 3px 3px 5px rgba(94, 104, 121, 0.566);
+
+            @media screen and (max-width: 500px) {
+                width: 15rem;
+                height: 15rem;
+            }
 
             img {
                 width: 100%;
@@ -61,6 +71,10 @@
 
         &_infos {
             margin-top: 100px;
+
+            @media screen and (max-width: 500px) {
+                margin-top: 50px;
+            }
 
             h2 {
                 text-align: center;

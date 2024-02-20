@@ -34,7 +34,7 @@ header {
 
             h1 {
                 @include flex($direction: row, $justify: unset, $align: center, $gap: 1rem);
-                color: $color-primary;
+                color: $color-dark;
 
                 img {
                     width: 40px;

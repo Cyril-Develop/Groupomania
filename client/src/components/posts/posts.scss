@@ -3,6 +3,10 @@
 .posts{
     @include flex($direction:column, $justify:space-between, $align:center, $gap:2rem);
     padding: 20px 0;
+    &_error{
+        font-size: clamp(1.8rem, 2vw, 2rem);
+        color: $color-secondary;
+    }
     &_btn{
         @include flex($direction: row, $justify: unset, $align: center, $gap: 1rem);
         @include btn($color: $color-secondary, $bg: $color-dark, $hover-color: $color-dark, $hover-bg: $color-secondary);

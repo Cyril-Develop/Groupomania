@@ -8,7 +8,7 @@ exports.createPost = (req, res) => {
         title: req.body.title ? req.body.title : '',
         content: req.body.content ? req.body.content : '',
         userId: req.auth.userId,
-        imagePost: req.file ? `${req.protocol}://${req.get('host')}/images/articleImages/${req.file.filename}` : ''
+        imagePost: req.file ? `${req.protocol}://${req.get('host')}/groupomania/api/images/articleImages/${req.file.filename}` : ''
     });
     dbConnection.query('INSERT INTO post SET ? ', post, (err, result) => {
         if (err) return res.status(500).json(err);
@@ -50,7 +50,7 @@ exports.deletePost = (req, res) => {
 exports.editPost = (req, res) => {
     dbConnection.query('SELECT * FROM post WHERE id = ?', req.params.id, (err, result) => {
         if (err) return res.status(500).json(err);
-        const image = req.file ? `${req.protocol}://${req.get('host')}/images/articleImages/${req.file.filename}` : result[0].imagePost;
+        const image = req.file ? `${req.protocol}://${req.get('host')}/groupomania/api/images/articleImages/${req.file.filename}` : result[0].imagePost;
         const title = req.body.title ? req.body.title : result[0].title;
         const content = req.body.content ? req.body.content : result[0].content;
         if (result[0].imagePost !== image) {

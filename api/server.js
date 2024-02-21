@@ -1,5 +1,12 @@
-const http = require('http');
+const https = require('https');
 const app = require('./app');
+require('dotenv').config();
+
+//Certificats SSL
+const options = {
+  key: fs.readFileSync('/etc/letsencrypt/live/cyril-develop.fr/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/cyril-develop.fr/fullchain.pem'),
+};
 
 const normalizePort = val => {
   const port = parseInt(val, 10);
@@ -12,7 +19,7 @@ const normalizePort = val => {
   }
   return false;
 };
-const port = normalizePort(process.env.PORT ||'8080');
+const port = normalizePort(process.env.PORT || '8000');
 app.set('port', port);
 
 const errorHandler = error => {
@@ -35,7 +42,7 @@ const errorHandler = error => {
   }
 };
 
-const server = http.createServer(app);
+const server = https.createServer(options, app);
 
 server.on('error', errorHandler);
 server.on('listening', () => {

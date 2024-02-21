@@ -6,7 +6,7 @@ class User {
         this.lastname = user.lastname;
         this.firstname = user.firstname;
         this.role = user.role;
-        this.imageProfile = "http://localhost:8080/images/profilePictures/defaultPicture.jpg";
+        this.imageProfile = "https://cyril-develop.fr/groupomania/api/images/profilePictures/defaultPicture.jpg";
     }
 };
 

@@ -91,7 +91,7 @@ exports.deleteAccount = (req, res) => {
             })
         })
         dbConnection.query('SELECT imageProfile FROM users WHERE id = ?', req.params.id, (err, result) => {
-            if (result[0].imageProfile === `http://localhost:8080/images/profilePictures/defaultPicture.jpg`) {
+            if (result[0].imageProfile === `https://cyril-develop.fr/groupomania/api/images/profilePictures/defaultPicture.jpg`) {
                 dbConnection.query('DELETE FROM users WHERE id = ?', req.params.id, (err, result) => {
                     if (err) res.status(500).json(err);
                     res.status(200).json({ message: 'User deleted !' });
@@ -112,7 +112,7 @@ exports.deleteAccount = (req, res) => {
 exports.editPicture = (req, res) => {
     dbConnection.query('SELECT imageProfile FROM users WHERE id = ?', req.params.id, (err, result) => {
         if (err) return res.status(500).json(err);
-        if (result[0].imageProfile !== `http://localhost:8080/groupomania/api/images/profilePictures/defaultPicture.jpg`) {
+        if (result[0].imageProfile !== `https://cyril-develop.fr/groupomania/api/images/profilePictures/defaultPicture.jpg`) {
             const filename = result[0].imageProfile.split('/images/')[1];
             fs.unlink(`images/${filename}`, () => {
                 dbConnection.query('UPDATE users SET imageProfile = ? WHERE id = ?', [`${req.protocol}://${req.get('host')}/groupomania/api/images/profilePictures/${req.file.filename}`, req.params.id], (err, result) => {

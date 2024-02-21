@@ -1,6 +1,7 @@
 const https = require('https');
 const app = require('./app');
 require('dotenv').config();
+const fs = require('fs');
 
 //Certificats SSL
 const options = {

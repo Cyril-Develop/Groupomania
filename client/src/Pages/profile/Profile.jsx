@@ -90,7 +90,6 @@ export default function Profile() {
 					<h2>
 						{profileOwner ? `${currentUser.firstname} ${currentUser.lastname}` : data && `${data.firstname} ${data.lastname}`}
 					</h2>
-					{errorFile && <p className="error" >{errorFile}</p>}
 				</div>
 			</div>
 

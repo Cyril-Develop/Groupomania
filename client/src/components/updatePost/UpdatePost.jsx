@@ -74,7 +74,6 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
                                 style={{ resize: 'none' }}
                                 onChange={e => setContent(e.target.value)}>
                             </textarea>
-                            {formError && <p className="error">{formError}</p>}
                         </div>
                         <div>
                             <label className="change_image" htmlFor="image">

@@ -40,9 +40,7 @@ export default function CreatePost({ setModalCreate }) {
         e.preventDefault();
         if (title === "") {
             setFormError('Merci de renseigner un titre');
-        } else if (image && image.size > 1000000) {
-            setFormError('les images ne doivent pas dépasser 1Mo');
-        } else {
+        }  else {
             mutate();
             setFormError('');
             setTitle("");

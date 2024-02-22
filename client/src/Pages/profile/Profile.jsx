@@ -42,7 +42,6 @@ export default function Profile() {
 	})
 
 	const [image, setImage] = useState(null);
-	const [errorFile, setErrorFile] = useState();
 
 	useEffect(() => {
 		if (profileOwner && image) {
@@ -65,7 +64,6 @@ export default function Profile() {
 				})
 				.catch(err => {
 					console.log(err);
-					setErrorFile('Seul les images ne dépassant pas 500Ko sont autorisées');
 				})
 		}
 	}, [image, currentUser, token, profileOwner]);

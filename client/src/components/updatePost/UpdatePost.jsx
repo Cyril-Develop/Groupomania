@@ -18,7 +18,6 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
     const [image, setImage] = useState(post.imagePost);
     const [content, setContent] = useState('');
     const [title, setTitle] = useState('');
-    const [formError, setFormError] = useState('');
 
     const queryClient = useQueryClient();
 
@@ -38,16 +37,12 @@ export default function UpdatePost({ setModalUpdate, setModalMenu, post }) {
 
     const editPost = (e) => {
         e.preventDefault();
-        if (image.size > 1000000) {
-            setFormError('les images ne doivent pas dépasser 1Mo');
-        } else {
-            const formData = new FormData();
-            formData.append('image', image !== post.imagePost ? image : post.imagePost);
-            formData.append('title', title);
-            formData.append('content', content);
-            mutate(formData);
-            setModalMenu(false);
-        }
+        const formData = new FormData();
+        formData.append('image', image !== post.imagePost ? image : post.imagePost);
+        formData.append('title', title);
+        formData.append('content', content);
+        mutate(formData);
+        setModalMenu(false);
     };
 
     return (

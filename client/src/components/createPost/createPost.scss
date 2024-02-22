@@ -5,6 +5,10 @@
     @include position;
     @include flex($direction:row, $justify:center, $align:center, $gap: 0);
     background-color: rgba(0, 0, 0, 0.735);
+
+    @media screen and (max-width: 700px) {
+        align-items: center;
+    }
     &_content{
         max-width: 580px;
         width: 90%;

@@ -1,14 +1,10 @@
 const express = require('express');
 const morgan = require('morgan');
-const cors = require('cors');
 const helmet = require('helmet');
 const path = require('path');
 const rateLimit = require('express-rate-limit');
 
 const app = express();
-app.use(cors({
-    origin: 'http://localhost:5173'
-}));
 app.use(express.json());
 app.use(morgan('dev'));
 

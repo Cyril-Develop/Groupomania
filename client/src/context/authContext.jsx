@@ -5,7 +5,7 @@ export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
 
-    const [formError, setFormError] = useState(false)
+    const [formError, setFormError] = useState('')
 
     const [successfulLogin, setSuccessfulLogin] = useState(false);
 
@@ -19,11 +19,20 @@ export const AuthContextProvider = ({ children }) => {
             .then(res => {
                 setCurrentUser(res.data);
                 setSuccessfulLogin(true);
-                setFormError(false);
+                setFormError('');
             })
             .catch(err => {
                 console.log(err);
-                setFormError(true)
+                switch(err.response.status) {
+                    case 404:
+                        setFormError('Email ou mot de passe incorrect !');
+                        break;
+                    case 401:
+                        setFormError('Mot de passe incorrect !');
+                        break;
+                    default:
+                        setFormError('Erreur serveur !');
+                }
             })
     };
 

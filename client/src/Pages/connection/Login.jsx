@@ -31,6 +31,9 @@ export default function Login() {
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
+		if(formValues.email === '' || formValues.password === '') {
+			return;
+		} 
 		try {
 			await login(formValues);
 		} catch (err) {

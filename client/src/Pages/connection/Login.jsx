@@ -80,7 +80,7 @@ export default function Login() {
 								onChange={handleChange}
 							/>
 							<label htmlFor="password" className={formValues.password && 'animLabel'}>Mot de passe</label>
-							{formError && <p>Email ou mot de passe incorrect</p>}
+							{formError && <p>{formError}</p>}
 						</div>
 						<button className='btn_submit' onClick={handleLogin} type='submit'>Se connecter</button>
 					</form>

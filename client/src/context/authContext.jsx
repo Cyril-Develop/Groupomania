@@ -24,6 +24,9 @@ export const AuthContextProvider = ({ children }) => {
             .catch(err => {
                 console.log(err);
                 switch(err.response.status) {
+                    case 500 :
+                        setFormError('Erreur serveur !');
+                        break;
                     case 404:
                         setFormError('Email ou mot de passe incorrect !');
                         break;
@@ -31,7 +34,7 @@ export const AuthContextProvider = ({ children }) => {
                         setFormError('Mot de passe incorrect !');
                         break;
                     default:
-                        setFormError('Erreur serveur !');
+                        setFormError('Oups, une erreur est survenue !');
                 }
             })
     };

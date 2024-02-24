@@ -25,13 +25,18 @@ export default function Login() {
 		setFormValues({ ...formValues, [name]: value })
 	};
 
-	const { formError, login, successfulLogin } = useContext(AuthContext);
+	const { formError, setFormError, login, successfulLogin } = useContext(AuthContext);
+
+	useEffect(() => {
+		setFormError('');
+	}, [formValues]);
 
 	const navigate = useNavigate();
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
 		if(formValues.email === '' || formValues.password === '') {
+			setFormError('Veuillez remplir tous les champs');
 			return;
 		} 
 		try {

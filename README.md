@@ -2,7 +2,7 @@
 
 # Formation développeur web
 
-## 📎 Projet 7 : Groupomania - Réseau social intranet
+## 📎 Projet 7 : Groupomania - Créez un réseau social d’entreprise.
 
 
 ![Alt text](images/screenshot2.jpg)
